@@ -1,0 +1,57 @@
+<section class="hero is-primary is-bold is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-4-widescreen is-5-fullhd p-5">
+
+        <div class="column is-auto">
+          <div class="transparent-box">
+            <div class="p-5">
+              <h4 class="title is-3 has-text-centered">Buscador de Materias</h4>
+              <hr class="fade-out-hr">
+              <form id="search-form">
+                <div class="field">
+                  <p class="control has-icons-left">
+                    <input id="sbuject-search" class="input" type="text" placeholder="por Materia">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-book"></i>
+                    </span>
+                  </p>
+                </div>
+                  <div class="control has-icons-left">
+                    <div class="select is-fullwidth">
+                      <select id="faculty-search">
+                        <option value="0" selected>Todas</option>
+                        {% for f in faculties %}
+                          <option value="{{f.faculty_id}}">{{f.faculty_name}}</option>>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="icon is-small is-left">
+                      <i class="fas fa-university"></i>
+                    </div>
+                  </div>
+                <br>
+                <a id="search-button" class="form-button button is-info">Buscar</a>
+                <br>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-auto">
+          <p class="subtitle is-4"><i>Instituto de clases de apoyo individuales y grupales de todas las materias y niveles con muchos profesores de la UBA. Nos especializamos en CBC.</i></p>
+          <p class="subtitle is-5">&#x2022 Buscá por materias, facultad o unidad académica</p>
+          <p class="subtitle is-5">&#x2022 Encontrá al profesor que más se ajuste a tus necesidades y horarios</p>
+          <p class="subtitle is-5">&#x2022 Seleccioná un horario, pagalo y reservá tus clases</p>
+        </div>
+
+        <div class="column is-auto">
+          <figure>
+            <img id="logo-image" class="is-rounded" src="static/media/eya_logo.jpg">
+          </figure>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

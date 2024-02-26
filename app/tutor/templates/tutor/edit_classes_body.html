@@ -1,0 +1,105 @@
+<div class="hero is-bold section has-background-light p-0">
+  <section class="main-content section columns is-variable is-1-mobile is-2-tablet is-3-desktop is-4-widescreen is-5-fullhd p-5">
+    <aside class="column is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen is-one-fifth-fullhd px-2">
+      <div class="section p-0">
+        {% include "tutor/profile.html" %}
+      </div>
+      <ul class="menu-list mt-2">
+        <li>
+          <a href="{{ url_for('public.home') }}" class="">
+            <span class="icon"><i class="fa fa-home"></i></span> Inicio
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <span class="icon"><i class="fa fa fa-cog"></i></span><span>Panel de Control</span>
+          </a>
+          <ul>
+            <li>
+              <a href="{{ url_for('public.tutor_view', tutor_id=tutor.id)}}">
+                <span class="icon is-small"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                <span>Modificar Horarios</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url_for('tutor.edit_classes', tutor_id=current_user.id) }}">
+                <span class="icon is-small"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+                <span>Modificar Precios y Materias</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="">
+            <span class="icon"><i class="fa fa-info"></i></span> Acerca de Entienda y Aprenda
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <div class="container column is-auto px-2">
+      <section class="hero is-link is-bold section pt-3 px-3">
+        <div class="section pt-0">
+          <div class="field mt-5">
+            <a href="#">
+              <button id="save-button" class="button is-success is-pulled-right is-small">Guardar</button>
+            </a>
+          </div>
+          <div id="edit-classes">
+            <div class="hrtext">
+              <h3 class="title is-5">Modificá las Materias y sus Precios</h3>
+              <div class="header-fade-out-hr"></div>
+            </div>
+
+            <section class="section p-5">
+              <div class="container">
+                <div class="field has-addons mb-5">
+                  <div class="control" style="justify-content: center;">
+                    <label class="label is-pulled-left mr-3" style="color: white;">Seleccioná una Materia:</label>
+                    <div class="select is-small">
+                      <select id="classes-select">
+                        {% for s in subjects %}
+                          <option value="{{s.subject_id}}" data-facultyid="{{s.faculty.faculty_id}}" data-subjectname="{{s.subject_name}}" data-facultyname="{{s.faculty.faculty_name}}">{{s.subject_name}} ({{s.faculty.faculty_name}})</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button id="add-subject-button" class="button is-success is-small">Agregar Materia</button>
+                  </div>
+                </div>
+              </div>
+              <i><a id="feedback" class="feedback"></a></i>
+              <table id="classes-table" class="content-table tutor-edit-subject-data">
+                <thead>
+                  <tr>
+                    <th class="is-hidden">Codigo Facultad</th>
+                    <th class="is-hidden">Código</th>
+                    <th>Materia</th>
+                    <th>Unidad Académica</th>
+                    <th>Precio de Referencia ($)</th>
+                    <th>Comentario</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for s in tutor.tutor_subject %}
+                    <tr data-subject="{{s.subject_id}}" data-tutor="{{tutor.id}}">
+                      <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
+                      <td class="is-hidden">{{s.subject.subject_id}}</td>
+                      <td>{{s.subject.subject_name}}</td>
+                      <td>{{s.subject.faculty.faculty_name}}</td>
+                      <td class="editable" contenteditable="true">{{s.price_ref}}</td>
+                      <td class="editable" contenteditable="true">{{s.comment if s.comment else ""}}</td>
+                      <td><button class="delete has-background-danger"></button></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,31 @@
+<div class="profile-card-container">
+  <div class="profile-card-info-image">
+    <img class="profile-card-img" src="{{url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg')}}" alt="this image contains user-image">
+  </div>
+  <div class="profile-card-content">
+    <a href="{{ url_for('student.home') }}">
+      <h3 class="profile-card-name">
+        {{ student.username }}
+      </h3>
+    </a>
+    <div class="profile-card-details">
+      <table style="width: 100%";>
+        <tbody style="width: 100%;">
+          <tr><td style="text-align: left;">Clases:</td><td style="text-align: right;"><strong>{{student.count_enrollments()}}</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class="profile-card-social-links">
+      <a class="facebook" href="#" target="_blank" title="facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a class="linkedin" href="#" title="linkedin" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a class="insta" href="#" target="_blank" title="instagram">
+        <i class="fab fa-instagram-square"></i>
+      </a>
+    </div>
+  </div>
+</div>

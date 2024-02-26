@@ -1,0 +1,21 @@
+.sort-controls {
+    display: flex;
+    /*align-items: center;*/
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+}
+
+.arrow-icons {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.arrow-icons span {
+    display: block;
+    float: none;
+    clear: both;
+}

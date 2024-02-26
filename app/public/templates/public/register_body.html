@@ -1,0 +1,114 @@
+<section class="hero is-primary is-bold is-small">
+  <div class="hero-body">
+
+    <div id="signup-box" class="signup-box transparent-box" style="width: 600px;">
+
+      <div class="signup-area has-text-centered" style="width: 85%; margin: auto;">
+        <h1 class="title">Registrate</h1>
+        <hr class="fade-out-hr">
+        <form action="" method="post" novalidate>
+          <div class="control mb-5">
+              {{ form.user_type() }}
+          </div>
+          <div class="control mb-5">
+            <p class="control has-icons-left has-icons-right">
+              {{ form.username(id="signup-user", class="input is-info", placeholder="Usuario", size=64) }}
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check"></i>
+              </span>
+            </p>
+          </div>
+          <div class="control mb-5">
+            <p class="control has-icons-left has-icons-right">
+              {{ form.name(id="signup-name", class="input is-info", placeholder="Nombre", size=64) }}
+              <span class="icon is-small is-left">
+                <i class="fas fa-user-edit"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check mr-2"></i>
+                <i class="fas fa-asterisk mr-2 fa-xs"></i>
+              </span>
+            </p>
+          </div>
+          <div class="control mb-5">
+            <p class="control has-icons-left has-icons-right">
+              {{ form.last_name(id="signup-last-name", class="input is-info", placeholder="Apellido", size=64) }}
+              <span class="icon is-small is-left">
+                <i class="fas fa-user-shield"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check mr-2"></i>
+                <i class="fas fa-asterisk mr-2 fa-xs"></i>
+              </span>
+            </p>
+          </div>
+          <div class="control mb-5">
+            <p class="control has-icons-left has-icons-right">
+              {{ form.email(id="signup-mail", class="input is-info", placeholder="Email") }}
+              <span class="icon is-small is-left">
+                <i class="fa fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check mr-2"></i>
+                <i class="fas fa-asterisk mr-2 fa-xs"></i>
+              </span>
+            </p>
+          </div>
+          <div class="control mb-5">
+            <p class="control has-icons-left has-icons-right">
+              {{ form.password(id="signup-pass", class="input is-info", placeholder="Contraseña") }}
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check"></i>
+              </span>
+            </p>
+          </div>
+          <div class="control mb-5">
+            <p class="control">
+              <span>
+                <span>
+                  <i class="fa fa-phone pt-3 pr-1"></i>
+                </span>
+                {{ form.phone_country_code(class="input is-info", style="width: 90px;") }}
+                -
+                {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area") }}
+                -
+                {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;") }}
+                <span class="icon is-small is-right">
+                  <i class="fa fa-check mx-2"></i>
+                  <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                </span>
+              </span>
+            </p>
+          </div>
+        </form>
+        <div class="field">
+          <p class="control" style="font-size: 10px;">
+            <span class="icon is-small is-right">
+              <i class="fas fa-asterisk mr-2 fa-xs"></i>
+            </span>
+            Los datos no serán visibles para otros usuarios de la aplicación
+          </p>
+        </div>
+
+        <div class="p-3 m-0">
+          <a id="signup-button" class="button is-info">
+            <span class="icon">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </span>
+            <span>Registrate</span>
+          </a>
+        </div>
+
+        <i><a id="feedback" class="feedback"></a></i>
+      </div>
+
+    </div>
+
+  </div>
+</section>

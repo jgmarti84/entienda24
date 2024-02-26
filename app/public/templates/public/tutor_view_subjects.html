@@ -1,0 +1,59 @@
+<div id="materias" class="is-hidden">
+  <div class="hrtext">
+    <h3 class="title is-5">Materias Disponibles con sus Precios</h3>
+    <div class="header-fade-out-hr"></div>
+  </div>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths">
+        <div class="content mt-4">
+          <table  id="tutor-subjects-table" class="content-table subjects-data" style="width: 90%; margin: auto;">
+            <thead>
+              <tr>
+                <th class="is-hidden">Codigo Facultad</th>
+                <th class="is-hidden">Código</th>
+                <th>Materia</th>
+                <th>Unidad Académica</th>
+                <th>Comentario</th>
+                <th>Programa</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in tutor.tutor_subject %}
+                <tr data-priceRef="{{s.price_ref}}" data-subjectId={{s.subject_id}} data-tutorId={{s.tutor_id}}>
+                  <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
+                  <td class="is-hidden">{{s.subject.subject_id}}</td>
+                  <td>{{s.subject.subject_name}}</td>
+                  <td>{{s.subject.faculty.faculty_name}}</td>
+                  <td>{{s.comment if s.comment else ""}}</td>
+                  <td>{{s.subject.subject_program if s.subject.subject_program != "" else "No hay programa"}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="column is-two-fifths py-5">
+        <div class="content">
+          <ul>
+            <li>
+              Se paga por hora, y pueden distribuir las horas como quieran.
+              La hora de prueba tiene un precio más bajo. Si su 1ra clase es de
+              hora y media o 2 hs, solo la 1ra hora tiene ese precio.
+            </li>
+            <li>
+              Después de abonar la 1ra hora, pueden pagar hs de clases por
+              separado o packs de 5 o 10 hs por adelantado a precios más bajos.
+            </li>
+            <li>
+              Las hs de los packs deben tomarse antes de las 5 semanas (35 días) o se pierden.
+            </li>
+            <li>
+              Los precios de las clases grupales son por persona.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

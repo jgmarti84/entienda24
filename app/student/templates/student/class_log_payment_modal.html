@@ -1,0 +1,42 @@
+<!--MODAL FOR UPLOAD PAYMENT-->
+<div id="upload-payment-modal" class="modal modal-fx-fadeInScale">
+  <div class="modal-background"></div>
+
+  <div class="modal-content is-huge" style="max-width: 450px;">
+    <div class="box hero is-primary is-bold section pt-3 px-3" style="border: 2px solid rgba(53,50,54,0.71)">
+      <div id="payment-file-timer" class="container">
+        <div class="simple-timer" style="width: 60px; margin: auto; justify-content: center;">
+          <span class="timer-minute">10</span>
+          <label class="separator">:</label>
+          <span class="timer-second">00</span>
+        </div>
+        <h1 class="subtitle is-4 has-text-centered mt-5">Total a pagar: </h1>
+        <p style="max-width: 500px;">
+          Transferí el total a la siguiente cuenta bancaria (CBU: 23985472487562834, alias: entienda.y.aprenda ) y subí el comprobante
+        </p>
+        <div id="upload-file-box" class="file is-small is-centered has-name m-5">
+          <label class="file-label">
+            <input class="file-input" type="file" name="resume" accept="image/*">
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+            <span class="file-name" style="background-color: rgba(250,250,250,0.25)">
+              Comprobante de Transferencia
+            </span>
+          </label>
+        </div>
+        <div class="field is-grouped is-grouped-centered mt-2">
+          <p id="upload-file" class="control">
+            <a class="button is-small is-info">Enviar Comprobante</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>

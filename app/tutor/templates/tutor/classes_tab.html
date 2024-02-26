@@ -1,0 +1,33 @@
+{% if default_params["active_tab"] == "clases" %}
+  <div id="{{default_params['active_tab']}}">
+{% else %}
+  <div id="clases" class="is-hidden">
+{% endif %}
+  <div class="hrtext">
+    <h3 class="title is-5">Tus Clases</h3>
+    <div class="header-fade-out-hr"></div>
+  </div>
+  <nav id="tutor-class-panel" class="panel is-primary" style="background-color: white; color: black;">
+    <div class="panel-block">
+      <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Search">
+        <span class="icon is-left">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+      </p>
+    </div>
+    <p class="panel-tabs tutor-class-panel-tabs">
+      <a class="is-active" data-status="-1">Todas</a>
+      <a data-status="0">Terminadas</a>
+      <a data-status="1">Confirmadas</a>
+      <a data-status="3">Canceladas</a>
+    </p>
+    <div class="panel-block tutor-class-panel-header">
+      <div class="container tutor-class-panel-cell"><p class="has-text-centered"><small><strong>Materia</strong></small></p></div>
+      <div class="container tutor-class-panel-cell"><p class="has-text-centered"><small><strong>Estudiante</strong></small></p></div>
+      <div class="container tutor-class-panel-cell"><p class="has-text-centered"><small><strong>Fecha y Horario</strong></small></p></div>
+      <div class="container tutor-class-panel-cell"><p class="has-text-centered"><small><strong>Estado</strong></small></p></div>
+      <div class="container tutor-class-panel-cell"><p class="has-text-centered"><small><strong>Info +</strong></small></p></div>
+    </div>
+  </nav>
+</div>

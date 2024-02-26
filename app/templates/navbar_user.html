@@ -1,0 +1,75 @@
+<section class="hero is-white is-medium">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/" class="navbar-item">
+        <img src="{{ url_for('static', filename='media/eya-logo.png') }}" alt="eya">
+        <h7 id="logo-title" class="subtitle"><strong>Entienda y Aprenda</strong></h7>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbar-menu-id" class="navbar-menu">
+      <div class="navbar-start">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">+ Informacion</a>
+          <div class="navbar-dropdown">
+            <div class="navbar-item">
+              <a href="{{ url_for('public.subjects') }}">
+                <span class="icon">
+                  <i class="fas fa-book"></i>
+                </span>
+                <span>Materias</span>
+              </a>
+            </div>
+            <div class="navbar-item">
+              <a href="{{ url_for('public.tutors') }}">
+                <span class="icon">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                </span>
+                <span>Profesores</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <div class="user-avatar is-small">{{ current_user.user.username[0].upper() }}</div>
+            <div class="user-username is-small">{{ current_user.user.username }}</div>
+          </a>
+          <div class="navbar-dropdown is-right">
+            <span class="navbar-item">
+              <a href="/settings">
+                <span class="icon">
+                  <i class="fa fa fa-cog"></i>
+                </span>
+                <span>Panel de Control</span>
+              </a>
+            </span>
+            <span class="navbar-item">
+              <a href="{{ url_for('public.home') }}">
+                <span class="icon">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span>Mi Perfil</span>
+              </a>
+            </span>
+            <hr class="navbar-divider">
+            <span class="navbar-item">
+              <a href="/logout">
+                <span class="icon">
+                  <i class="fas fa-sign-out-alt"></i>
+                </span>
+                <span>Salir de mi Cuenta</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>

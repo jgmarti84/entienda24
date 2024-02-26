@@ -1,0 +1,65 @@
+<div id="tutor-prices-modal" class="modal modal-fx-fadeInScale">
+  <div class="modal-background"></div>
+
+  <div class="modal-content">
+    <div class="box">
+      <!-- Your content -->
+      <div class="container">
+        {% for s in tutor.tutor_subject %}
+          <div id="subject-{{s.subject_id}}" class="prices-tables-div">
+            <div class="container mb-5">
+              <h1 id="subject-title" class="title has-text-centered">{{ s.subject.subject_name }}</h1>
+            </div>
+            <h1 class="subtitle has-text-centered mb-1">Precios de Clases virtuales</h1>
+            <table id="prices-table-v" class="table is-striped is-hoverable">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Hora de Prueba</th>
+                  <th>Hora de Clases</th>
+                  <th>Pack de 5 horas</th>
+                  <th>Pack de 10 horas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in s.get_price_table_v(factor=tutor.price_factor()) %}
+                  <tr>
+                    <td>{{ row["nr_students"] }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <h1 class="subtitle has-text-centered mb-1">Precios de Clases Presenciales</h1>
+            <table id="prices-table-p" class="table is-striped is-hoverable">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Hora de Prueba</th>
+                  <th>Hora de Clases</th>
+                  <th>Pack de 5 horas</th>
+                  <th>Pack de 10 horas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in s.get_price_table_p(factor=tutor.price_factor()) %}
+                  <tr>
+                    <td>{{ row["nr_students"] }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <button id="close-modal-button" class="modal-close is-large" aria-label="close"></button>
+</div>

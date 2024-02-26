@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tutor_subjects[0].subject.subject_name }} - Entienda y Aprenda{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/controls.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
+{% endblock %}
+
+{% block body %}
+  {% include "navbar.html" %}
+  {% include "public/subject_view_body.html" %}
+  {% include "footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/profile.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/subject_view.js') }}"></script>
+{% endblock %}

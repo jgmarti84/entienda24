@@ -1,0 +1,19 @@
+/* Custom styles for the user avatar in the navbar */
+.user-avatar {
+    width: 40px; /* Set the avatar's width */
+    height: 40px; /* Set the avatar's height */
+    background-color: #3498db; /* Set the background color */
+    color: #fff; /* Set the text color (white in this example) */
+    border-radius: 50%; /* Create a circular avatar */
+    box-shadow: 0 4px 6px 0 rgba(34, 60, 80, .16);
+    transition: all ease-in-out .2s;
+    text-align: center;
+    line-height: 40px; /* Vertically center the text */
+    font-weight: bold; /* Adjust font weight as needed */
+}
+
+/* Custom styles for the username in the navbar */
+.user-username {
+    margin-left: 10px; /* Add some space between the avatar and username */
+    margin-bottom: 5px;
+}

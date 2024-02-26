@@ -1,0 +1,179 @@
+<div id="perfil">
+  <div class="hrtext">
+    <h3 class="title is-5">Información General</h3>
+    <div class="header-fade-out-hr"></div>
+  </div>
+  <div class="container">
+    <div class="columns is-multiline">
+
+      <div class="column is-auto">
+        <div id="user-info-box" class="transparent-box" style="width: 400px; margin: auto;">
+
+          <div class="signup-area has-text-centered">
+            <h1 class="subtitle is-6 has-text-centered">Modificá o validá tu información general</h1>
+
+            <div class="field">
+              <p class="control has-icons-left">
+                <input id="signup-username" class="input is-info" type="text" placeholder="Usuario">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+                <input id="signup-name" class="input is-info" type="text" placeholder="Nombre">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user-edit"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+                <input id="signup-last-name" class="input is-info" type="text" placeholder="Apellido">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user-shield"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+                <input id="signup-mail" class="input is-info" type="text" placeholder="Email">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <p class="control">
+                <span>
+                  <span>
+                    <i class="fa fa-phone pt-3 pr-3"></i>
+                  </span>
+                  <select name="country-code" class="input is-info" style="width: 60px;"></select>
+                  <input title="Sin el 0 y sin el 15" name="phone" class="input is-info" type="text" placeholder="Area" style="width: 70px;">
+                  <input name="phone" class="input is-info" type="text" placeholder="Telefono" style="width: 140px">
+                </span>
+              </p>
+            </div>
+
+<!--            <div class="field">-->
+<!--              <p class="control has-icons-left">-->
+<!--                <input id="birth-date" class="input is-info" type="date" placeholder="">-->
+<!--                <span class="icon is-small is-left">-->
+<!--                  <i class="far fa-calendar"></i>-->
+<!--                </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="field">-->
+<!--              <p class="control has-icons-left">-->
+<!--                <input id="fantasy-name" class="input is-info" type="text" placeholder="Nombre de Fantasía">-->
+<!--                <span class="icon is-small is-left">-->
+<!--                  <i class="fas fa-ghost"></i>-->
+<!--                </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <textarea id="profile-description" class="textarea is-info" placeholder="Poné acá tu descripción"></textarea>-->
+
+<!--            <br>-->
+
+            <a id="validate-info-button" class="form-button button is-primary">Validar</a>
+            <br>
+            <i><a id="feedback" class="feedback"></a></i>
+          </div>
+        </div>
+<!--        <div id="user-info-box" class="transparent-box" style="width: 400px; margin: auto;">-->
+<!--          <div class="has-text-centered" style="padding: 30px">-->
+
+<!--            <div class="input-wrapper field p-3 m-0">-->
+<!--              <label class="label is-pulled-left mb-0" style="font-size: 9px;">Nombre</label>-->
+<!--              <input id="student-profile-name" class="input is-success" type="text" placeholder="Nombre">-->
+<!--            </div>-->
+
+<!--            <div class="input-wrapper field p-3 m-0">-->
+<!--              <label class="label is-pulled-left mb-0" style="font-size: 9px;">Apellido</label>-->
+<!--              <input id="student-profile-last-name" class="input is-success" type="text" placeholder="Apellido">-->
+<!--            </div>-->
+
+<!--            <div class="input-wrapper field p-3 m-0">-->
+<!--              <label class="label is-pulled-left mb-0">E-mail</label>-->
+<!--              <input class="input is-success" type="email" placeholder="E-mail" value=""  >-->
+<!--            </div>-->
+
+<!--&lt;!&ndash;            <div class="field p-3 m-0">&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="label is-pulled-left mb-0" style="font-size: 9px;">Género</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="select is-success is-fullwidth">&ndash;&gt;-->
+<!--&lt;!&ndash;                <select id="student-gender-selector">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="null" disabled selected hidden>Género...</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="H">Varon</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="M">Mujer</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="U">No Especifica</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="input-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;              <label id="alabel">E-mail</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              <input class="input is-success" type="email" placeholder="E-mail" value=""  >&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--            <div class="input-wrapper field p-3 m-0">-->
+<!--&lt;!&ndash;              <div class="control">&ndash;&gt;-->
+<!--                <label class="label is-pulled-left mb-0" style="font-size: 9px;">Nro. de Teléfono</label>-->
+<!--  &lt;!&ndash;              <input class="input is-success" type="text" placeholder="Nro. de Teléfono">&ndash;&gt;-->
+<!--                <span>-->
+<!--                  <input name="phone" class="input is-pulled-left is-success" type="text" placeholder="+54" style="width: 50px; margin-right: 5px;" disabled>-->
+<!--                  <input title="Sin el 0 y sin el 15" name="phone" class="input is-pulled-left is-success" type="text" placeholder="Cod. Area" style="width: 70px; margin-right: 5px;">-->
+<!--                  <input name="phone" class="input is-pulled-left is-success" type="text" placeholder="Nro. Telefono" style="width: 120px;">-->
+<!--                </span>-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--            </div>-->
+
+<!--            <div class="input-wrapper field p-3 m-0">-->
+<!--              <label class="label is-pulled-left mb-0" style="font-size: 9px;">Fecha de Nacimiento</label>-->
+<!--              <input class="input is-success" type="date" placeholder="Fecha de nacimiento">-->
+<!--            </div>-->
+
+<!--            <a id="validate-info-button" class="form-button button is-primary">Validar</a>-->
+
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+
+      <div class="column is-auto">
+        <div class="transparent-box" style="width: 400px; margin: auto;">
+          <div class="has-text-centered" style="padding: 30px">
+            <h1 class="subtitle is-6 has-text-centered">Foto de perfil</h1>
+            <div class="wrapper">
+              <input class="my_file" type="file">
+              <span class="icon" style="position: absolute; bottom: 0; left: 111px; z-index: 2; cursor: pointer; font-size: 30px;">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+              </span>
+              <figure class="image is-254x254">
+                <img src="{{ url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg') }}">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-auto">
+        <div class="transparent-box" style="width: 400px; margin: auto;">
+          <div class="has-text-centered" style="padding: 30px">
+            <h1 class="subtitle is-6 has-text-centered">Cambiá tu Usuario o Contraseña</h1>
+            <div class="button is-centered is-primary">
+              Modificar
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

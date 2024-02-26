@@ -1,0 +1,59 @@
+<section class="hero is-primary is-bold section">
+  <h1 class="title has-text-centered">Listado de Profesores</h1>
+  <hr class="fade-out-hr">
+  <div class="container is-horizontal">
+    <div class="sort-controls" style="width: 35%; margin: auto;">
+      <label for="order-tutors-select" style="margin-right: 0.5rem;"><strong>Ordená por:</strong></label>
+      <div class="select">
+        <select id="order-tutors-select" style="margin-right: 0.5rem;">
+          <option value="mean_score">Calificación</option>
+          <option value="count_scores">Calificaciones Recibidas</option>
+          <option value="availability_hours">Disponibilidad</option>
+          <option value="count_enrollments">Clases Dadas</option>
+          <option value="count_hours">Horas Dadas</option>
+        </select>
+      </div>
+      <span class="arrow-icons">
+        <span id="ascending-arrow" class="arrow">&#9650;</span>
+        <span id="descending-arrow" class="arrow">&#9660;</span>
+      </span>
+    </div>
+
+    <br>
+    <div class="columns is-multiline">
+
+      {% for tutor in tutors %}
+        <div class="column is-full-mobile">
+
+          <article class="media" data-tutorid="{{tutor.id}}">
+            <figure class="profile-hcard-primary-image media-left">
+                <img class="profile-hcard-img" src="{{url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg')}}">
+            </figure>
+
+            <div class="media-content">
+              <div class="content media-hcard-content">
+                <strong class="profile-card-name">{{ tutor.user.username }}</strong>
+                <small class="stars">{{ tutor.mean_score() }}</small><span style="font-size: 12px">({{ tutor.count_scores() }} opiniones)</span>
+                <p class="pt-3">
+                  Clases Dadas: <strong>{{ tutor.count_enrollments() }}</strong>
+                </p>
+                <p>
+                  Disponibilidad: <strong>{{ tutor.availability() }}</strong>
+                </p>
+                <hr class="fade-out-hr-gray" style="margin: 0">
+                <ul>
+                  {% for s in tutor.tutor_subject %}
+                    {% if s.comment != "" %}
+                      <li><strong>{{ s.subject.subject_name }} ({{ s.subject.faculty.faculty_name }}):</strong> {{ s.comment }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

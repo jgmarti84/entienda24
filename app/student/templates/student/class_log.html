@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Reservá Clase - Entienda y Aprenda {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    <link rel= "stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables.css') }}">
+{% endblock %}
+
+{% block body %}
+
+  {% include "navbar.html" %}
+  {% include "student/class_log_body.html" %}
+  {% include "student/class_log_schedule_modal.html" %}
+  {% include "student/class_log_payment_modal.html" %}
+  {% include "footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/utils.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/modal.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/request.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/schedule.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/logger.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/profile.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/class_log.js') }}"></script>
+{% endblock %}

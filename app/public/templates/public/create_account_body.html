@@ -1,0 +1,201 @@
+<section class="hero is-primary is-bold is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-4-widescreen is-5-fullhd p-5">
+
+        <div class="column is-auto">
+          <figure>
+            <img id="logo-image" class="is-rounded" src="{{ url_for('static', filename='media/eya_logo.jpg') }}">
+          </figure>
+        </div>
+
+        <div class="column is-auto">
+          <p class="subtitle is-4"><i>Para Reservar una Clase con un profesor de Entienda y Aprenda Tenés que estar logueado como estudiante.</i></p>
+          <p class="subtitle is-5">&#x2022 Ingresa con tu usuario de estudiante para reservar</p>
+          <p class="subtitle is-5">&#x2022 Si no tenés cuenta de Estudiante Registrate acá</p>
+        </div>
+
+        <div class="column is-auto">
+          <div class="tabs is-boxed is-small is-centered is-fullwidth mb-0">
+            <ul>
+              <li class="is-active" data-target="estudiante">
+                <a>
+                  <span class="icon is-small"><i class="fa fa-check"></i></span>
+                  <span>Ingreso</span>
+                </a>
+              </li>
+              <li data-target="registro">
+                <a>
+                  <span class="icon is-small"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+                  <span>Registro</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="signup-box p-5">
+            <div class="px-1" id="tab-settings-content">
+
+              <div id="estudiante">
+                <div>
+                  <strong>Ingresá con tu Cuenta de Estudiante</strong>
+                </div>
+                <hr class="fade-out-hr m-1">
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left">
+                    <input id="create-account-login-user" class="login-user login-input input is-success" type="text" placeholder="Usuario">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-user"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left">
+                    <input id="create-account-login-pass" class="login-input input is-success" type="password" placeholder="Contraseña">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="p-3 m-0">
+                  <a id="create-account-login-button" class="login-button button is-info">
+                    <span class="icon">
+                      <i class="fa fa-check"></i>
+                    </span>
+                    <span>Iniciar Sesión</span>
+                  </a>
+                </div>
+              </div>
+
+              <div id="registro" class="is-hidden">
+                <div>
+                  <strong>Registrate como Estudiante</strong>
+                </div>
+                <hr class="fade-out-hr m-1">
+
+                <div class="control mb-1 mt-5">
+                  <label class="radio">
+                    <input type="radio" name="user-type" value="P">
+                    Profesor
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="user-type" value="S" checked>
+                    Estudiante
+                  </label>
+                </div>
+
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left has-icons-right">
+                    <input id="signup-user" class="input is-info" type="text" placeholder="Usuario">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-user"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fa fa-check"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left has-icons-right">
+                    <input id="signup-pass" class="input is-info" type="password" placeholder="Contraseña">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fa fa-check"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left has-icons-right">
+                    <input id="signup-name" class="input is-info" type="text" placeholder="Nombre">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-user-edit"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fa fa-check mr-2"></i>
+                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left has-icons-right">
+                    <input id="signup-last-name" class="input is-info" type="text" placeholder="Apellido">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-user-shield"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fa fa-check mr-2"></i>
+                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field p-3 m-0">
+                  <p class="control has-icons-left has-icons-right">
+                    <input id="signup-mail" class="input is-info" type="text" placeholder="Email">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fa fa-check mr-2"></i>
+                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field">
+                  <p class="control">
+                    <span>
+                      <span>
+                        <i class="fa fa-phone pt-3 pr-3"></i>
+                      </span>
+                      <select name="country-code" class="input is-info" style="width: 60px;"></select>
+                      <input title="Sin el 0 y sin el 15" name="phone" class="input is-info" type="text" placeholder="Area" style="width: 55px;">
+                      <input name="phone" class="input is-info mr-3" type="text" placeholder="Nro. Telefono" style="width: 130px">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-check mx-2"></i>
+                        <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                      </span>
+                    </span>
+                  </p>
+                </div>
+
+                <div class="field">
+                  <p class="control" style="font-size: 10px;">
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                    </span>
+                    Los datos no serán visibles para otros usuarios de la aplicación
+                  </p>
+                </div>
+
+                <div class="p-3 m-0">
+                  <a id="signup-button" class="button is-info">
+                    <span class="icon">
+                      <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </span>
+                    <span>Registrate</span>
+                  </a>
+                </div>
+<!--                <br>-->
+        <!--        <textarea id="profile-description" class="textarea is-info" placeholder="Poné acá tu descripción"></textarea>-->
+        <!--        <br>-->
+<!--                <a id="signup-button" class="button is-info">Registrate</a>-->
+                <br>
+                <i><a id="feedback" class="feedback"></a></i>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

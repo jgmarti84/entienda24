@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Modificar Horarios - Entienda y Aprenda {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+{% endblock %}
+
+{% block body %}
+  {% set tutor = current_user %}
+  {% include "navbar.html" %}
+  {% include "tutor/edit_schedule_body.html" %}
+  {% include "footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/profile.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/utils.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/schedule.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/edit_schedule.js') }}"></script>
+{% endblock %}

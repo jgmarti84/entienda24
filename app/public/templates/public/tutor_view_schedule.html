@@ -1,0 +1,86 @@
+<div id="horarios">
+  <div class="hrtext">
+    <h3 class="title is-5">Disponibilidad Horaria</h3>
+    <div class="header-fade-out-hr"></div>
+  </div>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths">
+        <div class="container">
+          <div style="width: 400px; margin: auto;">
+            <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
+            <hr class="fade-out-hr" style="margin: 10px;">
+          </div>
+          <table id="schedule-table" class="content-table schedule-data" style="width: 400px; margin:auto;">
+            <thead>
+              <tr>
+                <th class="is-hidden">Tutor id</th>
+                <th class="is-hidden">Semana</th>
+                <th class="is-hidden">Indice Semana</th>
+                <th>Horario</th>
+                <th class="is-hidden">Indice Tiempo</th>
+                <th>Lu</th>
+                <th>Ma</th>
+                <th>Mi</th>
+                <th>Ju</th>
+                <th>Vi</th>
+                <th>Sá</th>
+                <th>Do</th>
+                <th class="is-hidden">Indice Año</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for slot in tutor.get_weeks_schedule(default_filters["number_weeks"]).to_dict(orient="records") %}
+              <tr>
+                <td class="is-hidden">{{tutor.id}}</td>
+                <td class="is-hidden">{{slot["monday_week_date"]}}</td>
+                <td class="is-hidden">{{slot["week_index"]}}</td>
+                <td>{{slot["time_slot"]}}</td>
+                <td class="is-hidden">{{slot["time_index"]}}</td>
+                {% for i in range(7) %}
+                  <td class="enrolled-{{slot['enrolled_days'][i]}} {{slot['availability_days'][i]}}">{{slot['availability_days'][i]}}</td>
+                {% endfor %}
+                <td class="is-hidden">{{slot["year_index"]}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          <ul class="pagination-list" style="justify-content: center; margin-top: 3px;">
+            <li id="schedule-table-previous">
+              <a aria-controls="schedule-table" role="link" class="pagination-link previous" style="font-size: 10px; padding: 8px;">
+                &lt;
+              </a>
+            </li>
+            <li id="schedule-table-next">
+              <a aria-controls="schedule-table" role="link" class="pagination-link next" style="font-size: 10px; padding: 8px;">
+                &gt;
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="column is-two-fifths py-5">
+        <div class="content">
+          <ul>
+            <li>
+              Se paga por hora, y pueden distribuir las horas como quieran.
+              La hora de prueba tiene un precio más bajo. Si su 1ra clase es de
+              hora y media o 2 hs, solo la 1ra hora tiene ese precio.
+            </li>
+            <li>
+              Después de abonar la 1ra hora, pueden pagar hs de clases por
+              separado o packs de 5 o 10 hs por adelantado a precios más bajos.
+            </li>
+            <li>
+              Las hs de los packs deben tomarse antes de las 5 semanas (35 días) o se pierden.
+            </li>
+            <li>
+              Los precios de las clases grupales son por persona.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

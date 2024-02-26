@@ -1,0 +1,115 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="119" name="Python" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="3">
+            <item index="0" class="java.lang.String" itemvalue="jupyterlab" />
+            <item index="1" class="java.lang.String" itemvalue="werkzeug" />
+            <item index="2" class="java.lang.String" itemvalue="itsdangerous" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="urllib.parse" />
+          <option value="research.pitch_plots.PitchPlotter.pitch_center" />
+          <option value="research.pitch_plots.PitchPlotter.pitch_def_left" />
+          <option value="research.pitch_plots.PitchPlotter.pitch_def_right" />
+          <option value="research.pitch_plots.PitchPlotter.pitch_off_left" />
+          <option value="research.pitch_plots.PitchPlotter.pitch_off_right" />
+          <option value="research.pitch_plots.PitchPlotter.offbox_def_left" />
+          <option value="research.pitch_plots.PitchPlotter.offbox_off_left" />
+          <option value="research.pitch_plots.PitchPlotter.offbox_off_right" />
+          <option value="research.pitch_plots.PitchPlotter.offbox_def_right" />
+          <option value="research.pitch_plots.PitchPlotter.defbox_def_left" />
+          <option value="research.pitch_plots.PitchPlotter.defbox_off_left" />
+          <option value="research.pitch_plots.PitchPlotter.defbox_off_right" />
+          <option value="research.pitch_plots.PitchPlotter.defbox_def_right" />
+          <option value="research.pitch_plots.PitchPlotter.off6box_def_left" />
+          <option value="research.pitch_plots.PitchPlotter.off6box_off_left" />
+          <option value="research.pitch_plots.PitchPlotter.off6box_off_right" />
+          <option value="research.pitch_plots.PitchPlotter.off6box_def_right" />
+          <option value="research.pitch_plots.PitchPlotter.def6box_def_left" />
+          <option value="research.pitch_plots.PitchPlotter.def6box_off_left" />
+          <option value="research.pitch_plots.PitchPlotter.def6box_off_right" />
+          <option value="research.pitch_plots.PitchPlotter.def6box_def_right" />
+          <option value="research.pitch_plots.PitchPlotter.def_penalty" />
+          <option value="research.pitch_plots.PitchPlotter.off_penalty" />
+          <option value="research.pitch_plots.PitchPlotter.def_post_left" />
+          <option value="research.pitch_plots.PitchPlotter.def_post_right" />
+          <option value="research.pitch_plots.PitchPlotter.off_post_right" />
+          <option value="research.pitch_plots.PitchPlotter.off_post_left" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.pitch_off_left" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.offbox_def_left" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.off6box_def_right" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.pitch_off_right" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.off6box_def_left" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.offbox_def_right" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.def6box_off_right" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.def_post_right" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.def_post_left" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.off_post_right" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.off_post_left" />
+          <option value="shared.src.geometry.pitch_location.PitchLocation.pich_geometry" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.def_penalty" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.off_penalty" />
+          <option value="pitch_def_left" />
+          <option value="pitch_def_right" />
+          <option value="pitch_off_left" />
+          <option value="pitch_off_right" />
+          <option value="defbox_def_left" />
+          <option value="defbox_def_right" />
+          <option value="defbox_off_left" />
+          <option value="defbox_off_right" />
+          <option value="offbox_def_left" />
+          <option value="offbox_def_right" />
+          <option value="offbox_off_left" />
+          <option value="offbox_off_right" />
+          <option value="def6box_def_left" />
+          <option value="def6box_def_right" />
+          <option value="def6box_off_left" />
+          <option value="def6box_off_right" />
+          <option value="off6box_def_left" />
+          <option value="off6box_def_right" />
+          <option value="off6box_off_right" />
+          <option value="def_post_left" />
+          <option value="def_post_right" />
+          <option value="off_post_left" />
+          <option value="off_post_right" />
+          <option value="def_penalty" />
+          <option value="off_penalty" />
+          <option value="pitch_center" />
+          <option value="def_to_off_axis" />
+          <option value="zsign" />
+          <option value="left_to_right" />
+          <option value="def_to_off" />
+          <option value="width" />
+          <option value="length" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry._get_penalty_coords" />
+          <option value="pitch_geometry" />
+          <option value="is_valid_location" />
+          <option value="pitch_side" />
+          <option value="shared.src.geometry.quadrant_geometry.QuadrantGrid.lg_quads" />
+          <option value="shared.src.geometry.quadrant_geometry.QuadrantGrid.wd_quads" />
+          <option value="shared.src.geometry.quadrant_geometry.QuadrantGrid.grid" />
+          <option value="int.clip" />
+          <option value="shared.src.geometry.pitch_coords.PitchGeometry.off6box_off_left" />
+          <option value="shared.src.geometry.pitch_coords.PitchCoordinatesDefinition.CENTER_CIRCLE_RADIUS_TO_PITCH_WIDTH_FRACTION" />
+          <option value="tests.domain.internal.test_player.TestPlayer.test_player_id" />
+          <option value="tests.domain.internal.test_player.TestPlayer.player" />
+          <option value="tests.domain.internal.test_player.TestCohort.test_cohort_ids" />
+          <option value="src.domain.internal.player.SeasonPlayer.get_carries" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

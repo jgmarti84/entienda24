@@ -1,0 +1,243 @@
+/* Table with content */
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.content-table thead tr {
+    background-color: hsl(188, 80%, 38%);
+    text-align: left;
+    border-bottom: 2.5px solid #969496;
+}
+.content-table thead tr th {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #f2f0f3;
+}
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+    color: #5b555b;
+    transition: background-color 0.3s ease!important; /* Add a smooth transition effect */
+}
+.content-table tbody tr {
+    border-bottom: 1.5px solid #969496;
+}
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f2f0f3;
+}
+.content-table tbody tr:nth-of-type(even):hover {
+    background-color: #d0ced0;
+}
+.content-table tbody tr:nth-of-type(odd) {
+    background-color: #e1dfe2;
+}
+.content-table tbody tr:nth-of-type(odd):hover {
+    background-color: #d0ced0;
+}
+.content-table tbody tr:last-of-type {
+    border-bottom: 2.5px solid #969496;
+}
+
+/* Specific table with subject-data Table with content */
+.content-table.subjects-data tbody tr {
+    cursor: pointer;
+    overflow-x: hidden;
+}
+.content-table.subjects-data thead tr th,
+.content-table.subjects-data tbody tr td {
+    text-align: center;
+}
+.content-table.subjects-data tbody tr td:nth-of-type(3),
+.content-table.subjects-data tbody tr td:nth-of-type(5) {
+    text-align: left;
+}
+
+/* subjects table for tutor profile */
+.content-table.tutor-subjects-data tr th,
+.content-table.tutor-subjects-data tr td {
+    text-align: center;
+}
+.content-table.tutor-subjects-data tr td:nth-of-type(3),
+.content-table.tutor-subjects-data tr td:nth-of-type(7) {
+    text-align: left;
+}
+.content-table.tutor-subjects-data tbody tr td:nth-of-type(6) {
+    cursor: pointer;
+}
+
+.content-table.tutor-edit-subject-data tr th,
+.content-table.tutor-edit-subject-data tr td {
+    text-align: center;
+}
+.content-table.tutor-edit-subject-data tr td:nth-of-type(1),
+.content-table.tutor-edit-subject-data tr td:nth-of-type(4) {
+    text-align: left;
+}
+
+/* Specific table with schedule-data Table with content */
+.content-table.schedule-data td:not(:nth-child(1)) {
+    border-left: 1px solid #969496;
+}
+.content-table.schedule-data td:not(:nth-child(1)) {
+    border-left: 1px solid #969496;
+}
+.content-table.schedule-data td {
+    text-align: center;
+}
+.content-table.schedule-data td:not(:first-of-type) {
+    text-align: center;
+}
+.content-table.schedule-data td:first-of-type {
+    font-weight: bold;
+}
+.content-table.schedule-data td:not(:last-of-type) {
+    border-right: 1px solid #969496;
+}
+.content-table.schedule-data th {
+    font-size: 13px;
+    padding: 3px 7px 3px 7px;
+}
+.content-table.schedule-data td {
+    font-size: 10px;
+    padding: 2px 4px 2px 4px;
+}
+
+/* Default background color */
+.content-table.schedule-data td.enrolled-0 {
+  background-color: rgba(53,50,54,0.75);
+}
+.content-table.schedule-data.edit td.enrolled-0 {
+  background-color: rgba(181,218,237,0.75);
+}
+.content-table.schedule-data.edit td.enrolled-0.current-selected {
+  background-color: rgba(255,236,94,0.98);
+}
+.content-table.schedule-data.edit td.enrolled-0.selected {
+  background-color: rgba(255,236,94,0.98);
+}
+
+/* Red background for enrolled-1 along with V, VyP, or P */
+.content-table.schedule-data td.enrolled-1,
+.content-table.schedule-data td.enrolled-1.V,
+.content-table.schedule-data td.enrolled-1.VyP,
+.content-table.schedule-data td.enrolled-1.P {
+  background-color: #f6c0b8;
+}
+.content-table.schedule-data td.enrolled-2,
+.content-table.schedule-data td.enrolled-2.V,
+.content-table.schedule-data td.enrolled-2.VyP,
+.content-table.schedule-data td.enrolled-2.P {
+  background-color: #f6c0b8;
+}
+
+/* Adjusting the color for specific classes */
+.content-table.schedule-data td.enrolled-0.V,
+.content-table.schedule-data td.enrolled-0.VyP,
+.content-table.schedule-data td.enrolled-0.P {
+  background-color: #dafec6;
+}
+/* TODO: Mostrar los colores en la página de reserva tipo instructivo
+/* Yellow background for selected and current-selected classes */
+.content-table.schedule-data td.enrolled-0.V.selected,
+.content-table.schedule-data td.enrolled-0.VyP.selected,
+.content-table.schedule-data td.enrolled-0.P.selected {
+  background-color: rgba(255,236,94,0.98);
+}
+.content-table.schedule-data td.enrolled-0.V.current-selected,
+.content-table.schedule-data td.enrolled-0.VyP.current-selected,
+.content-table.schedule-data td.enrolled-0.P.current-selected {
+  background-color: rgba(255,236,94,0.98);
+}
+.content-table.schedule-data td.enrolled-0.V.time-added,
+.content-table.schedule-data td.enrolled-0.VyP.time-added,
+.content-table.schedule-data td.enrolled-0.P.time-added {
+  background-color: rgba(172,164,173,0.75);
+}
+.content-table.schedule-data td.enrolled-0.V.time-added.hover-row,
+.content-table.schedule-data td.enrolled-0.VyP.time-added.hover-row,
+.content-table.schedule-data td.enrolled-0.P.time-added.hover-row {
+    background-color: rgba(229,214,231,0.75);
+    border: 2px solid rgba(93,231,140,0.75);
+}
+.content-table.schedule-data td.enrolled-0.V.time-added.selected,
+.content-table.schedule-data td.enrolled-0.VyP.time-added.selected,
+.content-table.schedule-data td.enrolled-0.P.time-added.selected {
+    background-color: rgba(255,236,94,0.5);
+}
+
+.content-table.schedule-data td.enrolled-0.V.time-added.current-selected,
+.content-table.schedule-data td.enrolled-0.VyP.time-added.current-selected,
+.content-table.schedule-data td.enrolled-0.P.time-added.current-selected {
+    background-color: rgba(255,236,94,0.5);
+}
+
+.content-table.schedule-data td.B {
+    background-color: rgba(53,50,54,0.75);
+}
+.content-table.schedule-data.edit td.B {
+    background-color: rgba(53,50,54,0.75);
+}
+/* Classes for rendering next and previous buttons of schedule table pagination*/
+.disabled {
+    pointer-events: none;
+    color: gray;
+    background-color: rgba(100,150,150,0.64);
+    text-decoration: none;
+    position: relative;
+}
+
+.disabled::before {
+    content: '\1F6AB'; /* Unicode for a "no entry" sign icon */
+    position: absolute;
+    font-size: 20px;
+    color: gray;
+}
+
+/* Price Table styles */
+.prices-table {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: auto;
+    font-size: 0.8em;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    padding: 20px;
+}
+.prices-table thead tr th {
+    font-weight: bold;
+}
+.prices-table thead tr:first-of-type th {
+    text-align: center;
+    padding: 3px;
+}
+.prices-table thead tr:nth-of-type(2) th {
+    text-align: center;
+    padding: 3px 7px 3px 7px;
+}
+.prices-table tbody td {
+    padding: 3px 5px 3px 5px;
+}
+
+/* logged classes table data */
+.content-table.logged-data td {
+    text-align: center;
+}
+.content-table.logged-data td:not(:first-of-type) {
+    text-align: center;
+}
+.content-table.logged-data td:first-of-type {
+    font-weight: bold;
+}
+.content-table.logged-data th {
+    font-size: 13px;
+    padding: 3px 7px 3px 7px;
+}
+.content-table.logged-data td {
+    font-size: 10px;
+    padding: 2px 4px 2px 4px;
+}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Materias - Entienda y Aprenda {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include "navbar.html" %}
+    {% include "public/subjects_body.html" %}
+    {% include "footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bulma.min.js"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/utils.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/login.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/signup.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/auth.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/strings.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/subjects.js') }}"></script>
+{% endblock %}

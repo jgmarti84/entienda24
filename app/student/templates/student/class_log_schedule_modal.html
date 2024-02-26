@@ -1,0 +1,92 @@
+<!--MODAL FOR CLASS SCHEDULING-->
+<div id="schedule-log-modal" class="modal modal-fx-fadeInScale">
+  <div class="modal-background"></div>
+  <div class="modal-content is-huge" style="max-width: 900px;">
+    <div class="box hero is-primary is-bold section pt-3 px-3" style="border: 2px solid rgba(53,50,54,0.71)">
+      <div class="columns is-variable">
+        <div class="column is-two-thirds">
+      <!--          availability table-->
+          <div id="availability-box" class="container">
+            <div style="width: 400px; margin: auto;">
+              <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
+              <hr class="fade-out-hr" style="margin: 10px;">
+            </div>
+            <div class="has-text-centered mb-3"><i><a id="feedback" class="feedback"></a></i></div>
+            <table id="schedule-table" class="content-table schedule-data" style="width: 400px; margin: auto;">
+              <thead>
+                <tr>
+                  <th class="is-hidden">Tutor id</th>
+                  <th class="is-hidden">Semana</th>
+                  <th class="is-hidden">Indice Semana</th>
+                  <th>Horario</th>
+                  <th class="is-hidden">Indice Tiempo</th>
+                  <th>Lu</th>
+                  <th>Ma</th>
+                  <th>Mi</th>
+                  <th>Ju</th>
+                  <th>Vi</th>
+                  <th>Sá</th>
+                  <th>Do</th>
+                  <th class="is-hidden">Indice Ano</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for slot in tutor.get_weeks_schedule(default_params["number_weeks"]).to_dict(orient="records") %}
+                  <tr>
+                    <td class="is-hidden">{{tutor.id}}</td>
+                    <td class="is-hidden">{{slot["monday_week_date"]}}</td>
+                    <td class="is-hidden">{{slot["week_index"]}}</td>
+                    <td>{{slot["time_slot"]}}</td>
+                    <td class="is-hidden">{{slot["time_index"]}}</td>
+                    {% for i in range(7) %}
+                      <td class="enrolled-{{slot['enrolled_days'][i]}} {{slot['availability_days'][i]}}">{{slot['availability_days'][i]}}</td>
+                    {% endfor %}
+                    <td class="is-hidden">{{slot["year_index"]}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <ul class="pagination-list" style="justify-content: center; margin-top: 3px;">
+              <li id="schedule-table-previous">
+                <a aria-controls="schedule-table" role="link" class="pagination-link previous" style="font-size: 10px; padding: 8px;">
+                  &lt;
+                </a>
+              </li>
+              <li id="schedule-table-next">
+                <a aria-controls="schedule-table" role="link" class="pagination-link next" style="font-size: 10px; padding: 8px;">
+                  &gt;
+                </a>
+              </li>
+            </ul>
+          </div>
+      <!--          availability table-->
+        </div>
+        <div class="column is-auto">
+          <div class="field is-grouped is-grouped-centered pt-6 mt-2">
+            <p class="control">
+              <a id="add-availability-button" class="button is-small is-info mb-3">Agregar</a>
+            </p>
+            <p class="control">
+              <a id="remove-availability-button" class="button is-small is-info mb-3">Sacar</a>
+            </p>
+          </div>
+          <div class="container">
+            <p class="subtitle has-text-centered m-3">Horarios Seleccionados</p>
+            <table id="logged-availability-table" class="content-table logged-data" style="width: 200px; margin: auto;">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Horario</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <p class="control has-text-centered my-4"><a id="confirm-hours-button" class="button is-info is-small">Confirmar Horarios</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="close-modal-button" class="modal-close is-large" aria-label="close"></button>
+</div>

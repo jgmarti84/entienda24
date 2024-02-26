@@ -1,0 +1,97 @@
+<section class="hero is-white is-medium">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="{{ url_for('public.home') }}" class="navbar-item">
+        <img src="{{ url_for('static', filename='media/eya-logo.png') }}" alt="eya">
+        <h1 id="logo-title" class="subtitle"><strong>Entienda y Aprenda</strong></h1>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbar-menu-id" class="navbar-menu">
+      <div class="navbar-start">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">+ Informacion</a>
+          <div class="navbar-dropdown">
+            <div class="navbar-item">
+              <a href="{{ url_for('public.subjects') }}">
+                <span class="icon">
+                  <i class="fas fa-book"></i>
+                </span>
+                <span>Materias</span>
+              </a>
+            </div>
+            <div class="navbar-item">
+              <a href="{{ url_for('public.tutors') }}">
+                <span class="icon">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                </span>
+                <span>Profesores</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="/">
+            Tu Cuenta
+          </a>
+          <div class="navbar-dropdown is-right">
+            <div class="navbar-item">
+              <strong><a href="{{ url_for('public.login') }}">Ingresá con tu Usuario</a></strong>
+            </div>
+            <hr class="navbar-divider">
+            <form onsubmit="return false;" id="navbar-login-form" novalidate>
+              {{ login_form.hidden_tag() }}
+              <a class="navbar-item">
+                <div class="field">
+                  <p class="control has-icons-left">
+                    {{ login_form.username_email(id="navbar-login-user", class="login-user login-input input is-small is-success", placeholder="Usuario/Email") }}
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-user"></i>
+                    </span>
+                  </p>
+                </div>
+              </a>
+              <a class="navbar-item">
+                <div class="field">
+                  <p class="control has-icons-left">
+                    {{ login_form.password(id="navbar-login-pass", class="login-input input is-small is-success", placeholder="Contraseña") }}
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                  </p>
+                </div>
+              </a>
+              <div class="is-hidden username-errors navbar-item">
+                <ul></ul>
+              </div>
+              <span class="navbar-item">
+                <a id="navbar-login-button" class="login-button button is-primary is-small">
+                  <span class="icon"><i class="fa fa-check"></i></span>
+                  <span>Iniciar Sesión</span>
+                </a>
+              </span>
+            </form>
+            <hr class="navbar-divider">
+            <div class="navbar-item">
+              <strong>No tenés Cuenta?</strong>
+            </div>
+            <span class="navbar-item">
+              <a href="{{ url_for('public.register') }}" class="button is-primary is-small">
+                <span class="icon">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </span>
+                <span>Registrate</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>

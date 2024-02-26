@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Materia - Entienda y Aprenda{% endblock %}
+
+{% block body %}
+  {% include "navbar.html" %}
+  <section class="hero is-primary is-bold is-small">
+    <div class="hero-body">
+      <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+        <div class="column is-auto">
+          <figure>
+            <img id="logo-image" class="is-rounded" src="{{ url_for('static', filename='media/eya_logo.jpg') }}">
+          </figure>
+        </div>
+        <div class="column is-auto">
+          <div class="container has-text-centered p-5">
+            <h1 class="title has-text-centered">{{ subject.subject_name }}</h1>
+            <hr class="fade-out-hr">
+            <p class="subtitle">
+              <strong>No existen profesores que actualmente estén dando esta materia.</strong>
+            </p>
+            <p>
+              <a href="{{ url_for('public.subjects') }}" style="color: #5b555b;">Volvé al buscador de materias</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include "footer.html" %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,206 @@
+<div class="hero is-bold section has-background-light p-0">
+  <section class="main-content section columns is-variable is-1-mobile is-2-tablet is-3-desktop is-4-widescreen is-5-fullhd p-5">
+    <aside class="column is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen is-one-fifth-fullhd px-2">
+      <div class="section p-0">
+        {% include "tutor/profile.html" %}
+      </div>
+    </aside>
+    <section class="container column is-auto px-2">
+      <section class="hero is-primary is-bold section pt-3 px-3">
+        <section id="logger-section" class="section pt-3">
+          <h1 class="title has-text-centered mb-3" data-tutorid="{{ tutor.id }}">Reservá horas con {{ tutor.user.username }}</h1>
+          <hr class="fade-out-hr mt-1 mb-3">
+          <div class="has-text-centered mb-3"><i><a id="feedback" class="feedback"></a></i></div>
+          <section class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-4-widescreen is-5-fullhd">
+            <div class="column is-one-third">
+              <div id="log-class-box" class="log-class-box">
+                <div class="log-class-area">
+
+<!--              log step 1-->
+                  <div id="step1" class="mt-3">
+                    <p style="margin: 3px;">Seleccioná una materia:</p>
+                    <div class="control has-icons-left">
+                      <div class="select is-small">
+                        <select id="subject-selector" style="margin-right: 0.5rem;">
+                          {% for subject in tutor.tutor_subject %}
+                            <option value="{{ subject.subject_id }}" data-priceref="{{ subject.price_ref }}">
+                              {{ subject.subject.subject_name }} ({{ subject.subject.faculty.faculty_name }})</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="icon is-small is-left">
+                        <i class="fa fa-graduation-cap"></i>
+                      </div>
+                    </div>
+                  </div>
+<!--              log step 1-->
+
+<!--              log step 2-->
+                  <div id="step2" class="mt-3">
+                    <p style="margin: 3px;">Virtual o Presencial:</p>
+                    <div class="control">
+                      <div class="select is-small">
+                        <select id="class-type-selector" style="margin-right: 0.5rem;">
+                          {% if logged_class_type == 'p' %}
+                            <option value="v">Virtual</option>
+                            <option value="p" selected>Presencial</option>
+                          {% else %}
+                            <option value="v" selected>Virtual</option>
+                            <option value="p">Presencial</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+<!--              log step 2-->
+
+<!--              log step 3-->
+                  <div id="step3" class="mt-3">
+                    <p style="margin: 0px;">Cantidad de Alumnos:</p>
+                    <div class="control has-icons-left">
+
+                      <div class="field">
+                        <p class="control has-icons-left">
+                          <input class="input is-small" type="number" style="width: 80px;" value=1>
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-users"></i>
+                          </span>
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+<!--              log step 3-->
+
+<!--              log step 4-->
+                  <div id="step4" class="mt-3">
+                    <p style="margin: 3px;">Cantidad de horas:</p>
+                    <div class="control has-icons-left">
+                      <div class="field">
+                        <p class="control has-icons-left">
+                          <input class="input is-small" type="number" style="width: 80px;" value=1>
+                          <span class="icon is-small is-left">
+                            <i class="far fa-clock"></i>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+<!--              log step 4-->
+
+<!--              Previous and Next buttons-->
+                  <div id="next-back-buttons" class="field is-grouped mt-5" style="justify-content: center;">
+                    <p id="back-button-p" class="control">
+                      <a class="button is-info is-small">
+                        Volver
+                      </a>
+                    </p>
+                    <p id="next-button-p" class="control">
+                      <a class="button is-info is-small">
+                        Siguiente
+                      </a>
+                    </p>
+                  </div>
+<!--              Previous and Next buttons-->
+
+                </div>
+              </div>
+              <div id="student-info-box" class="is-hidden"></div>
+              <div id="other-students-info-box" class="is-hidden"></div>
+              <div id="logged-table-div" class="is-hidden mt-5">
+                <p class="subtitle has-text-centered m-3">Horarios Seleccionados</p>
+                <hr class="fade-out-hr mt-1 mb-3">
+              </div>
+            </div>
+            <section class="column is-auto">
+
+              <div id="price-detail-box">
+                <div id="class-prices-box">
+                  {% for s in tutor.tutor_subject %}
+                    <!-- Your content -->
+                    <div  id="price-table-{{ s.subject_id }}" class="prices-data">
+                      <div class="container mt-2">
+                        <table id="prices-table-v" class="prices-table" data-factor="{{ tutor.price_factor() }}">
+                          <thead>
+                            <tr>
+                              <th colspan="6"><p>Precios de Clases Virtuales</p></th>
+                            </tr>
+                            <tr>
+                              <th></th>
+                              <th>Hora de Prueba</th>
+                              <th>Hora de Clases</th>
+                              <th>Pack de 5 horas</th>
+                              <th>Pack de 10 horas</th>
+                            </tr>
+                            <tr>
+                              <th colspan="5"><hr class="fade-out-hr mt-1 mb-3"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for row in s.get_price_table_v(factor=tutor.price_factor()) %}
+                              <tr>
+                                <td>{{ row["nr_students"] }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div class="container mt-2">
+                        <table id="prices-table-p" class="prices-table" data-factor="{{ tutor.price_factor() }}">
+                          <thead>
+                            <tr>
+                              <th colspan="6"><p>Precios de Clases Presenciales</p></th>
+                            </tr>
+                            <tr>
+                              <th></th>
+                              <th><p>Hora de Prueba</p></th>
+                              <th><p>Hora de Clases</p></th>
+                              <th><p>Pack de 5 horas</p></th>
+                              <th><p>Pack de 10 horas</p></th>
+                            </tr>
+                            <tr>
+                              <th colspan="5"><hr class="fade-out-hr mt-1 mb-2"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for row in s.get_price_table_p(factor=tutor.price_factor()) %}
+                              <tr>
+                                <td>{{ row["nr_students"] }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div id="price-detail-list" class="has-text-centered mt-3" style="width: 300px; margin: auto;">
+                </div>
+                <div id="last-step">
+                  <hr class="fade-out-hr mb-3">
+                  <h1 class="title my-1">Total a pagar: <p class="is-pulled-right">total price here</p></h1>
+                  <hr class="fade-out-hr mt-3">
+                  <div class="field is-grouped mt-5" style="justify-content: center;">
+                    <p class="control">
+                      <a id="confirm-button" class="button is-small is-info">Elegir Horarios</a>
+                      <a id="log-class-button" class="button is-normal is-info is-hidden">Realizar Reserva</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</div>

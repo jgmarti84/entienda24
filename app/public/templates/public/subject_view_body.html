@@ -1,0 +1,67 @@
+<section class="hero is-primary is-bold section">
+  <h1 class="title has-text-centered">{{ tutor_subjects[0].subject.subject_name }}</h1>
+  <h3 class="subtitle has-text-centered">Profesores Disponibles</h3>
+  <hr class="fade-out-hr">
+  <div class="container is-horizontal" style="margin-left: 470px; margin-right: 470px">
+    <div class="sort-controls">
+      <label for="order-tutors-select" style="margin-right: 0.5rem;"><strong>Ordená por:</strong></label>
+      <div class="select">
+        <select id="order-tutors-select" style="margin-right: 0.5rem;">
+          <option value="mean_score">Calificación</option>
+          <option value="count_scores">Calificaciones Recibidas</option>
+          <option value="availability_hours">Disponibilidad</option>
+          <option value="count_enrollments">Clases Dadas</option>
+          <option value="count_hours">Horas Dadas</option>
+        </select>
+      </div>
+      <span class="arrow-icons">
+          <span id="ascending-arrow" class="arrow">&#9650;</span>
+          <span id="descending-arrow" class="arrow">&#9660;</span>
+      </span>
+    </div>
+    <br>
+    <div>
+      {% for subject in tutor_subjects %}
+        <div class="column is-full-mobile">
+
+          <article class="media" data-tutorid="{{ subject.tutor_id }}">
+            <figure class="profile-hcard-primary-image media-left">
+                <img class="profile-hcard-img" src="{{url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg')}}">
+            </figure>
+
+            <div class="media-content">
+              <div class="content media-hcard-content">
+                <strong class="profile-card-name">{{ subject.tutor.user.username }}</strong>
+                <small class="stars">{{ subject.tutor.mean_score() }}</small><span style="font-size: 12px">({{ subject.tutor.count_scores() }} opiniones)</span>
+                <div class="pt-3 mb-3">
+                  {% set pv = subject.get_price_table_v()[0]["hour_x1"] * subject.tutor.price_factor() %}
+                  {% set pp = subject.get_price_table_p()[0]["hour_x1"] * subject.tutor.price_factor() %}
+                  <p>
+                    Precio Virtual: <strong>{{ '${:,.2f}'.format(pv).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
+                  </p>
+                  <p>
+                    Precio Presencial: <strong>{{ '${:,.2f}'.format(pp).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
+                  </p>
+                  <p>
+                    Clases Dadas: <strong>{{ subject.tutor.count_enrollments() }}</strong>
+                  </p>
+                  <p>
+                    Disponibilidad: <strong>{{ subject.tutor.availability() }}</strong>
+                  </p>
+                </div>
+                <hr class="fade-out-hr-gray" style="margin: 0">
+                {% if subject.comment != "" %}
+                  <ul style="padding-right: 10px">
+                    <li>
+                      <strong>{{ subject.comment }}</strong>
+                    </li>
+                  </ul>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

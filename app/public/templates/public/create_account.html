@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Creá una Cuenta - Entienda y Aprenda {% endblock %}
+
+{% block links %}
+<style>
+    input[name=phone]::-webkit-input-placeholder {
+        font-size: 12px !important;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+  {% include "navbar.html" %}
+  {% include "public/create_account_body.html" %}
+  {% include "footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
