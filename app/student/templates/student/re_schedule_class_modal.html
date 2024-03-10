@@ -31,19 +31,6 @@
                 </tr>
               </thead>
               <tbody>
-                {% for slot in tutor.get_weeks_schedule(default_params["number_weeks"]).to_dict(orient="records") %}
-                  <tr>
-                    <td class="is-hidden">{{tutor.id}}</td>
-                    <td class="is-hidden">{{slot["monday_week_date"]}}</td>
-                    <td class="is-hidden">{{slot["week_index"]}}</td>
-                    <td>{{slot["time_slot"]}}</td>
-                    <td class="is-hidden">{{slot["time_index"]}}</td>
-                    {% for i in range(7) %}
-                      <td class="enrolled-{{slot['enrolled_days'][i]}} {{slot['availability_days'][i]}}">{{slot['availability_days'][i]}}</td>
-                    {% endfor %}
-                    <td class="is-hidden">{{slot["year_index"]}}</td>
-                  </tr>
-                {% endfor %}
               </tbody>
             </table>
             <ul class="pagination-list" style="justify-content: center; margin-top: 3px;">

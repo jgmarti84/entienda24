@@ -13,85 +13,83 @@
     <div class="columns is-multiline">
 
       <div class="column is-auto">
-        <div id="user-info-box" class="transparent-box" style="width: 400px; margin: auto;">
-
+        <div id="user-info-box" class="transparent-box" style="width: 500px; margin: auto; padding: 30px">
+          <h1 class="subtitle is-6 has-text-centered">Modificá o validá tu información general</h1>
           <div class="signup-area has-text-centered">
-            <h1 class="subtitle is-6 has-text-centered">Modificá o validá tu información general</h1>
-
-            <div class="field">
-              <p class="control has-icons-left">
-                <input id="signup-username" class="input is-info" type="text" placeholder="Usuario">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control has-icons-left">
-                <input id="signup-name" class="input is-info" type="text" placeholder="Nombre">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user-edit"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control has-icons-left">
-                <input id="signup-last-name" class="input is-info" type="text" placeholder="Apellido">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user-shield"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control has-icons-left">
-                <input id="signup-mail" class="input is-info" type="text" placeholder="Email">
-                <span class="icon is-small is-left">
-                  <i class="fa fa-envelope"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control">
-                <span>
-                  <span>
-                    <i class="fa fa-phone pt-3 pr-3"></i>
+            <form action="" method="post" novalidate>
+              <div class="control mb-5">
+                <p class="control has-icons-left has-icons-right">
+                  {{ form.username(id="signup-user", class="input is-info", placeholder="Usuario", size=64, value=current_user.user.username) }}
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
                   </span>
-                  <select name="country-code" class="input is-info" style="width: 60px;"></select>
-<!--                  <input name="phone" class="input is-info" type="text" placeholder="+54" style="width: 50px;">-->
-                  <input title="Sin el 0 y sin el 15" name="phone" class="input is-info" type="text" placeholder="Area" style="width: 70px;">
-                  <input name="phone" class="input is-info" type="text" placeholder="Telefono" style="width: 140px">
+                </p>
+              </div>
+              <div class="control mb-5">
+                <p class="control has-icons-left has-icons-right">
+                  {{ form.name(id="signup-name", class="input is-info", placeholder="Nombre", size=64, value=current_user.user.name) }}
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user-edit"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="control mb-5">
+                <p class="control has-icons-left has-icons-right">
+                  {{ form.last_name(id="signup-last-name", class="input is-info", placeholder="Apellido", size=64, value=current_user.user.last_name) }}
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user-shield"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="control mb-5">
+                <p class="control has-icons-left has-icons-right">
+                  {{ form.email(id="signup-mail", class="input is-info", placeholder="Email", value=current_user.user.email) }}
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="control mb-5">
+                <p class="control">
+                  <span>
+                    <span>
+                      <i class="fa fa-phone pt-3 pr-1"></i>
+                    </span>
+                    {{ form.phone_country_code(class="input is-info", style="width: 90px;", select=phones[0]) }}
+                    -
+                    {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area", value=phones[1]) }}
+                    -
+                    {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;", value=phones[2]) }}
+                  </span>
+                </p>
+              </div>
+            </form>
+            <div class="p-3 m-0">
+              <a id="validate-info-button" class="form-button button is-primary">
+                <span class="icon is-small is-right">
+                  <i class="fa fa-check"></i>
                 </span>
-              </p>
+                <span>Validar</span>
+              </a>
             </div>
 
-<!--            <textarea id="profile-description" class="textarea is-info" placeholder="Poné acá tu descripción"></textarea>-->
-
-<!--            <br>-->
-
-            <a id="validate-info-button" class="form-button button is-primary">Validar</a>
-            <br>
             <i><a id="feedback" class="feedback"></a></i>
           </div>
         </div>
       </div>
-
       <div class="column is-auto">
-        <div class="transparent-box" style="width: 400px; margin: auto;">
+        <div class="transparent-box" style="width: 400px; margin: auto; position: relative;">
           <div class="has-text-centered" style="padding: 30px">
             <h1 class="subtitle is-6 has-text-centered">Foto de perfil</h1>
-            <div class="wrapper">
-              <input class="my_file" type="file">
-              <span class="icon" style="position: absolute; bottom: 0; left: 111px; z-index: 2; cursor: pointer; font-size: 30px;">
-                <i class="fa fa-camera" aria-hidden="true"></i>
-              </span>
-              <figure class="image is-254x254">
-                <img src="{{ url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg') }}">
-              </figure>
-            </div>
+              <div class="image-wrapper">
+                <input class="my_file" type="file">
+                <span class="photo icon">
+                  <i class="fa fa-camera" aria-hidden="true"></i>
+                </span>
+                <figure class="image is-254x254">
+                  <img src="{{tutor.user.avatar(256)}}">
+                </figure>
+              </div>
           </div>
         </div>
       </div>
@@ -100,9 +98,48 @@
         <div class="transparent-box" style="width: 400px; margin: auto;">
           <div class="has-text-centered" style="padding: 30px">
             <h1 class="subtitle is-6 has-text-centered">Cambiá tu Usuario o Contraseña</h1>
-            <div class="button is-centered is-primary">
+            <div id="modify-password-button" class="button is-centered is-primary">
               Modificar
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-auto">
+        <div class="transparent-box" style="width: 400px; margin: auto;">
+          <div class="has-text-centered" style="padding: 30px">
+            <h1 class="subtitle is-6 has-text-centered">Agregá los datos de tu Cuenta Bancaria o billetera virtual</h1>
+            <form action="" method="post" novalidate>
+              <div class="control mb-5">
+                <p class="control has-icons-left has-icons-right">
+                  {% if current_user.bank_cbu %}
+                    {{ bank_form.cbu(id="bank-cbu", class="input is-info", placeholder="CBU/CVU", size=64, value=current_user.bank_cbu) }}
+                  {% else %}
+                    {{ bank_form.cbu(id="bank-cbu", class="input is-info", placeholder="CBU/CVU", size=64) }}
+                  {% endif %}
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-university"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="control mb-5">
+                <p class="control has-icons-left has-icons-right">
+                  {% if current_user.bank_alias %}
+                    {{ bank_form.alias(id="bank-alias", class="input is-info", placeholder="Alias", size=64, value=current_user.bank_alias) }}
+                  {% else %}
+                    {{ bank_form.alias(id="bank-alias", class="input is-info", placeholder="Alias", size=64) }}
+                  {% endif %}
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-wallet"></i>
+                  </span>
+                </p>
+              </div>
+            </form>
+            <div id="bank-details-button" class="button is-centered is-primary">
+              Agregar
+            </div>
+            <br>
+            <i class="has-text-centered"><a id="bank-feedback" class="feedback"></a></i>
           </div>
         </div>
       </div>

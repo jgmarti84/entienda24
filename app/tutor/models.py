@@ -1,6 +1,8 @@
 from sqlalchemy.orm import relationship
 from app import db
 import pandas as pd
+from app.utils.schedule import from_iso_to_datetime
+from datetime import timedelta
 
 
 class MateriaProfesor(db.Model):
@@ -100,6 +102,37 @@ class HorarioProfesorDisponible(db.Model):
         else:
             self.save()
 
+    def datetime(self):
+        return from_iso_to_datetime(
+            self.year_index,
+            self.week_index,
+            self.day_index,
+            self.time_index
+        )
+
+    def date(self):
+        return self.datetime().strftime("%d-%m-%Y")
+
+    def start_time(self):
+        return self.datetime().strftime("%H:%M")
+
+    def end_time(self):
+        return (self.datetime() + timedelta(minutes=30)).strftime("%H:%M")
+
+    @staticmethod
+    def get_tutor_slots_by_isodate(tutor_id, year_index=None, week_index=None, day_index=None, time_index=None):
+        filters = [HorarioProfesorDisponible.tutor_id == tutor_id]
+        if year_index:
+            filters.append(HorarioProfesorDisponible.year_index == year_index)
+        if week_index:
+            filters.append(HorarioProfesorDisponible.week_index == week_index)
+        if day_index:
+            filters.append(HorarioProfesorDisponible.day_index == day_index)
+        if time_index is not None:
+            filters.append(HorarioProfesorDisponible.time_index == time_index)
+
+        return db.session.query(HorarioProfesorDisponible).filter(*filters).all()
+
     @staticmethod
     def get_all():
         return HorarioProfesorDisponible.query.all()
@@ -129,10 +162,35 @@ class HorarioProfesorReservado(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def datetime(self):
+        return from_iso_to_datetime(
+            self.year_index,
+            self.week_index,
+            self.day_index,
+            self.time_index
+        )
+
+    def date(self):
+        return self.datetime().strftime("%d-%m-%Y")
+
+    def start_time(self):
+        return self.datetime().strftime("%H:%M")
+
+    def end_time(self):
+        return (self.datetime() + timedelta(minutes=30)).strftime("%H:%M")
+
     @staticmethod
     def get_all():
         return HorarioProfesorReservado.query.all()
 
     @staticmethod
+    def get_by_class_id(class_id):
+        return HorarioProfesorReservado.query.filter(HorarioProfesorReservado.enrolled_class_id.in_([class_id])).all()
+
+    @staticmethod
     def get_by_tutor_id(tutor_id):
         return HorarioProfesorReservado.query.filter(HorarioProfesorReservado.tutor_id.in_([tutor_id])).all()
+
+    @staticmethod
+    def get_by_id(slot_id):
+        return HorarioProfesorReservado.query.get(slot_id)

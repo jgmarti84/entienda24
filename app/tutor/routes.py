@@ -1,13 +1,17 @@
 from . import tutor_bp
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, jsonify
 from flask_login import login_required, current_user
 import json
 from urllib.parse import urlparse
 from app.models import Materia
+from app.student.models import ClaseReservada
 from app.tutor.models import MateriaProfesor, HorarioProfesorDisponible
+from app.auth.models import Estudiante, Profesor
 import app.utils.schedule as schedule
 import numpy as np
 from psycopg2.extensions import register_adapter, AsIs
+from app.auth.forms import ModifyPasswordForm, EditUserProfileForm, EditTutorBankDataForm
+import phonenumbers
 register_adapter(np.int64, AsIs)
 
 
@@ -20,8 +24,39 @@ def home():
     }
     if current_user.is_authenticated:
         if current_user.is_tutor:
-            current_user.get_weeks_schedule(4)
-            return render_template("tutor/home.html", default_params=default_params)
+            # Update classes so those that are older than today will have a status of finished
+            ClaseReservada.update_classes_status(tutor_id=current_user.user.id)
+            # get all the classes from the tutor
+            tutor_logged_classes = ClaseReservada.get_by_tutor_id(current_user.user.id)
+            other_student_dict = {}
+            for cls in tutor_logged_classes:
+                for student_id in cls.other_students:
+                    student = other_student_dict.get(student_id)
+                    if not student:
+                        other_student_dict[student_id] = Estudiante.get_by_id(student_id)
+
+            form = EditUserProfileForm()
+            user_phone = phonenumbers.parse(current_user.user.phone)
+            pcode = user_phone.country_code
+            form.phone_country_code.default = pcode
+            form.process()
+            pext = "" if not user_phone.extension else user_phone.extension
+            pnat = "" if not user_phone.national_number else user_phone.national_number
+            user_phone = [pcode, pext, pnat]
+
+            pass_form = ModifyPasswordForm()
+            bank_form = EditTutorBankDataForm()
+            return render_template(
+                "tutor/home.html",
+                default_params=default_params,
+                form=form,
+                pass_form=pass_form,
+                phones=user_phone,
+                bank_form=bank_form,
+                classes=tutor_logged_classes,
+                other_student_dict=other_student_dict
+            )
+
     return redirect(url_for('public.login'))
 
 
@@ -56,6 +91,12 @@ def save_tutor_subjects():
         if current_user.is_tutor:
             tutor = current_user
             if request.method == "POST":
+                if not current_user.bank_cbu:
+                    return json.dumps({"status": "Save Error",
+                                       "error": "Antes de poder guardar materias para dar debe registrar un CBU y Alias"})
+                if not current_user.bank_alias:
+                    return json.dumps({"status": "Save Error",
+                                       "error": "Antes de poder guardar materias para dar debe registrar un CBU y Alias"})
                 data = request.get_json()
                 # validate data
                 for subject_data in data["tutor_subjects_array"]:
@@ -109,3 +150,28 @@ def save_tutor_schedule():
                     return json.dumps({"status": "Save Error", "error": "Ocurrió un error al guardar los horarios!"})
         return redirect(url_for('student.home'))
     return redirect(url_for('public.login'))
+
+
+@tutor_bp.route('/cancel_logged_class/<int:class_id>', methods=["POST"])
+@login_required
+def cancel_logged_class(class_id):
+    if current_user.is_authenticated:
+        if current_user.is_tutor:
+            if request.method == "POST":
+                try:
+                    cls = ClaseReservada.get_by_id(class_id)
+                    cls.update(**dict(status=3))
+                    return jsonify({"status": "Cancel Successful", "message": "La Clase se ha cancelado correctamente"}), 200
+                except Exception as e:
+                    return jsonify({"status": "Cancel Error", "error": str(e)}), 500
+        return redirect(url_for('student.home'))
+    return redirect(url_for('public.login'))
+
+
+@tutor_bp.route('/get_tutor_schedule/<int:tutor_id>', defaults={"nweeks": 4}, methods=["GET"])
+@tutor_bp.route('/get_tutor_schedule/<int:tutor_id>/<int:nweeks>', methods=["GET"])
+@login_required
+def get_tutor_schedule(tutor_id, nweeks):
+    if request.method == "GET":
+        tutor = Profesor.get_by_id(tutor_id)
+        return jsonify({"tutor_schedule": tutor.get_weeks_schedule(nweeks).to_dict(orient="records")}), 200

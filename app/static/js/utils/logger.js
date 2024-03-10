@@ -4,10 +4,10 @@ function updateForm(id) {
     } else {
         $("#back-button-p").hide();
     }
-    if (id<5) {
-        $("#next-button-p").show();
-    } else {
+    if (id>3) {
         $("#next-button-p").hide();
+    } else {
+        $("#next-button-p").show();
     }
     for (var i=1; i<6; i++) {
         if (i<=id+1) {
@@ -27,7 +27,7 @@ function updateForm(id) {
     } else {
         $("#last-step").hide();
     }
-    if (formId >= 2) {
+    if (id >= 2) {
         $("#student-info-box").removeClass("is-hidden")
         $("#other-students-info-box").removeClass("is-hidden")
 
@@ -316,29 +316,217 @@ function renderPricesTable(tableId, subjectId, showV=true, showP=true) {
         $(`#${tableId}-p`).removeClass("is-hidden")
     }
 }
-// function renderPricesTable(tableId, subjectId, showV=true, showP=true) {
-//     if (!showV) {
-//         $(`#${tableId}-v`).addClass("is-hidden")
-//     } else {
-//         $(`#${tableId}-v`).removeClass("is-hidden")
-//         $(`#${tableId}-v tbody tr`).each(function(rowIndex, rowElement) {
-//             if ($(rowElement).data("subject_id") !== parseInt(subjectId)) {
-//                 $(rowElement).addClass("is-hidden")
-//             } else {
-//                 $(rowElement).removeClass("is-hidden")
-//             }
-//         })
-//     }
-//     if (!showP) {
-//         $(`#${tableId}-p`).addClass("is-hidden")
-//     } else {
-//         $(`#${tableId}-p`).removeClass("is-hidden")
-//         $(`#${tableId}-p tbody tr`).each(function(rowIndex, rowElement) {
-//             if ($(rowElement).data("subject_id") !== parseInt(subjectId)) {
-//                 $(rowElement).addClass("is-hidden")
-//             } else {
-//                 $(rowElement).removeClass("is-hidden")
-//             }
-//         })
-//     }
-// }
+
+function moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, classType, hours, userType="tutor") {
+    if (userType === "tutor") {
+        if (classStatus === 1) {
+            confirm("Está seguro que desea cancelar esta clase?\n" +
+                "Una vez cancelada, quedara en ese estado hasta que\n" +
+                "el alumno elija nuevamente horarios.")
+            const request_url = `/cancel_logged_class/${classId}`
+            makeStringifyPostRequest(request_url, {}, function (error, response) {
+                if (error) {
+                    console.error("Error en el request:", error)
+                    return;
+                }
+                if (response.status === "Cancel Successful") {
+                    location.reload()
+                } else {
+                    message(response.error, true, "tutor-class-panel", "panel-feedback")
+                }
+            })
+        }
+    } else {
+        if (classStatus === 0) {
+            const request_url = `/score_class/${classId}`
+        }
+        if (classStatus === 1 || classStatus === 3) {
+            const post_url = `/get_tutor_schedule/${tutorId}/4`
+            makeGetRequest(post_url, function(error, response) {
+                var isMouseDown = false;
+                if (error) {
+                    console.error("There was an error in the request.")
+                } else {
+                    const tableId = "schedule-table"
+                    $(response.tutor_schedule).each(function(index, slot) {
+                        $(`#${tableId} tbody`).append(tutorScheduleRow(tutorId, slot))
+                    })
+                    openModal($("#schedule-log-modal"))
+
+                    var tablePageIndex = 1;
+                    var rowsPerPage = 28;
+
+                    const indexes = getTablePaginationIndexList(tableId, rowsPerPage);
+                    const weeks_list = [...new Set(extractTableDataArray(tableId).map(x => x.monday_week_date))];
+
+                    renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
+                    renderTablePagButtons(tableId, tablePageIndex, indexes);
+                    renderTableTitle(tableId, tablePageIndex, weeks_list);
+                    $(`#${tableId}-next`).click(function() {
+                        if (tablePageIndex < indexes[indexes.length - 1]) {
+                            tablePageIndex++;
+                        }
+                        renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
+                        renderTablePagButtons(tableId, tablePageIndex, indexes);
+                        renderTableTitle(tableId, tablePageIndex, weeks_list);
+                    })
+
+                    $(`#${tableId}-previous`).click(function() {
+                        if (tablePageIndex > indexes[0]) {
+                            tablePageIndex--;
+                        }
+                        renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
+                        renderTablePagButtons(tableId, tablePageIndex, indexes);
+                        renderTableTitle(tableId, tablePageIndex, weeks_list);
+                    })
+
+                    $(`#${tableId} td`).mousedown(function() {
+                        isMouseDown = true;
+                        startCell = $(this);
+                        return false;
+                    }).mouseover(function() {
+                        if (isMouseDown) {
+                            endCell = $(this);
+                            selectCellsInTable(startCell, endCell, tableId);
+                        }
+                    })
+                    // Individual cells deselection
+                    $(`#${tableId} td`).click(function() {
+                        if (!$(this).hasClass("B")) {
+                            if ($(this).hasClass("selected")) {
+                                $(this).removeClass("selected");
+                            } else {
+                                if ($(this).hasClass("enrolled-0")) {
+                                    $(this).addClass("selected");
+                                }
+                            }
+                        }
+                    })
+                    $(document).mouseup(function() {
+                        isMouseDown = false;
+                        var array = getElementsArrayByClass("current-selected");
+                        $(array).each(function() {
+                            $(this).removeClass("current-selected");
+                            $(this).addClass("selected");
+                        })
+                    });
+
+                    // Handle deselection when user clicks outside the table
+                    $(document).on('click', function (e) {
+                        if (!$(e.target).closest(`#${tableId}`).length) {
+                            $('.selected').removeClass('selected');
+                        }
+                    });
+
+                    $("#add-availability-button").click(function() {
+                        var selectedCells = getElementsArrayByClass("selected");
+                        var cellsNotAdded = [];
+                        $(selectedCells).each(function (index, cell) {
+                            var classTypeCond = $(cell).hasClass(classType) || $(cell).hasClass("VyP");
+                            var availabilityCond = $(cell).hasClass("enrolled-0");
+                            if (availabilityCond && classTypeCond) {
+                                $(cell).addClass("time-added");
+                            } else {
+                                cellsNotAdded.push(cell);
+                            }
+                            $(cell).removeClass("selected");
+                        })
+                        var classesArray = classRowsCreation(getElementsArrayByClass("time-added"));
+
+                        $("#logged-availability-table tbody").empty();
+                        $(classesArray).each(function(index, rowClass) {
+                            var firstCellInfo = getCellInfo(rowClass[0]);
+                            var lastCellInfo = getCellInfo(rowClass[rowClass.length - 1]);
+                            var classDate =  new Date(firstCellInfo[4]);
+                            classDate.setDate(classDate.getUTCDate() + firstCellInfo[2]);
+
+                            var row = "<tr>";
+                            row += `<td>${transformDate(classDate)}</td>`;
+                            row += `<td>${timeIndexParser[firstCellInfo[3]]} - ${timeIndexParser[lastCellInfo[3]+1]}</td>`;
+                            row += "</tr>";
+                            $("#logged-availability-table tbody").append(row);
+                        })
+                    })
+
+                    $("#remove-availability-button").click(function() {
+                        var selectedCells = getElementsArrayByClass("selected");
+
+                        $(selectedCells).each(function(index, cell) {
+                            $(cell).removeClass("time-added");
+                            $(cell).removeClass("selected");
+                        })
+
+                        var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
+                        $("#logged-availability-table tbody").empty();
+                        $(classesArray).each(function(index, rowClass) {
+                            var firstCellInfo = getCellInfo(rowClass[0]);
+                            var lastCellInfo = getCellInfo(rowClass[rowClass.length - 1]);
+                            var classDate =  new Date(firstCellInfo[4]);
+                            classDate.setDate(classDate.getUTCDate() + firstCellInfo[2]);
+
+                            var row = "<tr>";
+                            row += `<td>${transformDate(classDate)}</td>`;
+                            row += `<td>${timeIndexParser[firstCellInfo[3]]} - ${timeIndexParser[lastCellInfo[3]+1]}</td>`;
+                            row += "</tr>";
+                            $("#logged-availability-table tbody").append(row);
+                        })
+                    })
+                    $("#confirm-hours-button").click(function() {
+                        const request_url = `/validate_class_log/${tutorId}`;
+                        var timeSlots = [];
+                        $(getElementsArrayByClass("time-added")).each(function(index, element) {timeSlots.push(getCellInfo(element))});
+                        var dataToSend = {slots: timeSlots, hours: hours, class_type: classType};
+                        makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
+                            if (error) {
+                                console.error('Error in the fifth request: ', error);
+                                return
+                            }
+                            var status = JSON.parse(response)["status"];
+                            if (status === "Validate Successful") {
+                                const post_url = `/class_log_re_schedule/${classId}`
+                                var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
+                                const dataToSend = {schedule_data: transformClassRowsData(classesArray)};
+                                makeStringifyPostRequest(post_url, dataToSend, function(error, response) {
+                                    if (error) {
+                                        console.error("Error en el request: ", error)
+                                        return
+                                    }
+                                    var status = response.status;
+                                    if (status === "Re-schedule Successful") {
+                                        window.location.reload()
+                                    } else {
+                                        message(response.error, true, "availability-box", messageId="schedule-modal-feedback");
+                                    }
+                                })
+                                closeModal($("#add-availability-button").closest(".modal"));
+                            } else {
+                                message(JSON.parse(response)["error"], true, "availability-box", messageId="schedule-modal-feedback");
+                            }
+                        })
+                    });
+                }
+
+            })
+        }
+    }
+}
+
+function tutorScheduleRow(tutorId, slotData) {
+    let yourDate = new Date(slotData.monday_week_date)
+    var row = "<tr>";
+    row += `<td class="is-hidden">${tutorId}</td>`;
+    row += `<td class="is-hidden">${yourDate.toISOString().split('T')[0]}</td>`;
+    row += `<td class="is-hidden">${slotData.week_index}</td>`;
+    row += `<td>${timeIndexParser[slotData.time_index]}</td>`;
+    row += `<td class="is-hidden">${slotData.time_index}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[0]} ${slotData.availability_days[0]}">${slotData.availability_days[0]}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[1]} ${slotData.availability_days[1]}">${slotData.availability_days[1]}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[2]} ${slotData.availability_days[2]}">${slotData.availability_days[2]}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[3]} ${slotData.availability_days[3]}">${slotData.availability_days[3]}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[4]} ${slotData.availability_days[4]}">${slotData.availability_days[4]}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[5]} ${slotData.availability_days[5]}">${slotData.availability_days[5]}</td>`;
+    row += `<td class="enrolled-${slotData.enrolled_days[6]} ${slotData.availability_days[6]}">${slotData.availability_days[6]}</td>`;
+    row += `<td class="is-hidden">${slotData.year_index}</td>`;
+    row += "</tr>"
+    return row
+}

@@ -4,6 +4,7 @@
 
 {% block links %}
     <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    <link rel= "stylesheet" type="text/css" href="{{ url_for('static', filename='css/cards.css') }}">
     <link rel= "stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables.css') }}">
 {% endblock %}
 
@@ -18,6 +19,7 @@
 
 {% block scripts %}
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/utils.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/simpletimer.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/modal.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/request.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/schedule.js') }}"></script>

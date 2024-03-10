@@ -26,4 +26,67 @@
       <div class="container student-class-panel-cell"><p class="has-text-centered"><small><strong>Info +</strong></small></p></div>
     </div>
   </nav>
+  <table class="panel-table" style="width: 100%;">
+    <thead>
+      <tr>
+<!--        <th class="is-hidden">subject_id</th>-->
+        <th class="is-hidden">materia</th>
+        <th class="is-hidden">profesor</th>
+        <th class="is-hidden">fecha y hora</th>
+        <th class="is-hidden">estado</th>
+        <th class="is-hidden">mas info</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for class in classes %}
+    <tr data-classid="{{ class.id }}" data-subjectid="{{ class.subject.subject_id }}" data-tutorid="{{ class.tutor_id }}" data-studentid="{{class.student_id }}" data-status="{{ class.status }}" data-classtype="{{ class.class_type }}" data-slots="{{ class.class_length() }}">
+<!--      <td class="is-hidden subject-id-cell">{{ class.subject.id }}</td>-->
+      <td class="subject-name-cell"><i class="fas fa-book mr-2" aria-hidden="true"></i>{{ class.subject.subject_name }}</td>
+      <td class="tutor-cell">
+        <i class="fas fa-user-edit mr-2" aria-hidden="true"></i>{{ class.tutor.user.username }}
+      </td>
+      <td class="date-time-cell">
+        <p class="has-text-centered">{{ class.date() }}</p>
+        <p class="has-text-centered">{{ class.interval() }}</p>
+      </td>
+      <td class="status-cell" data-status="{{ class.status }}">
+      {% if class.status == 0 %}
+        <p class="has-text-centered">
+          <span class="icon is-large">
+            <i class="far fa-calendar-check" aria-hidden="true"></i>
+          </span>
+          Terminada
+        </p>
+      {% elif class.status == 1 %}
+        <p class="has-text-centered">
+          <span class="icon is-large">
+            <i class="far fa-calendar" aria-hidden="true"></i>
+          </span>
+          Confirmada
+        </p>
+      {% elif class.status == 2 %}
+        <p class="has-text-centered">
+          <span class="icon is-large">
+            <i class="far fa-calendar-plus" aria-hidden="true"></i>
+          </span>
+          Reservada Temporalmente
+        </p>
+      {% else %}
+        <p class="has-text-centered">
+          <span class="icon is-large">
+            <i class="far fa-calendar-times" aria-hidden="true"></i>
+          </span>
+          Cancelada
+        </p>
+      {% endif %}
+      </td>
+      {% if class.score %}
+        <td class="more-info-cell">{{ class.score }}</td>
+      {% else %}
+        <td class="more-info-cell"><a>{{ class.student_info() }}</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 </div>

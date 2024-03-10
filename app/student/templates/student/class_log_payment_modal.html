@@ -2,18 +2,42 @@
 <div id="upload-payment-modal" class="modal modal-fx-fadeInScale">
   <div class="modal-background"></div>
 
-  <div class="modal-content is-huge" style="max-width: 450px;">
+  <div class="modal-content is-huge px-5" style="max-width: 550px;">
     <div class="box hero is-primary is-bold section pt-3 px-3" style="border: 2px solid rgba(53,50,54,0.71)">
-      <div id="payment-file-timer" class="container">
+      <div id="payment-file-timer" class="container px-5">
         <div class="simple-timer" style="width: 60px; margin: auto; justify-content: center;">
           <span class="timer-minute">10</span>
           <label class="separator">:</label>
           <span class="timer-second">00</span>
         </div>
-        <h1 class="subtitle is-4 has-text-centered mt-5">Total a pagar: </h1>
-        <p style="max-width: 500px;">
-          Transferí el total a la siguiente cuenta bancaria (CBU: 23985472487562834, alias: entienda.y.aprenda ) y subí el comprobante
+        <h1 class="subtitle is-4 has-text-centered mt-5 mb-0">Total a pagar: </h1>
+        <hr class="fade-out-hr mb-3 mt-0">
+        <p class="has-text-centered">
+          <strong>Si posee cuenta bancaria o alguna billetera virtual, envie la totalidad del dinero a la siguiente cuenta y adjunte el comprobante de pago.</strong>
         </p>
+        </br>
+        <ul>
+          {% if tutor.bank_cbu %}
+            <li><strong>CBU: </strong>{{tutor.bank_cbu}}</li>
+          {% endif %}
+          {% if tutor.bank_alias %}
+            <li><strong>ALIAS: </strong>{{tutor.bank_alias}}</li>
+          {% endif %}
+          <li><strong>TITULAR: </strong>{{tutor.user.name}} {{tutor.user.last_name}}</li>
+        </ul>
+        </br>
+        <p class="has-text-centered">
+        <strong>Si solo cuenta con efectivo, le diremos cómo proceder contactándonos en el siguiente número telefónico:</strong>
+        </p>
+        <p class="has-text-centered">+54 9 11 5528 6230</p>
+        </br>
+        <h6 class="has-text-centered mb-0">Importante</h6>
+        <hr class="fade-out-hr mb-2 mt-0" style="width: 30%; margin: auto;">
+        <ol>
+          <li style="font-size: 10px;">Si el profesor no le da la clase o incumple con el horario luego de realizar el pago, se le solicita que le reintegre su dinero si usted lo desea. En caso de negarse, la plataforma le suspende la cuenta al profesor pero no se hará cargo del reintegro del dinero.</li>
+          <li style="font-size: 10px;">Debido a 1, no se recomienda abonar packs con profesores con pocas horas de clases dadas en la plataforma, hasta tomar al menos la hora de prueba.</li>
+          <li style="font-size: 10px;">En caso de que tenga que adjuntar varios comprobantes (por ejemplo si la clase es grupal o si realizo el pago en 2 partes), juntelos todos en un solo archivo.</li>
+        </ol>
         <div id="upload-file-box" class="file is-small is-centered has-name m-5">
           <label class="file-label">
             <input class="file-input" type="file" name="resume" accept="image/*">
@@ -36,6 +60,30 @@
           </p>
         </div>
       </div>
+
+      <div id="confirmation-message" class="is-hidden">
+        <h1 class="subtitle has-text-centered">Usted reservo la clase correctamente</h1>
+        <p class="has-text-centered">Escribanos al <strong>+54 9 11 5528 6230</strong>  o continue al chat the whatsapp para ponerlo en contacto con el profesor</p>
+
+<!--        <a class="icon has-text-primary" href="https://wa.me/+5491155286230">-->
+<!--          <i class="fab fa-whatsapp"></i>-->
+<!--        </a>-->
+
+<!--        <a class="button is-small is-info" href="{{url_for('student.home')}}">Aceptar</a>-->
+        <div class="field is-grouped mt-5" style="justify-content: center;">
+          <p class="control">
+            <a class="icon has-text-primary" href="https://wa.me/+5491155286230">
+              <i class="fab fa-whatsapp is-large"></i>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-info is-small" href="{{url_for('student.home')}}">
+              Aceptar
+            </a>
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>

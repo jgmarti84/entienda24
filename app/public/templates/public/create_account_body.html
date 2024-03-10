@@ -10,12 +10,12 @@
         </div>
 
         <div class="column is-auto">
-          <p class="subtitle is-4"><i>Para Reservar una Clase con un profesor de Entienda y Aprenda Tenés que estar logueado como estudiante.</i></p>
+          <p class="subtitle is-4"><i>Para Reservar una Clase con un profesor de Entienda y Aprenda tenés que estar logueado como estudiante.</i></p>
           <p class="subtitle is-5">&#x2022 Ingresa con tu usuario de estudiante para reservar</p>
           <p class="subtitle is-5">&#x2022 Si no tenés cuenta de Estudiante Registrate acá</p>
         </div>
 
-        <div class="column is-auto">
+        <div id="#tab-settings-content" class="column is-auto">
           <div class="tabs is-boxed is-small is-centered is-fullwidth mb-0">
             <ul>
               <li class="is-active" data-target="estudiante">
@@ -70,124 +70,112 @@
 
               <div id="registro" class="is-hidden">
                 <div>
-                  <strong>Registrate como Estudiante</strong>
+                  <strong>Registrate en Entienda y Aprenda</strong>
                 </div>
                 <hr class="fade-out-hr m-1">
+                    <form action="" method="post" novalidate>
+                      <div class="control mb-5">
+                          {{ form.user_type() }}
+                      </div>
+                      <div class="control mb-5">
+                        <p class="control has-icons-left has-icons-right">
+                          {{ form.username(id="signup-user", class="input is-info", placeholder="Usuario", size=64) }}
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="control mb-5">
+                        <p class="control has-icons-left has-icons-right">
+                          {{ form.name(id="signup-name", class="input is-info", placeholder="Nombre", size=64) }}
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-user-edit"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fa fa-check mr-2"></i>
+                            <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="control mb-5">
+                        <p class="control has-icons-left has-icons-right">
+                          {{ form.last_name(id="signup-last-name", class="input is-info", placeholder="Apellido", size=64) }}
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-user-shield"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fa fa-check mr-2"></i>
+                            <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="control mb-5">
+                        <p class="control has-icons-left has-icons-right">
+                          {{ form.email(id="signup-mail", class="input is-info", placeholder="Email") }}
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fa fa-check mr-2"></i>
+                            <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="control mb-5">
+                        <p class="control has-icons-left has-icons-right">
+                          {{ form.password(id="signup-pass", class="input is-info", placeholder="Contraseña") }}
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="control mb-5">
+                        <p class="control">
+                          <span>
+                            <span>
+                              <i class="fa fa-phone pt-3 pr-1"></i>
+                            </span>
+                            {{ form.phone_country_code(class="input is-info", style="width: 90px;") }}
+                            -
+                            {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area") }}
+                            -
+                            {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;") }}
+                            <span class="icon is-small is-right">
+                              <i class="fa fa-check mx-2"></i>
+                              <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                            </span>
+                          </span>
+                        </p>
+                      </div>
+                    </form>
+                    <div class="field">
+                      <p class="control" style="font-size: 10px;">
+                        <span class="icon is-small is-right">
+                          <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                        </span>
+                        Los datos no serán visibles para otros usuarios de la aplicación
+                      </p>
+                    </div>
 
-                <div class="control mb-1 mt-5">
-                  <label class="radio">
-                    <input type="radio" name="user-type" value="P">
-                    Profesor
-                  </label>
-                  <label class="radio">
-                    <input type="radio" name="user-type" value="S" checked>
-                    Estudiante
-                  </label>
-                </div>
+                    <div class="p-3 m-0">
+                      <a id="signup-button" class="button is-info">
+                        <span class="icon">
+                          <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        </span>
+                        <span>Registrate</span>
+                      </a>
+                    </div>
 
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left has-icons-right">
-                    <input id="signup-user" class="input is-info" type="text" placeholder="Usuario">
-                    <span class="icon is-small is-left">
-                      <i class="fa fa-user"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </p>
-                </div>
+                    <i><a id="feedback" class="feedback"></a></i>
+<!--                  </div>-->
 
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left has-icons-right">
-                    <input id="signup-pass" class="input is-info" type="password" placeholder="Contraseña">
-                    <span class="icon is-small is-left">
-                      <i class="fa fa-lock"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </p>
-                </div>
-
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left has-icons-right">
-                    <input id="signup-name" class="input is-info" type="text" placeholder="Nombre">
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-user-edit"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fa fa-check mr-2"></i>
-                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
-                    </span>
-                  </p>
-                </div>
-
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left has-icons-right">
-                    <input id="signup-last-name" class="input is-info" type="text" placeholder="Apellido">
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-user-shield"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fa fa-check mr-2"></i>
-                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
-                    </span>
-                  </p>
-                </div>
-
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left has-icons-right">
-                    <input id="signup-mail" class="input is-info" type="text" placeholder="Email">
-                    <span class="icon is-small is-left">
-                      <i class="fa fa-envelope"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fa fa-check mr-2"></i>
-                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
-                    </span>
-                  </p>
-                </div>
-
-                <div class="field">
-                  <p class="control">
-                    <span>
-                      <span>
-                        <i class="fa fa-phone pt-3 pr-3"></i>
-                      </span>
-                      <select name="country-code" class="input is-info" style="width: 60px;"></select>
-                      <input title="Sin el 0 y sin el 15" name="phone" class="input is-info" type="text" placeholder="Area" style="width: 55px;">
-                      <input name="phone" class="input is-info mr-3" type="text" placeholder="Nro. Telefono" style="width: 130px">
-                      <span class="icon is-small is-right">
-                        <i class="fa fa-check mx-2"></i>
-                        <i class="fas fa-asterisk mr-2 fa-xs"></i>
-                      </span>
-                    </span>
-                  </p>
-                </div>
-
-                <div class="field">
-                  <p class="control" style="font-size: 10px;">
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-asterisk mr-2 fa-xs"></i>
-                    </span>
-                    Los datos no serán visibles para otros usuarios de la aplicación
-                  </p>
-                </div>
-
-                <div class="p-3 m-0">
-                  <a id="signup-button" class="button is-info">
-                    <span class="icon">
-                      <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    </span>
-                    <span>Registrate</span>
-                  </a>
-                </div>
-<!--                <br>-->
-        <!--        <textarea id="profile-description" class="textarea is-info" placeholder="Poné acá tu descripción"></textarea>-->
-        <!--        <br>-->
-<!--                <a id="signup-button" class="button is-info">Registrate</a>-->
-                <br>
-                <i><a id="feedback" class="feedback"></a></i>
+<!--                </div>-->
 
               </div>
             </div>

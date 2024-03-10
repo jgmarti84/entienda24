@@ -140,10 +140,10 @@
                             {% for row in s.get_price_table_v(factor=tutor.price_factor()) %}
                               <tr>
                                 <td>{{ row["nr_students"] }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
                               </tr>
                             {% endfor %}
                           </tbody>
@@ -171,10 +171,10 @@
                             {% for row in s.get_price_table_p(factor=tutor.price_factor()) %}
                               <tr>
                                 <td>{{ row["nr_students"] }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                                <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                                <td>{{ '${:,.0f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
                               </tr>
                             {% endfor %}
                           </tbody>
@@ -191,8 +191,9 @@
                   <hr class="fade-out-hr mt-3">
                   <div class="field is-grouped mt-5" style="justify-content: center;">
                     <p class="control">
+                      <a id="modify-hours-button" class="button is-small is-info is-hidden">Modificar Horarios</a>
                       <a id="confirm-button" class="button is-small is-info">Elegir Horarios</a>
-                      <a id="log-class-button" class="button is-normal is-info is-hidden">Realizar Reserva</a>
+                      <a id="log-class-button" class="button is-small is-info is-hidden">Realizar Reserva</a>
                     </p>
                   </div>
                 </div>

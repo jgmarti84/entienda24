@@ -10,6 +10,7 @@ from app import db
 from app.tutor.models import HorarioProfesorDisponible, HorarioProfesorReservado
 import app.utils.schedule as schedule
 from app.data.static_data import time_index_parser
+from hashlib import md5
 
 
 class Usuario(db.Model, UserMixin):
@@ -29,6 +30,8 @@ class Usuario(db.Model, UserMixin):
     birth_date = db.Column(db.Date, nullable=True)
     profile_description = db.Column(db.String(400), nullable=True)
     fantasy_name = db.Column(db.String(50), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     _is_tutor = None
 
@@ -48,10 +51,14 @@ class Usuario(db.Model, UserMixin):
             self._is_tutor = self.user_type == 'p'
         return self._is_tutor
 
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+
     def save(self):
         if not self.id:
             db.session.add(self)
-        db.session.commit()
+        # db.session.commit()
         if self.is_tutor:
             tutor = Profesor(self.id)
             tutor.save()
@@ -59,7 +66,11 @@ class Usuario(db.Model, UserMixin):
             student = Estudiante(self.id)
             student.save()
 
-
+    def update(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+        db.session.add(self)
+        db.session.commit()
 
     def mean_score(self):
         return 3
@@ -101,13 +112,14 @@ class Profesor(db.Model, UserMixin):
     __tablename__ = "profesores"
 
     id = db.Column(db.Integer, db.ForeignKey('usuarios.id', ondelete='CASCADE'), primary_key=True)
+    bank_cbu = db.Column(db.String(22), nullable=True)
+    bank_alias = db.Column(db.String(64), nullable=True)
 
     user = relationship("Usuario")
     tutor_subject = relationship("MateriaProfesor")
     availability_schedule = relationship("HorarioProfesorDisponible")
     enrollment_schedule = relationship("HorarioProfesorReservado")
     class_enrolled = relationship("ClaseReservada", back_populates="tutor")
-    # scores = relationship("Calificacion", back_populates="tutor")
 
     is_tutor = True
 
@@ -118,6 +130,12 @@ class Profesor(db.Model, UserMixin):
         return f'<Profesor {self.user.username} ({self.user.email})>'
 
     def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         db.session.add(self)
         db.session.commit()
 
@@ -198,9 +216,6 @@ class Profesor(db.Model, UserMixin):
         return float(len(schedule_df) / 2)
 
     def availability(self, n_weeks=8):
-        # if not isinstance(x, (np.floating, float)):
-        #     return_value = "N/A"
-        # else:
         x = self.availability_hours(n_weeks=n_weeks)
         if x < 5:
             return_value = "baja"
@@ -232,7 +247,6 @@ class Estudiante(db.Model, UserMixin):
 
     user = relationship("Usuario")
     class_enrolled = relationship("ClaseReservada", back_populates="student")
-    # scores = relationship("Calificacion", back_populates="student")
 
     is_tutor = False
 

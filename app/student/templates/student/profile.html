@@ -1,12 +1,14 @@
 <div class="profile-card-container">
   <div class="profile-card-info-image">
-    <img class="profile-card-img" src="{{url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg')}}" alt="this image contains user-image">
+    <img class="profile-card-img" src="{{student.user.avatar(256)}}" alt="this image contains user-image">
+    {% if student.user.updated_at %}<p style="color: white; font-size: 9px;">Última actividad: <br>{{ student.user.updated_at.strftime("%d/%m/%y a las %H:%M hrs.") }}</p>{% endif %}
   </div>
   <div class="profile-card-content">
     <a href="{{ url_for('student.home') }}">
-      <h3 class="profile-card-name">
-        {{ student.username }}
-      </h3>
+      <ul style="list-style: none;">
+        <li class="user-avatar is-small" style="display: inline-block;">{{ student.user.username[0].upper() }}</li>
+        <li class="user-username is-small" style="display: inline-block;">{{ student.user.username }}</li>
+      </ul>
     </a>
     <div class="profile-card-details">
       <table style="width: 100%";>

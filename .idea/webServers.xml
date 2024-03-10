@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c95428a6-9775-458c-8ceb-984fa75a57c7" name="hostinger">
+        <fileTransfer accessType="SFTP" host="178.16.143.130" port="22" sshConfigId="4322cace-ce11-42ec-a9e0-3521adf94764" sshConfig="root@178.16.143.130:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

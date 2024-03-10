@@ -2,7 +2,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Numeric
 from sqlalchemy.types import TypeDecorator, TEXT
 import json
-
+from datetime import datetime, timedelta
 from app import db
 
 
@@ -38,11 +38,76 @@ class ClaseReservada(db.Model):
     student = relationship("Estudiante", back_populates="class_enrolled")
     tutor = relationship("Profesor", back_populates="class_enrolled")
     subject = relationship("Materia", back_populates="class_enrolled")
-    enrolled_schedule = relationship("HorarioProfesorReservado")
-
+    enrolled_schedule = relationship("HorarioProfesorReservado", cascade='all, delete')
 
     def __repr__(self):
         return f"< Profesor: {self.tutor_id} Estudiante: {self.student_id} Materia: {self.subject_id}>"
 
     def class_length(self):
-        return float(len(self.enrolled_schedule)) / 2.
+        return len(self.enrolled_schedule)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def remove(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+        db.session.add(self)
+        db.session.commit()
+
+    def date(self):
+        return self.enrolled_schedule[0].date()
+
+    def interval(self):
+        start_time = self.enrolled_schedule[0].start_time()
+        end_time = self.enrolled_schedule[-1].end_time()
+        return f"{start_time} - {end_time}"
+
+    def student_info(self):
+        if self.status == 1:
+            return_status = "Reprogramar Clase"
+        elif self.status == 0:
+            return_status = "Calificar Clase/Profesor"
+        elif self.status == 3:
+            return_status = "Seleccionar Horarios"
+        else:
+            return_status = "Error"
+        return return_status
+
+    def tutor_info(self):
+        if self.status == 1:
+            return_status = "Cancelar Clase"
+        elif self.status == 0:
+            return_status = "Sin Calificar"
+        else:
+            return_status = "Ver mas Info"
+        return return_status
+
+    @staticmethod
+    def get_by_id(class_id):
+        return ClaseReservada.query.get(class_id)
+
+    @staticmethod
+    def get_by_student_id(student_id):
+        return ClaseReservada.query.filter_by(student_id=student_id).all()
+
+    @staticmethod
+    def get_by_tutor_id(tutor_id):
+        return ClaseReservada.query.filter_by(tutor_id=tutor_id).all()
+
+    @staticmethod
+    def get_by_status(status):
+        return ClaseReservada.query.filter(ClaseReservada.status.in_([status])).all()
+
+    @staticmethod
+    def update_classes_status(**filters):
+        classes = ClaseReservada.query.filter_by(**filters).all()
+        for cls in classes:
+            if cls.enrolled_schedule[-1].datetime() < datetime.now() + timedelta(minutes=30):
+                if cls.status == 1:
+                    cls.update(**dict(status=0))

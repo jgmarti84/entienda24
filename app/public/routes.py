@@ -119,3 +119,11 @@ def subject_info(subject_id):
         login_form=login_form,
         default_params=default_params
     )
+
+
+# -------- Redirect page when trying to log class ----------------------------------------------------------- #
+@public_bp.route('/student_account_creation')
+def create_account():
+    login_form = LoginForm()
+    signup_form = SignupForm()
+    return render_template("public/create_account.html", form=signup_form, login_form=login_form)

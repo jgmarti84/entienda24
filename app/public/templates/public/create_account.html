@@ -4,10 +4,19 @@
 
 {% block links %}
 <style>
-    input[name=phone]::-webkit-input-placeholder {
-        font-size: 12px !important;
+    select[name=phone_country_code]::-webkit-input-placeholder {
+        font-size: 8px;
+    }
+    #user_type li {
+        display: inline;
+        margin-right: 10px;
     }
 </style>
+<!--<style>-->
+<!--    input[name=phone]::-webkit-input-placeholder {-->
+<!--        font-size: 12px !important;-->
+<!--    }-->
+<!--</style>-->
 {% endblock %}
 
 {% block body %}
@@ -17,4 +26,10 @@
 {% endblock %}
 
 {% block scripts %}
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/utils.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/login.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/signup.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/auth.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/tabs.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/views/create_account.js') }}"></script>
 {% endblock %}

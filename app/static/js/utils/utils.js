@@ -1,9 +1,9 @@
-function message(status, shake=false, id="") {
+function message(status, shake=false, id="", messageId="feedback") {
   if (shake) {
     $("#"+id).effect("shake", {direction: "right", times: 2, distance: 8}, 250);
   }
-  document.getElementById("feedback").innerHTML = status;
-  $("#feedback").show().delay(3000).fadeOut();
+  document.getElementById(messageId).innerHTML = status;
+  $(`#${messageId}`).show().delay(3000).fadeOut();
 }
 
 function error(type) {

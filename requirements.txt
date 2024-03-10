@@ -3,6 +3,7 @@ Flask-Login
 Flask-SQLAlchemy
 Flask-WTF
 Flask-Caching
+Flask-Migrate
 WTForms-Alchemy
 bcrypt
 psycopg2

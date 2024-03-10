@@ -11,7 +11,7 @@
 }
 
 .profile-card-link-image {
-  padding: 3em 0;
+  padding: 1em 0;
   background-image: linear-gradient(70deg, hsl(217, 71%, 53%), hsl(217, 56%, 40%));
   border: 1px solid rgba(107,100,108,0.79);
   border-top-left-radius: 1em;
@@ -19,7 +19,7 @@
 }
 
 .profile-card-info-image {
-  padding: 3em 0;
+  padding: 2em 0;
   background-image: linear-gradient(70deg, hsl(204, 86%, 53%), hsl(204, 70%, 40%));
   border: 1px solid rgba(107,100,108,0.79);
   border-top-left-radius: 1em;
@@ -49,8 +49,8 @@
 }
 
 .profile-card-img {
-  width: 10em;
-  height: 10em;
+  width: 13em;
+  height: 13em;
   border-radius: 50%;
   box-shadow: 0 0.6em 1.8em;
   object-fit: cover;
