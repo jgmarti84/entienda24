@@ -4,12 +4,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime, timezone
 
+import os
+import logging
+from logging.handlers import RotatingFileHandler
+
 db = SQLAlchemy()
 
 login_manager = LoginManager()
 
 
 def create_app():
+
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
@@ -45,6 +50,23 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+
+    # error logging!
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler(
+        'logs/entiendayaprenda.log',
+        maxBytes=10240,
+        backupCount=10
+    )
+    file_handler.setFormatter(
+        logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+    )
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Entienda y Aprenda startup')
 
     return app
 
