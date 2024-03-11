@@ -78,6 +78,52 @@ $(document).ready(function () {
     })
     closeModalEvents("modify-password-modal")
 
+    // Modify ratings float numbers into stars
+    $(".score").each(function() {
+        const n = this.innerHTML
+        this.innerHTML = getStars(n)
+    })
+
+    $("#student-class-panel input").on('input', function() {
+        var tabStatus = $(`.panel-tabs a.is-active`).data("status")
+        var panelRows = $(`.panel-table tbody tr`)
+        const inputString = this.value
+        $(panelRows).each(function() {
+            const subjectName = removeAccentsAndLowerCase($(this).find("td.subject-name-cell").text());
+            const rowStatus = $(this).find("td.status-cell").data("status")
+            if (tabStatus === rowStatus || tabStatus === -1) {
+                if (subjectName.includes(inputString)) {
+                    $(this).removeClass("is-hidden")
+                }
+                else {
+                    $(this).addClass("is-hidden")
+                }
+            }
+        })
+    });
+
+    $(".panel-tabs a").click(function() {
+        $(".panel-tabs a").each(function() {
+            $(this).removeClass("is-active")
+        })
+        $(this).addClass("is-active")
+        var tabStatus = $(this).data("status")
+        var panelRows = $(`.panel-table tbody tr`)
+        if (tabStatus === -1) {
+            $(panelRows).each(function() {
+                $(this).removeClass("is-hidden")
+            })
+        } else {
+            $(panelRows).each(function() {
+                var rowStatus = $(this).find("td.status-cell").data("status")
+                if (rowStatus === tabStatus) {
+                    $(this).removeClass("is-hidden")
+                } else {
+                    $(this).addClass("is-hidden")
+                }
+            })
+        }
+    })
     $(".more-info-cell").click(function() {
         const row = $(this).parent('tr')
         const classId = $(row).data("classid")

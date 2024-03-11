@@ -124,6 +124,12 @@ def save_tutor_schedule():
         if current_user.is_tutor:
             tutor = current_user
             if request.method == "POST":
+                if not current_user.bank_cbu:
+                    return json.dumps({"status": "Save Error",
+                                       "error": "Antes de poder guardar materias para dar debe registrar un CBU y Alias"})
+                if not current_user.bank_alias:
+                    return json.dumps({"status": "Save Error",
+                                       "error": "Antes de poder guardar materias para dar debe registrar un CBU y Alias"})
                 data = request.get_json()
                 modified_schedule = schedule.transform_view_schedule_db_format(data["data"])
                 db_schedule = tutor.get_availability_df()

@@ -1,12 +1,10 @@
 from . import student_bp
 from flask import render_template, redirect, url_for, request, jsonify
-from flask_login import login_required, current_user, logout_user, login_user
-from app.auth.models import Usuario, Profesor
+from flask_login import login_required, current_user
+from app.auth.models import Profesor
 from app.student.models import ClaseReservada
 from app.auth.forms import EditUserProfileForm, ModifyPasswordForm
 import phonenumbers
-import json
-import os
 
 
 @student_bp.route('/student/home/')
@@ -21,7 +19,7 @@ def home():
 
             # buscamos todas las clases
             student_logged_classes = ClaseReservada.get_by_student_id(current_user.user.id)
-
+            student_logged_classes.extend(ClaseReservada.query.filter(ClaseReservada.other_students.contains([current_user.user.id])).all())
             form = EditUserProfileForm()
             user_phone = phonenumbers.parse(current_user.user.phone)
             pcode = user_phone.country_code
@@ -60,3 +58,18 @@ def class_log(tutor_id):
             )
         return redirect("public.create_account")
     return redirect("public.create_account")
+
+
+@student_bp.route('/get_class_data/<int:class_id>', methods=["GET"])
+@login_required
+def get_class_data(class_id):
+    if request.method == "GET":
+        cls = ClaseReservada.get_by_id(class_id)
+        class_info = {
+            "class": cls.as_dict(),
+            "student": cls.student.user.as_dict(),
+            "tutor": cls.tutor.user.as_dict(),
+            "subject": cls.subject.as_dict(),
+            "enrolled_schedule": [dict(**ce.as_dict(), **{"date": ce.date(), "start_time": ce.start_time(), "end_time": ce.end_time()}) for ce in cls.enrolled_schedule]
+        }
+        return jsonify({"status": "Get Successful", "class_info": class_info})

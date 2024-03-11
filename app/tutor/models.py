@@ -27,6 +27,9 @@ class MateriaProfesor(db.Model):
     def get_price_table_p(self, factor=1.0):
         return self.create_prices_table(float(self.price_ref) * 1.25 * factor).round(0).to_dict(orient="records")
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     @staticmethod
     def create_prices_table(price):
         df = pd.DataFrame({
@@ -119,6 +122,9 @@ class HorarioProfesorDisponible(db.Model):
     def end_time(self):
         return (self.datetime() + timedelta(minutes=30)).strftime("%H:%M")
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     @staticmethod
     def get_tutor_slots_by_isodate(tutor_id, year_index=None, week_index=None, day_index=None, time_index=None):
         filters = [HorarioProfesorDisponible.tutor_id == tutor_id]
@@ -178,6 +184,9 @@ class HorarioProfesorReservado(db.Model):
 
     def end_time(self):
         return (self.datetime() + timedelta(minutes=30)).strftime("%H:%M")
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     @staticmethod
     def get_all():

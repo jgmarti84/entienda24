@@ -88,6 +88,9 @@ class ClaseReservada(db.Model):
             return_status = "Ver mas Info"
         return return_status
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     @staticmethod
     def get_by_id(class_id):
         return ClaseReservada.query.get(class_id)

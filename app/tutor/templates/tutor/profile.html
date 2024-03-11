@@ -14,7 +14,7 @@
         <li class="user-username is-small" style="display: inline-block;">{{ tutor.user.username }}</li>
       </ul>
     </a>
-    <span><span class="stars">{{ tutor.mean_score() }}</span><p> {{ tutor.mean_score() }} <span style="font-size: 12px">({{ tutor.count_scores() }} opiniones)</span></p></span>
+    <span><span class="stars">{{ tutor.mean_score() }}</span><p> {{ '{:.2f}'.format(tutor.mean_score()) }} <span style="font-size: 12px">({{ tutor.count_scores() }} opiniones)</span></p></span>
     <div class="profile-card-details">
       <table style="width: 100%";>
         <tbody style="width: 100%;">

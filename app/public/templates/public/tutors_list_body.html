@@ -27,7 +27,7 @@
 
           <article class="media" data-tutorid="{{tutor.id}}">
             <figure class="profile-hcard-primary-image media-left">
-                <img class="profile-hcard-img" src="{{url_for('static', filename='media/default-avatar-icon-of-social-media-user-vector.jpeg')}}">
+                <img class="profile-hcard-img" src="{{tutor.user.avatar(256)}}">
             </figure>
 
             <div class="media-content">

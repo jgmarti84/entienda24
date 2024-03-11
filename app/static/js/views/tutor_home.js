@@ -135,6 +135,12 @@ $(document).ready(function () {
         $(`#bank-cbu`).closest(`div.transparent-box`).css("border", "2px solid red")
     }
 
+    // Modify ratings float numbers into stars
+    $(".score").each(function() {
+        const n = this.innerHTML
+        this.innerHTML = getStars(n)
+    })
+
     $("#tutor-class-panel input").on('input', function() {
         var tabStatus = $(`.panel-tabs a.is-active`).data("status")
         var panelRows = $(`.panel-table tbody tr`)

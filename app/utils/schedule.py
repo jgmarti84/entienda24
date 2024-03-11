@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta
 
 import numpy as np
 import pandas as pd
+from pytz import timezone
 
 
 hour_to_time_index = {
@@ -11,6 +12,7 @@ hour_to_time_index = {
     "20:00": 24, "20:30": 25, "21:00": 26, "21:30": 27
 }
 
+ba_tz = timezone('America/Argentina/Buenos_Aires')
 
 def time_slot_from_time_index(time_index):
     hour = int(time_index / 2)
@@ -107,7 +109,7 @@ def empty_week_schedules_df(start_date=None, n_weeks=8):
 
 
 def impute_past_availability_slots(availability_df, minutes_lag=15):
-    now_ids = from_datetime_to_iso(datetime.now() - timedelta(minutes=minutes_lag))
+    now_ids = from_datetime_to_iso(datetime.now().astimezone(ba_tz) - timedelta(minutes=minutes_lag))
     now_condition = (availability_df["year_index"] == now_ids[0]) & \
                      (availability_df["week_index"] == now_ids[1]) & \
                       (availability_df["day_index"] == now_ids[2]) & \

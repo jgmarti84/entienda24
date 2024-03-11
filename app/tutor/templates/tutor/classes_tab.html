@@ -45,7 +45,6 @@
     <tbody>
     {% for class in classes %}
     <tr data-classid="{{ class.id }}">
-      <td class="is-hidden subject-id-cell">{{ class.subject.id }}</td>
       <td class="subject-name-cell"><i class="fas fa-book mr-2" aria-hidden="true"></i>{{ class.subject.subject_name }}</td>
       <td class="student-cell">
         <i class="fas fa-user-edit mr-2" aria-hidden="true"></i>{{ class.student.user.username }}
@@ -89,9 +88,9 @@
       {% endif %}
       </td>
       {% if class.score %}
-        <td class="more-info-cell">{{ class.score }}</td>
+        <td class="more-info-cell score">{{ class.score }}</td>
       {% else %}
-        <td class="more-info-cell"><a>{{ class.tutor_info() }}</a></td>
+        <td class="more-info-cell"><a class="button is-primary is-small" style="font-size: 10px;">{{ class.tutor_info() }}</a></td>
       {% endif %}
     </tr>
     {% endfor %}

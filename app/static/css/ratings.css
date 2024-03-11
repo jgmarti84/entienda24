@@ -1,0 +1,41 @@
+#priorityFlag {
+    color: rgb(241, 241, 70);
+    font-size: 1em;
+    padding: 0.25em;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.fa-star {}
+
+.fa-star:hover {
+    cursor: pointer;
+}
+
+.checkedStar {
+    color: red;
+}
+
+#ratingBox {
+    width: 170px;
+    color: #5b555b;
+    margin: auto;
+}
+
+#ratinngBox::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+#starsBox {
+    /*float: left;*/
+    width: 70%;
+    margin: auto;
+}
+
+#flagBox {
+    width: 30%;
+    float: right;
+}

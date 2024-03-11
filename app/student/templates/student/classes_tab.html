@@ -2,6 +2,7 @@
   <div class="hrtext">
     <h3 class="title is-5">Tus Clases</h3>
     <div class="header-fade-out-hr"></div>
+    <i class="has-text-centered"><a id="panel-feedback" class="feedback"></a></i>
   </div>
   <nav id="student-class-panel" class="panel is-primary" style="background-color: white; color: black;">
     <div class="panel-block">
@@ -29,7 +30,6 @@
   <table class="panel-table" style="width: 100%;">
     <thead>
       <tr>
-<!--        <th class="is-hidden">subject_id</th>-->
         <th class="is-hidden">materia</th>
         <th class="is-hidden">profesor</th>
         <th class="is-hidden">fecha y hora</th>
@@ -40,7 +40,6 @@
     <tbody>
     {% for class in classes %}
     <tr data-classid="{{ class.id }}" data-subjectid="{{ class.subject.subject_id }}" data-tutorid="{{ class.tutor_id }}" data-studentid="{{class.student_id }}" data-status="{{ class.status }}" data-classtype="{{ class.class_type }}" data-slots="{{ class.class_length() }}">
-<!--      <td class="is-hidden subject-id-cell">{{ class.subject.id }}</td>-->
       <td class="subject-name-cell"><i class="fas fa-book mr-2" aria-hidden="true"></i>{{ class.subject.subject_name }}</td>
       <td class="tutor-cell">
         <i class="fas fa-user-edit mr-2" aria-hidden="true"></i>{{ class.tutor.user.username }}
@@ -81,9 +80,9 @@
       {% endif %}
       </td>
       {% if class.score %}
-        <td class="more-info-cell">{{ class.score }}</td>
+        <td class="more-info-cell score">{{ class.score }}</td>
       {% else %}
-        <td class="more-info-cell"><a>{{ class.student_info() }}</a></td>
+        <td class="more-info-cell"><a class="button is-primary is-small" style="font-size: 10px;">{{ class.student_info() }}</a></td>
       {% endif %}
     </tr>
     {% endfor %}

@@ -60,6 +60,12 @@ def signup():
             user.set_password(password)
             user.created_at = datetime.now(timezone.utc)
             user.save()
+            if user.is_tutor:
+                tutor = Profesor(user.id)
+                tutor.save()
+            else:
+                student = Estudiante(user.id)
+                student.save()
             login_user(user, remember=True)
             next_page = request.args.get('next', None)
             if not next_page or urlparse(next_page).netloc != '':
@@ -224,6 +230,21 @@ def class_log_re_schedule(class_id):
             return jsonify({"status": "Re-schedule Successful"}), 200
         except Exception as e:
             return jsonify({'status': 'Re-schedule Error', 'error': str(e)}), 500
+
+
+@auth_bp.route('/save_class_score/<int:class_id>', methods=["POST"])
+@login_required
+def save_class_score(class_id):
+    if current_user.is_authenticated:
+        if not current_user.is_tutor:
+            if request.method == "POST":
+                data = request.get_json()
+                try:
+                    cls = ClaseReservada.get_by_id(class_id)
+                    cls.update(score=data["score"])
+                    return jsonify({"status": "Save Successful"}), 200
+                except Exception as e:
+                    return jsonify({"status": "Save Error", "error": f"Error al guardar la calificacion: {e}"}), 500
 
 
 @auth_bp.route('/update_user_data', methods=["POST"])

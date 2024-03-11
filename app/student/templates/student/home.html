@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/panels.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ratings.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -21,7 +22,10 @@
 {% endblock %}
 
 {% block scripts %}
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/strings.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/profile.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/utils.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/utils/rating_utils.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/schedule.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/logger.js') }}"></script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/utils/request.js') }}"></script>

@@ -16,6 +16,9 @@ class CodigoPais(db.Model):
     def __repr__(self):
         return f"<{self.country_abbv}: {self.code}>"
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     @staticmethod
     def get_all():
         return CodigoPais.query.all()
@@ -36,6 +39,9 @@ class Facultad(db.Model):
             return_repr += f" ({self.university_name})"
         return_repr += ">"
         return return_repr
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     @staticmethod
     def get_all():
@@ -63,6 +69,9 @@ class Materia(db.Model):
 
     def unidecode_subject_name(self):
         return unidecode(self.subject_name).lower()
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     @staticmethod
     def get_all():

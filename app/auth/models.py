@@ -58,13 +58,7 @@ class Usuario(db.Model, UserMixin):
     def save(self):
         if not self.id:
             db.session.add(self)
-        # db.session.commit()
-        if self.is_tutor:
-            tutor = Profesor(self.id)
-            tutor.save()
-        else:
-            student = Estudiante(self.id)
-            student.save()
+        db.session.commit()
 
     def update(self, **kwargs):
         for k, v in kwargs.items():
@@ -72,17 +66,19 @@ class Usuario(db.Model, UserMixin):
         db.session.add(self)
         db.session.commit()
 
-    def mean_score(self):
-        return 3
-
-    def count_scores(self):
-        return 10
-
-    def availability(self):
-        return "media"
-
-    def count_enrollments(self):
-        return 7
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    # def mean_score(self):
+    #     return 3
+    #
+    # def count_scores(self):
+    #     return 10
+    #
+    # def availability(self):
+    #     return "media"
+    #
+    # def count_enrollments(self):
+    #     return 7
 
     @staticmethod
     def get_by_id(tutor_id):
@@ -192,6 +188,7 @@ class Profesor(db.Model, UserMixin):
         return return_value
 
     def count_hours(self):
+        # TODO: this needs to be ironed out in order to consider classes that have already been given
         return sum([ce.class_length() for ce in self.class_enrolled])
 
     def mean_score(self):
@@ -228,6 +225,9 @@ class Profesor(db.Model, UserMixin):
     def count_enrollments(self):
         return len(self.class_enrolled)
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     @staticmethod
     def get_by_id(tutor_id):
         return Profesor.query.get(tutor_id)
@@ -259,6 +259,9 @@ class Estudiante(db.Model, UserMixin):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def count_enrollments(self):
         return 7

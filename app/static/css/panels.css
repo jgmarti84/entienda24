@@ -8,15 +8,8 @@
     cursor: default;
 }
 
-/*.student-class-panel-cell .tutor-class-panel-cell {*/
-/*    width: 20%;*/
-/*    !*margin-right: 2px*!*/
-/*}*/
-
 .student-class-panel-tabs {
-    /*background-color: rgba(135,171,237,0.71)*/
     background-color: hsl(204, 70%, 40%);
-    /*border: 1px solid rgba(166,164,165,0.71);*/
 }
 
 .tutor-class-panel-tabs {
@@ -24,9 +17,7 @@
 }
 
 .student-class-panel-header {
-    /*background-color: rgba(181,218,237,0.71);*/
     background-color: hsl(204, 86%, 53%);
-    /*border: 1px solid rgba(166,164,165,0.71);*/
 }
 .student-class-panel-header div {
     width: 18%;
@@ -61,91 +52,24 @@
     width: 18%;
     font-size: 14px;
     padding: 12px 15px;
-    /*color: #5b555b;*/
     font-weight: bold;
     vertical-align: middle;
     transition: background-color 0.3s ease!important; /* Add a smooth transition effect */
 }
 
-    /*vertical-align: middle;*/
-    /*white-space: nowrap;*/
-    /*font-weight: bold;*/
-    /*color: #f2f0f3;*/
 .panel-table tbody tr {
     border-bottom: 1.5px solid #969496;
 }
-/*.panel-table tbody tr:nth-of-type(even) {*/
-/*    background-color: #f2f0f3;*/
-/*}*/
-/*.panel-table tbody tr:nth-of-type(even):hover {*/
-/*    background-color: #d0ced0;*/
-/*}*/
-/*.panel-table tbody tr:nth-of-type(odd) {*/
-/*    background-color: #e1dfe2;*/
-/*}*/
-/*.panel-table tbody tr:nth-of-type(odd):hover {*/
-/*    background-color: #d0ced0;*/
-/*}*/
+
 .panel-table tbody tr:last-of-type {
     border-bottom: 2.5px solid #969496;
 }
-.panel-table tbody tr td:not(:nth-of-type(2)):not(:nth-of-type(6)) {
+.panel-table tbody tr td:not(:nth-of-type(1)):not(:nth-of-type(5)) {
     text-align: center;
 }
-.panel-table tbody tr td:nth-of-type(2) {
+.panel-table tbody tr td:nth-of-type(1) {
     width: 30%;
 }
-.panel-table tbody tr td:nth-of-type(6) {
+.panel-table tbody tr td:nth-of-type(5) {
     width: 16%;
 }
-
-/*.content-table th,*/
-/*.content-table td {*/
-/*    padding: 12px 15px;*/
-/*    color: #5b555b;*/
-/*    transition: background-color 0.3s ease!important; !* Add a smooth transition effect *!*/
-/*}*/
-/*.content-table {*/
-/*    border-collapse: collapse;*/
-/*    margin: 25px 0;*/
-/*    font-size: 0.9em;*/
-/*    border-radius: 5px 5px 0 0;*/
-/*    overflow: hidden;*/
-/*    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);*/
-/*}*/
-/*.content-table thead tr {*/
-/*    background-color: hsl(188, 80%, 38%);*/
-/*    text-align: left;*/
-/*    border-bottom: 2.5px solid #969496;*/
-/*}*/
-/*.content-table thead tr th {*/
-/*    text-align: center;*/
-/*    vertical-align: middle;*/
-/*    white-space: nowrap;*/
-/*    font-weight: bold;*/
-/*    color: #f2f0f3;*/
-/*}*/
-/*.content-table th,*/
-/*.content-table td {*/
-/*    padding: 12px 15px;*/
-/*    color: #5b555b;*/
-/*    transition: background-color 0.3s ease!important; !* Add a smooth transition effect *!*/
-/*}*/
-/*.content-table tbody tr {*/
-/*    border-bottom: 1.5px solid #969496;*/
-/*}*/
-/*.content-table tbody tr:nth-of-type(even) {*/
-/*    background-color: #f2f0f3;*/
-/*}*/
-/*.content-table tbody tr:nth-of-type(even):hover {*/
-/*    background-color: #d0ced0;*/
-/*}*/
-/*.content-table tbody tr:nth-of-type(odd) {*/
-/*    background-color: #e1dfe2;*/
-/*}*/
-/*.content-table tbody tr:nth-of-type(odd):hover {*/
-/*    background-color: #d0ced0;*/
-/*}*/
-/*.content-table tbody tr:last-of-type {*/
-/*    border-bottom: 2.5px solid #969496;*/
-/*}*/

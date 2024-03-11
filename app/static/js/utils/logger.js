@@ -326,7 +326,7 @@ function moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, cla
             const request_url = `/cancel_logged_class/${classId}`
             makeStringifyPostRequest(request_url, {}, function (error, response) {
                 if (error) {
-                    console.error("Error en el request:", error)
+                    console.error("Error en el request:", error);
                     return;
                 }
                 if (response.status === "Cancel Successful") {
@@ -338,7 +338,58 @@ function moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, cla
         }
     } else {
         if (classStatus === 0) {
-            const request_url = `/score_class/${classId}`
+            const get_url = `/get_class_data/${classId}`
+            makeGetRequest(get_url, function(error, response) {
+                if (error) {
+                    console.error("Error en el request:", error);
+                    return;
+                }
+                if (response.status === "Get Successful") {
+                    $("#class-info-container").empty()
+                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Profesor:</strong> ${response.class_info.tutor.username} </p>`)
+                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Materia:</strong> ${response.class_info.subject.subject_name}</p>`)
+                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Fecha:</strong> ${response.class_info.enrolled_schedule[0].date}</p>`)
+                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Horario:</strong> ${response.class_info.enrolled_schedule[0].start_time} - ${response.class_info.enrolled_schedule[response.class_info.enrolled_schedule.length-1].end_time}</p>`)
+                    openModal($("#class-qualify-modal"));
+
+                    var stars = document.getElementsByClassName("fa-star");
+                    Array.prototype.forEach.call(stars, (star) => star.addEventListener("click", setPriority));
+
+                    $("#class-qualify-modal .modal-background").click(function() {
+                        closeModal($(this).closest(".modal"));
+                    })
+
+                    $(document).on("keydown", function(event) {
+                        let key = (event.keyCode ? event.keyCode : event.which);
+                        if (key === 27) {
+                            closeModal($("#class-qualify-modal"));
+                        }
+                    })
+                    $("button.modal-close").click(function() {
+                        closeModal($(this).closest(".modal"))
+                    })
+                    $("#class-qualify-modal .button").click(function() {
+                        console.log($("#ratingBox").data("index"))
+                        const score = $("#ratingBox").data("index")
+                        const request_url = `/save_class_score/${classId}`;
+                        var dataToSend = {score: score}
+                        makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
+                            if (error) {
+                                console.error('Error in the fifth request: ', error);
+                                return;
+                            }
+                            if (response.status === "Save Successful") {
+                                location.reload()
+                            } else {
+                                message(response.error, true, "class-qualify-modal", messageId="score-feedback")
+                            }
+
+                        })
+                    })
+                } else {
+                    message(response.error, true, "student-class-panel", "panel-feedback")
+                }
+            })
         }
         if (classStatus === 1 || classStatus === 3) {
             const post_url = `/get_tutor_schedule/${tutorId}/4`
