@@ -1,11 +1,11 @@
 from flask import render_template, url_for, redirect, request
-from flask_login import current_user, logout_user
+from flask_login import current_user
 
 from app.auth.forms import LoginForm, SignupForm
-from app.auth.models import Usuario, Profesor, Estudiante
+from app.auth.models import Profesor
 from app.models import Materia, Facultad
 from app.tutor.models import MateriaProfesor
-from app.student.models import ClaseReservada
+
 from . import public_bp
 
 
@@ -49,6 +49,12 @@ def login():
         return render_template("public/login.html", login_form=login_form)
 
 
+# -------- About Us ----------------------------------------------------------- #
+@public_bp.route("/quienes_somos")
+def quienes_somos():
+    return "Somos entienda y aprenda"
+
+
 # -------- Tutor Public Page ----------------------------------------------------------- #
 @public_bp.route('/tutor-view/<int:tutor_id>')
 def tutor_view(tutor_id):
@@ -85,18 +91,16 @@ def subjects():
 # -------- All Tutors Public Page ----------------------------------------------------------- #
 @public_bp.route('/tutors')
 def tutors():
-    asc = request.args.get('asc', 'false')
-    default_params = {
-        "sortby": request.args.get('sortby', 'mean_score'),
-        "asc": True if asc == "true" else False
-    }
+    def get_tutor_hours(x):
+        return x.count_hours(status=0)
+
     tutors_list = Profesor.get_all()
+    tutors_list = sorted(tutors_list, key=get_tutor_hours, reverse=True)
     login_form = LoginForm()
     return render_template(
         "public/tutors_list.html",
         tutors=tutors_list,
         login_form=login_form,
-        default_params=default_params
     )
 
 

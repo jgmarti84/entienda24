@@ -95,6 +95,7 @@ function updatePriceDetail(form_id) {
     var subjectElement = $("#subject-selector").find(`option[value='${subjectId}']`);
     var factor = parseFloat($("#prices-table-v").data("factor"))
     var indPrice = parseFloat($(subjectElement).data(`priceref`));
+    var noHours = $("#student-info-box").data("hours")
     var precioHora = indPrice * factor * 1.5;
     if (classType === "p") {precioHora *= 1.25}
     var students = parseInt($("#step3 input").val());
@@ -113,8 +114,8 @@ function updatePriceDetail(form_id) {
     }
     if (form_id >= 2) {
         $("#price-detail-list").append(`<h4 class="subtitle is-4 has-text-centered my-1">Detalle del Precio</h4>`)
-        $("#price-detail-list").append(`<hr class="fade-out-hr mt-3 mb-3">`)
-        $("#price-detail-list").append(`<ul class="has-text-centered"></ul>`)
+        // $("#price-detail-list").append(`<hr class="fade-out-hr mt-3 mb-3">`)
+        // $("#price-detail-list").append(`<ul class="has-text-centered"></ul>`)
 
         if (students === 2) {
             var precioHora = precioHora * 0.8;
@@ -136,14 +137,32 @@ function updatePriceDetail(form_id) {
         var text = "";
         var indTotal = 0
         if (r10r5 !== 0) {
+            // horas simples a considerar
             var hoursString = "hora";
             var hourType = "simple";
-            if (r10r5 > 1) {
-                hoursString += "s";
-                hourType += "s";
+
+            if (noHours === "False") {
+                indTotal += precioHora / 1.5
+                text += `<li>1 hora de prueba de ${formatPrice(precioHora / 1.5)}</li>`
+                if (r10r5 > 1) {
+                    var r10r5m1 = r10r5 - 1
+                    if (r10r5m1 > 1) {
+                        hoursString += "s"
+                        hourType += "s"
+                    }
+                    indTotal += r10r5m1 * precioHora
+                    text += `<li>+</li>`
+                    text += `<li>${r10r5m1} ${hoursString} ${hourType} de ${formatPrice(precioHora)}</li>`
+                }
+            } else {
+                if (r10r5 > 1) {
+                    hoursString += "s";
+                    hourType += "s";
+                }
+                indTotal += r10r5 * precioHora
+                text += `<li>${r10r5} ${hoursString} ${hourType} de ${formatPrice(precioHora)}</li>`;
             }
-            indTotal += r10r5 * precioHora
-            text += `<li>${r10r5} ${hoursString} ${hourType} de ${formatPrice(precioHora)}</li>`;
+
         }
         if (r10q5 !== 0) {
             var precioSimple = precioHora * 6.25 / 1.5
@@ -169,13 +188,13 @@ function updatePriceDetail(form_id) {
         $("#price-detail-list").append(`<ul class="has-text-centered"></ul>`)
         $("#price-detail-list ul:last-of-type").append(text)
         $("#price-detail-list").append(`<hr class="fade-out-hr mt-3 mb-3">`)
-        var perStudent = indTotal / students
-        $("#price-detail-list").append(`<p>Total por estudiante: <strong>${formatPrice(perStudent)}</strong></p>`)
+        $("#price-detail-list").append(`<p>Total por estudiante: <strong>${formatPrice(indTotal)}</strong></p>`)
         $("#price-detail-list").append(`<hr class="fade-out-hr mt-3 mb-3">`)
-        $("#price-detail-list").append(`<p>Total: <strong>${formatPrice(indTotal)}</strong></p>`)
+        var total = indTotal * students
+        $("#price-detail-list").append(`<p>Total: <strong>${formatPrice(total)}</strong></p>`)
     }
     if (form_id >=4) {
-        $("#last-step p.is-pulled-right").text(formatPrice(indTotal))
+        $("#last-step p.is-pulled-right").text(formatPrice(total))
     }
 }
 
@@ -399,11 +418,14 @@ function moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, cla
                     console.error("There was an error in the request.")
                 } else {
                     const tableId = "schedule-table"
+                    const modalTagId = "schedule-log-modal";
+
+                    openModal($(`#${modalTagId}`))
+                    $(`#${tableId} tbody`).empty()
                     $(response.tutor_schedule).each(function(index, slot) {
                         $(`#${tableId} tbody`).append(tutorScheduleRow(tutorId, slot))
                     })
-                    openModal($("#schedule-log-modal"))
-
+                    modalOpen = true
                     var tablePageIndex = 1;
                     var rowsPerPage = 28;
 
@@ -522,41 +544,7 @@ function moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, cla
                             $("#logged-availability-table tbody").append(row);
                         })
                     })
-                    $("#confirm-hours-button").click(function() {
-                        const request_url = `/validate_class_log/${tutorId}`;
-                        var timeSlots = [];
-                        $(getElementsArrayByClass("time-added")).each(function(index, element) {timeSlots.push(getCellInfo(element))});
-                        var dataToSend = {slots: timeSlots, hours: hours, class_type: classType};
-                        makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
-                            if (error) {
-                                console.error('Error in the fifth request: ', error);
-                                return
-                            }
-                            var status = JSON.parse(response)["status"];
-                            if (status === "Validate Successful") {
-                                const post_url = `/class_log_re_schedule/${classId}`
-                                var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
-                                const dataToSend = {schedule_data: transformClassRowsData(classesArray)};
-                                makeStringifyPostRequest(post_url, dataToSend, function(error, response) {
-                                    if (error) {
-                                        console.error("Error en el request: ", error)
-                                        return
-                                    }
-                                    var status = response.status;
-                                    if (status === "Re-schedule Successful") {
-                                        window.location.reload()
-                                    } else {
-                                        message(response.error, true, "availability-box", messageId="schedule-modal-feedback");
-                                    }
-                                })
-                                closeModal($("#add-availability-button").closest(".modal"));
-                            } else {
-                                message(JSON.parse(response)["error"], true, "availability-box", messageId="schedule-modal-feedback");
-                            }
-                        })
-                    });
                 }
-
             })
         }
     }

@@ -1,4 +1,8 @@
-<div id="clases" class="is-hidden">
+{% if default_params["active_tab"] == "clases" %}
+  <div id="{{default_params['active_tab']}}">
+{% else %}
+  <div id="clases" class="is-hidden">
+{% endif %}
   <div class="hrtext">
     <h3 class="title is-5">Tus Clases</h3>
     <div class="header-fade-out-hr"></div>

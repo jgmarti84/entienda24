@@ -11,6 +11,9 @@ import phonenumbers
 @login_required
 def home():
     if current_user.is_authenticated:
+        default_params = {
+            "active_tab": request.args.get('tab', "perfil")
+        }
         if not current_user.is_tutor:
             # removemos las clases que quedron temporalmente reservadas por alguna razon que no tengo claro.
             classes = ClaseReservada.query.filter_by(status=2).filter_by(student_id=current_user.user.id).all()
@@ -32,6 +35,7 @@ def home():
             pass_form = ModifyPasswordForm()
             return render_template(
                 "student/home.html",
+                default_params=default_params,
                 form=form,
                 pass_form=pass_form,
                 phones=user_phone,

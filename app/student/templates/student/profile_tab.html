@@ -1,4 +1,8 @@
-<div id="perfil">
+{% if default_params["active_tab"] == "perfil" %}
+  <div id="{{default_params['active_tab']}}">
+{% else %}
+  <div id="perfil" class="is-hidden">
+{% endif %}
   <div class="hrtext">
     <h3 class="title is-5">Información General</h3>
     <div class="header-fade-out-hr"></div>

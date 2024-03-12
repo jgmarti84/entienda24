@@ -8,6 +8,7 @@ from datetime import date, datetime, timedelta
 
 from app import db
 from app.tutor.models import HorarioProfesorDisponible, HorarioProfesorReservado
+from app.student.models import ClaseReservada
 import app.utils.schedule as schedule
 from app.data.static_data import time_index_parser
 from hashlib import md5
@@ -172,7 +173,7 @@ class Profesor(db.Model, UserMixin):
         return df
 
     def price_factor(self):
-        count_hours = self.count_hours()
+        count_hours = self.count_hours(status=0)
         if count_hours < 0:
             raise Exception("Tutor hours count is less than zero!")
         elif count_hours < 249:
@@ -187,9 +188,22 @@ class Profesor(db.Model, UserMixin):
             return_value = 1.1
         return return_value
 
-    def count_hours(self):
-        # TODO: this needs to be ironed out in order to consider classes that have already been given
-        return sum([ce.class_length() for ce in self.class_enrolled])
+    def get_classes(self, status=None):
+        tutor_logged_classes = ClaseReservada.get_by_tutor_id(self.id)
+        if isinstance(status, type(None)):
+            status = [0, 1, 2, 3]
+        if not isinstance(status, list):
+            status = [status]
+        clases = [ce for ce in tutor_logged_classes if ce.status in status]
+        return clases
+
+    def count_hours(self, status=None):
+        clases = self.get_classes(status=status)
+        return sum(ce.class_length() / 2 for ce in clases)
+
+    def count_enrollments(self, status=None):
+        clases = self.get_classes(status=status)
+        return len(clases)
 
     def mean_score(self):
         if self.count_scores() == 0:
@@ -221,9 +235,6 @@ class Profesor(db.Model, UserMixin):
         else:
             return_value = "alta"
         return return_value
-
-    def count_enrollments(self):
-        return len(self.class_enrolled)
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -263,8 +274,29 @@ class Estudiante(db.Model, UserMixin):
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-    def count_enrollments(self):
-        return 7
+    def get_classes(self, status=None):
+        student_logged_classes = ClaseReservada.get_by_student_id(self.id)
+        student_logged_classes.extend(
+            ClaseReservada.query.filter(ClaseReservada.other_students.contains([self.id])).all())
+        if isinstance(status, type(None)):
+            status = [0, 1, 2, 3]
+        if not isinstance(status, list):
+            status = [status]
+        clases = [ce for ce in student_logged_classes if ce.status in status]
+        return clases
+
+    def count_hours(self, status=None):
+        clases = self.get_classes(status=status)
+        return sum(ce.class_length() / 2 for ce in clases)
+
+    def has_class_tutor(self, tutor_id):
+        clases = self.get_classes(status=[0, 1])
+        tutor_clases = [ce for ce in clases if ce.tutor_id == tutor_id]
+        return len(tutor_clases) != 0
+
+    def count_enrollments(self, status=None):
+        clases = self.get_classes(status=status)
+        return len(clases)
 
     @staticmethod
     def get_by_id(student_id):

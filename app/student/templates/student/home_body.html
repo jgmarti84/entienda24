@@ -6,49 +6,26 @@
         {% set student = current_user %}
         {% include "student/profile.html" %}
       </div>
-      <ul class="menu-list mt-2">
-        <li>
-          <a href="#">
-            <span class="icon"><i class="fa fa-home"></i></span> Inicio
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <span class="icon"><i class="fa fa fa-cog"></i></span><span>Panel de Control</span>
-          </a>
-          <ul>
-            <li>
-              <a href="#">
-                <span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i></span>
-                <span>Clases</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="icon is-small"><i class="fas fa-comments" aria-hidden="true"></i></span>
-                <span>Mensajes</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" class="">
-            <span class="icon"><i class="fa fa-info"></i></span> Acerca de Entienda y Aprenda
-          </a>
-        </li>
-      </ul>
     </aside>
 
     <div class="container column is-auto px-2">
       <div class="tabs is-boxed mb-0">
         <ul>
-          <li class="is-active" data-target="perfil">
+          {% if default_params["active_tab"] == "perfil" %}
+            <li class="is-active" data-target="perfil">
+          {% else %}
+            <li data-target="perfil">
+          {% endif %}
             <a>
               <span class="icon is-small"><i class="fas fa-user-circle"></i></span>
               <span>Perfil</span>
             </a>
           </li>
-          <li data-target="clases">
+          {% if default_params["active_tab"] == "clases" %}
+            <li class="is-active" data-target="clases">
+          {% else %}
+            <li data-target="clases">
+          {% endif %}
             <a>
               <span class="icon is-small"><i class="fas fa-book"></i></span>
               <span>Clases</span>

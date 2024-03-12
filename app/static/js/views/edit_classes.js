@@ -57,7 +57,24 @@ $(document).ready(function () {
     });
 
     $("#save-button").click(function() {
-        const dataToSend = {tutor_subjects_array: tutorSubjectsTable.rows().data().toArray()};
+        var tableId = 'classes-table'
+        var tableData = []
+        $(`#${tableId} tr`).each(function (rowIndex, row) {
+            if (rowIndex > 0) {
+                // Object to store cell data for each row
+                var rowData = [$(row).data("subject"), $(row).data("tutor")];
+                // var availabilityDays = [];
+                // Iterate through each cell in the row
+
+                $(row).find('td').each(function (colIndex, cell) {
+                    rowData.push($(cell).text())
+                });
+                // Add the row object to the table data array
+                tableData.push(rowData);
+            }
+        });
+
+        const dataToSend = {tutor_subjects_array: tableData};
         $.post({
             type: "POST",
             url: `/save_tutor_sutbjects/`,

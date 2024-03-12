@@ -25,10 +25,10 @@
                 {% for row in s.get_price_table_v() %}
                   <tr>
                     <td>{{ row["nr_students"] }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -48,10 +48,10 @@
                 {% for row in s.get_price_table_p() %}
                   <tr>
                     <td>{{ row["nr_students"] }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
-                    <td>{{ '${:,.2f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_test"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_x1"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_x5"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
+                    <td>{{ '${:,.0f}'.format(row["hour_x10"]).replace(",", ";").replace(".", ",").replace(";", ".") }}</td>
                   </tr>
                 {% endfor %}
               </tbody>

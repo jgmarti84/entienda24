@@ -13,21 +13,23 @@
     <div class="profile-card-details">
       <table style="width: 100%";>
         <tbody style="width: 100%;">
-          <tr><td style="text-align: left;">Clases:</td><td style="text-align: right;"><strong>{{student.count_enrollments()}}</strong></td></tr>
+          <tr><td style="text-align: left;">Horas de clases tomadas:</td><td style="text-align: right;"><strong>{{student.count_hours(status=0)}}</strong></td></tr>
+          <tr><td style="text-align: left;">Clases por tomar:</td><td style="text-align: right;"><strong>{{student.count_enrollments(status=1)}}</strong></td></tr>
+          <tr><td style="text-align: left;">Clases por reprogramar:</td><td style="text-align: right;"><strong>{{student.count_enrollments(status=3)}}</strong></td></tr>
         </tbody>
       </table>
     </div>
     <hr>
     <div class="profile-card-social-links">
-      <a class="facebook" href="#" target="_blank" title="facebook">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a class="linkedin" href="#" title="linkedin" target="_blank">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a class="insta" href="#" target="_blank" title="instagram">
-        <i class="fab fa-instagram-square"></i>
-      </a>
+<!--      <a class="facebook" href="#" target="_blank" title="facebook">-->
+<!--        <i class="fab fa-facebook"></i>-->
+<!--      </a>-->
+<!--      <a class="linkedin" href="#" title="linkedin" target="_blank">-->
+<!--        <i class="fab fa-linkedin"></i>-->
+<!--      </a>-->
+<!--      <a class="insta" href="#" target="_blank" title="instagram">-->
+<!--        <i class="fab fa-instagram-square"></i>-->
+<!--      </a>-->
     </div>
   </div>
 </div>

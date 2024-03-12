@@ -5,44 +5,49 @@
         {% include "tutor/profile.html" %}
       </div>
       <ul class="menu-list mt-2">
-        <li>
-          <a href="{{ url_for('public.home') }}" class="">
-            <span class="icon"><i class="fa fa-home"></i></span> Inicio
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <span class="icon"><i class="fa fa fa-cog"></i></span><span>Panel de Control</span>
-          </a>
-          <ul>
-            <li>
-              <a href="{{ url_for('public.tutor_view', tutor_id=tutor.id)}}">
-                <span class="icon is-small"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                <span>Modificar Horarios</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ url_for('tutor.edit_classes', tutor_id=current_user.id) }}">
-                <span class="icon is-small"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-                <span>Modificar Precios y Materias</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" class="">
-            <span class="icon"><i class="fa fa-info"></i></span> Acerca de Entienda y Aprenda
-          </a>
-        </li>
+<!--        <li>-->
+<!--          <a href="{{ url_for('public.home') }}" class="">-->
+<!--            <span class="icon"><i class="fa fa-home"></i></span> Inicio-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a href="">-->
+<!--            <span class="icon"><i class="fa fa fa-cog"></i></span><span>Panel de Control</span>-->
+<!--          </a>-->
+<!--          <ul>-->
+<!--            <li>-->
+<!--              <a href="{{ url_for('public.tutor_view', tutor_id=tutor.id)}}">-->
+<!--                <span class="icon is-small"><i class="fa fa-calendar" aria-hidden="true"></i></span>-->
+<!--                <span>Modificar Horarios</span>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="{{ url_for('tutor.edit_classes', tutor_id=current_user.id) }}">-->
+<!--                <span class="icon is-small"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>-->
+<!--                <span>Modificar Precios y Materias</span>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a href="#" class="">-->
+<!--            <span class="icon"><i class="fa fa-info"></i></span> Acerca de Entienda y Aprenda-->
+<!--          </a>-->
+<!--        </li>-->
       </ul>
     </aside>
 
     <div class="container column is-auto px-2">
       <section class="hero is-link is-bold section pt-3 px-3">
-        <div class="section pt-0">
-          <div class="field mt-5">
+        <div class="section pt-5" style="position: relative;">
+          <div class="field mt-2 mx-2 p-1" style="position: absolute; top: 0px;right: 0px;">
             <a href="#">
               <button id="save-button" class="button is-success is-pulled-right is-small">Guardar</button>
+            </a>
+          </div>
+          <div class="field mt-2 mx-2 p-1" style="position: absolute; top: 0px; right: 90px;">
+            <a href="{{ url_for('tutor.home')+'?tab=materias' }}">
+              <button id="back-button" class="button is-success is-pulled-right is-small">Volver</button>
             </a>
           </div>
           <div id="edit-classes">
@@ -89,8 +94,8 @@
                       <td class="is-hidden">{{s.subject.subject_id}}</td>
                       <td>{{s.subject.subject_name}}</td>
                       <td>{{s.subject.faculty.faculty_name}}</td>
-                      <td class="editable" contenteditable="true">{{s.price_ref}}</td>
-                      <td class="editable" contenteditable="true">{{s.comment if s.comment else ""}}</td>
+                      <td class="editable" contenteditable="true">{{ s.price_ref }}</td>
+                      <td class="editable" contenteditable="true">{{ s.comment if s.comment else "" }}</td>
                       <td><button class="delete has-background-danger"></button></td>
                     </tr>
                   {% endfor %}

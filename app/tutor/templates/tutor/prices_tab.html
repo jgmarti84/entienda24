@@ -35,7 +35,7 @@
                   <td class="is-hidden">{{s.subject.subject_id}}</td>
                   <td>{{s.subject.subject_name}}</td>
                   <td>{{s.subject.faculty.faculty_name}}</td>
-                  <td>{{'${:,.2f}'.format(s.price_ref).replace(",", ";").replace(".", ",").replace(";", ".")}}</td>
+                  <td>{{'${:,.0f}'.format(s.price_ref).replace(",", ";").replace(".", ",").replace(";", ".")}}</td>
                   <td class="tutor-prices-link"><a class="button is-success is-small">Ver Precios</a></td>
                   <td>{{s.comment if s.comment else ""}}</td>
                 </tr>

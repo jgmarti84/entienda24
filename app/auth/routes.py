@@ -198,9 +198,9 @@ def class_log_confirm():
 
             tutor_id = cls.tutor_id
             path = f"uploads/{tutor_id}/{class_ids}"
-            if not os.path.exists(path):
-                os.makedirs(path)
-            file.save(f"{path}/{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
+            # if not os.path.exists(path):
+            #     os.makedirs(path)
+            # file.save(f"{path}/{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
             return jsonify({'status': 'Confirm Successful'}), 200
         except Exception as e:
             return jsonify({'status': 'Confirm Error', 'error': str(e)}), 500
@@ -332,9 +332,9 @@ def upload_picture():
         try:
             user_id = current_user.user.id
             path = f"uploads/{user_id}/"
-            if not os.path.exists(path):
-                os.makedirs(path)
-            file.save(f"{path}/profile_picture_{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
+            # if not os.path.exists(path):
+            #     os.makedirs(path)
+            # file.save(f"{path}/profile_picture_{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
             return jsonify({'status': 'Upload Successful'}), 200
         except Exception as e:
             return jsonify({'status': 'Upload Error', 'error': str(e)}), 500

@@ -34,7 +34,6 @@ $(document).ready(function () {
             const formData = new FormData();
             const file = $(fileInput)[0].files[0];
             formData.append('file', file);
-            // formData.append('student_id', JSON.stringify());
             $.post({
                 type: "POST",
                 url: '/upload_picture',
@@ -42,9 +41,10 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    console.log(response)
                     if (response.status === "Upload Successful") {
                         alert("response successful")
+                        var baseURL = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                        window.location.href = baseURL + "/student/home?tab=perfil";
                     }
                 }
             })
@@ -126,6 +126,7 @@ $(document).ready(function () {
     })
     $(".more-info-cell").click(function() {
         const row = $(this).parent('tr')
+        $(row).addClass("active")
         const classId = $(row).data("classid")
         const subjectId = $(row).data("subjectid")
         const classStatus = $(row).data("status")
@@ -135,4 +136,75 @@ $(document).ready(function () {
         const hours = $(row).data("slots") / 2
         moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, classType, hours, userType="student")
     })
+
+    const modalTagId = "schedule-log-modal";
+    const tableId = "schedule-table";
+    $(`#${modalTagId} .modal-background`).click(function () {
+        closeModal($(this).closest(".modal"));
+        $(`#${tableId} td`).removeClass("time-added");
+        $("#logged-availability-table tbody").empty();
+        $("tr.active").removeClass("active");
+        // modalOpen = false;
+    })
+    $("#close-modal-button").click(function () {
+        closeModal($(`#${modalTagId}`).closest(".modal"));
+        $(`#${tableId} td`).removeClass("time-added");
+        $("#logged-availability-table tbody").empty();
+        $("tr.active").removeClass("active");
+    })
+    $(document).on("keydown", function (event) {
+        let key = (event.keyCode ? event.keyCode : event.which);
+        if (key === 27) {
+            closeModal($(`#${modalTagId}`).closest(".modal"));
+            $(`#${tableId} td`).removeClass("time-added");
+            $("#logged-availability-table tbody").empty();
+            $("tr.active").removeClass("active");
+        }
+    })
+
+    $("#confirm-hours-button").click(function() {
+        console.log("entering")
+        const row = $("tr.active")
+        const classId = $(row).data("classid")
+        // const subjectId = $(row).data("subjectid")
+        // const classStatus = $(row).data("status")
+        const tutorId = $(row).data("tutorid")
+        // const studentId = $(row).data("studentid")
+        const classType = $(row).data("classtype")
+        const hours = $(row).data("slots") / 2
+
+
+        const request_url = `/validate_class_log/${tutorId}`;
+        var timeSlots = [];
+        $(getElementsArrayByClass("time-added")).each(function(index, element) {timeSlots.push(getCellInfo(element))});
+        var dataToSend = {slots: timeSlots, hours: hours, class_type: classType};
+        makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
+            if (error) {
+                console.error('Error in the fifth request: ', error);
+                return
+            }
+            var status = JSON.parse(response)["status"];
+            if (status === "Validate Successful") {
+                const post_url = `/class_log_re_schedule/${classId}`
+                var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
+                const dataToSend = {schedule_data: transformClassRowsData(classesArray)};
+                makeStringifyPostRequest(post_url, dataToSend, function(error, response) {
+                    if (error) {
+                        console.error("Error en el request: ", error)
+                        return
+                    }
+                    var status = response.status;
+                    if (status === "Re-schedule Successful") {
+                        $("div.box").addClass("is-hidden")
+                        $("div.modal-content").css("max-width", "500px")
+                        $("#confirmation-message").removeClass("is-hidden")
+                    } else {
+                        message(response.error, true, "availability-box", messageId="schedule-modal-feedback");
+                    }
+                })
+            } else {
+                message(JSON.parse(response)["error"], true, "availability-box", messageId="schedule-modal-feedback");
+            }
+        })
+    });
 })

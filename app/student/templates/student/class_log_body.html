@@ -105,7 +105,7 @@
 
                 </div>
               </div>
-              <div id="student-info-box" class="is-hidden"></div>
+              <div id="student-info-box" class="is-hidden" data-hours="{{ current_user.has_class_tutor(tutor_id=tutor.id) }}"></div>
               <div id="other-students-info-box" class="is-hidden"></div>
               <div id="logged-table-div" class="is-hidden mt-5">
                 <p class="subtitle has-text-centered m-3">Horarios Seleccionados</p>

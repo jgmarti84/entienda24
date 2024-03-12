@@ -62,8 +62,8 @@ function formatName(str) {
     return newNames.join(" ")
 }
 
-function formatPrice(val) {
-    return val.toLocaleString('es-ar', {style: 'currency', currency: 'ARS', minimumFractionDigits: 2})
+function formatPrice(val, minimumFractionDigits=0) {
+    return val.toLocaleString('es-ar', {style: 'currency', currency: 'ARS', minimumFractionDigits: minimumFractionDigits})
 }
 
 function diff_hours(dt2, dt1) {
