@@ -1,80 +1,58 @@
+function getSubjectsTableData(tableTagId) {
+    var tableData = []
+    $(`#${tableTagId} tbody tr`).each(function (rowIndex, row) {
+        // Object to store cell data for each row
+        var rowData = [];
+        $(row).find('td').each(function (colIndex, cell) {
+            rowData.push($(cell).text())
+        });
+        // Add the row object to the table data array
+        tableData.push(rowData);
+    });
+    return tableData
+}
+
 $(document).ready(function () {
     ratingToStars()
 
-    var tutorSubjectsTable = $('#classes-table').DataTable({
-        dom: 'rt',
-        paging: false,
-        autoWidth: false,
-        columns: [
-            {title: "Codigo Unidad Academica", visible: false, orderable: false},
-            {title: "Codigo Materia", visible: false, orderable: false},
-            {title: "Materia", visible: true, orderable: false},
-            {title: "Unidad Academica", visible: true, orderable: false},
-            {title: "Precio de Referencia ($)", visible: true, orderable: false},
-            {title: "Comentario", visible: true, orderable: false},
-            {title: "Eliminar", visible: true, orderable: false},
-        ],
-    });
-
+    var tableId = 'classes-table'
     // Add click event to delete buttons
     $('#classes-table tbody').on('click', '.delete', function () {
-        var row = tutorSubjectsTable.row($(this).parents('tr'));
+        // var row = tutorSubjectsTable.row($(this).parents('tr'));
+        var row = $(this).parents("tr")
 
         // Confirm deletion
         if (confirm('Está seguro que quiere sacar esta materia?')) {
-            row.remove().draw();
+            $(row).remove();
         }
     });
 
     $('#add-subject-button').on('click', function() {
         const subjectId = $('#classes-select').val()
-        var exists = tutorSubjectsTable.rows().data().toArray().some(function(rowData) {
+        var tutorSubjectsTable = getSubjectsTableData(tableId)
+        var exists = tutorSubjectsTable.some(function(rowData) {
             return rowData[1] === String(subjectId);
         });
-
         if (!exists) {
-            var newRow = [
-                String($('#classes-select').find(':selected').data('facultyid')),
-                String($('#classes-select').val()),
-                String($('#classes-select').find(':selected').data('subjectname')),
-                String($('#classes-select').find(':selected').data('facultyname')),
-                0,
-                "",
-                `<td><button class="delete has-background-danger"></button></td>`
-            ]
+            var newRow = `<tr data-subject="subjectId">`
+            newRow += `<td class="is-hidden">${$("#classes-select").find(":selected").data("facultyid")}</td>`
+            newRow += `<td class="is-hidden">${$("#classes-select").val()}</td>`
+            newRow += `<td>${$("#classes-select").find(":selected").data("subjectname")}</td>`
+            newRow += `<td>${$("#classes-select").find(":selected").data("facultyname")}</td>`
+            newRow += `<td class="editable" contenteditable="true">0</td>`
+            newRow += `<td class="editable" contenteditable="true"></td>`
+            newRow += `<td><button class="delete has-background-danger"></button></td>`
+            newRow += `</tr>`
+
             // Add the new row to the DataTable
-            var subjectRow = tutorSubjectsTable.row.add(newRow).draw().node();
-            $(subjectRow).find('td:eq(2), td:eq(3)').addClass('editable').attr('contenteditable', 'true');
-            // Enable cell editing for specific columns
-            $('#classes-table tbody').on('blur', 'td.editable', function () {
-                var cell = tutorSubjectsTable.cell(this);
-                cell.data($(this).text());
-            });
+            $('#classes-table tbody').append(newRow)
         } else {
             message(`La materia ${$('#classes-select').find(':selected').data('subjectname')} ya se encuentra agregada!`, true, "classes-select");
-            // alert('La materia ya se encuentra agregada!');
         }
     });
 
     $("#save-button").click(function() {
-        var tableId = 'classes-table'
-        var tableData = []
-        $(`#${tableId} tr`).each(function (rowIndex, row) {
-            if (rowIndex > 0) {
-                // Object to store cell data for each row
-                var rowData = [$(row).data("subject"), $(row).data("tutor")];
-                // var availabilityDays = [];
-                // Iterate through each cell in the row
-
-                $(row).find('td').each(function (colIndex, cell) {
-                    rowData.push($(cell).text())
-                });
-                // Add the row object to the table data array
-                tableData.push(rowData);
-            }
-        });
-
-        const dataToSend = {tutor_subjects_array: tableData};
+        const dataToSend = {tutor_subjects_array: getSubjectsTableData(tableId)};
         $.post({
             type: "POST",
             url: `/save_tutor_sutbjects/`,

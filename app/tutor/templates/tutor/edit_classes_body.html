@@ -75,7 +75,7 @@
                 </div>
               </div>
               <i><a id="feedback" class="feedback"></a></i>
-              <table id="classes-table" class="content-table tutor-edit-subject-data">
+              <table id="classes-table" class="content-table tutor-edit-subject-data" data-tutor="{{tutor.id}}">
                 <thead>
                   <tr>
                     <th class="is-hidden">Codigo Facultad</th>
@@ -89,7 +89,7 @@
                 </thead>
                 <tbody>
                   {% for s in tutor.tutor_subject %}
-                    <tr data-subject="{{s.subject_id}}" data-tutor="{{tutor.id}}">
+                    <tr data-subject="{{s.subject_id}}">
                       <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
                       <td class="is-hidden">{{s.subject.subject_id}}</td>
                       <td>{{s.subject.subject_name}}</td>

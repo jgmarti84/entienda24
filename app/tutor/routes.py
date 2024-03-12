@@ -99,6 +99,12 @@ def save_tutor_subjects():
                                        "error": "Antes de poder guardar materias para dar debe registrar un CBU y Alias"})
                 data = request.get_json()
                 # validate data
+                if len(data["tutor_subjects_array"]) == 0:
+                    next_page = request.args.get('next', None)
+                    if not next_page or urlparse(next_page).netloc != '':
+                        next_page = url_for('tutor.home') + '?tab=materias'
+                    MateriaProfesor.remove_by_tutor(tutor.id)
+                    return json.dumps({"status": "Save Successful", "next_page": next_page})
                 for subject_data in data["tutor_subjects_array"]:
                     if subject_data[4] == "0" or subject_data[4] == 0:
                         return json.dumps({"status": "Save Error", "error": f"Por favor ponga un precio de referencia para la materia {subject_data[2]}."})

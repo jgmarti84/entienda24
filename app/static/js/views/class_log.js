@@ -328,6 +328,7 @@ $(document).ready(function () {
     $(`#upload-file`).on('click', function () {
         const formData = new FormData();
         const file = $(fileInput)[0].files[0];
+        console.log(file)
         formData.append('file', file);
         formData.append('loggedIds', JSON.stringify(loggedIds));
         const post_url = '/class_log_confirm'
@@ -345,7 +346,10 @@ $(document).ready(function () {
                     }, 60000);
                     $("#payment-file-timer").addClass("is-hidden")
                     $("#confirmation-message").removeClass("is-hidden")
+                } else {
+                    message(response.error, true, "upload-payment-modal", "payment-modal-feedback")
                 }
+
             },
             error: function (response) {
                 alert(response.error)

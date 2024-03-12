@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import json
 from .utils import validate_email_syntax
 import phonenumbers
+import config
 from app.tutor.models import HorarioProfesorDisponible, HorarioProfesorReservado, MateriaProfesor
 from app.student.models import ClaseReservada
 import app.utils.schedule as schedule
@@ -182,7 +183,9 @@ def class_log_remove():
 def class_log_confirm():
     if request.method == "POST":
         class_ids = json.loads(request.form["loggedIds"])
-        file = request.files['file']
+        file = request.files.get('file')
+        if not file:
+            return jsonify({'status': 'Confirm Error', 'error': "Tiene que incluir el comprobante de transferencia"})
         try:
             for class_id in class_ids:
                 slot_ids = [s.id for s in HorarioProfesorReservado.get_by_class_id(class_id)]
@@ -196,11 +199,10 @@ def class_log_confirm():
                 cls.status = 1
                 cls.save()
 
-            tutor_id = cls.tutor_id
-            path = f"uploads/{tutor_id}/{class_ids}"
-            # if not os.path.exists(path):
-            #     os.makedirs(path)
-            # file.save(f"{path}/{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
+            path = f"{config.UPLOADS_DIRECTORY}/payment_checks/{class_ids}"
+            if not os.path.exists(path):
+                os.makedirs(path)
+            file.save(f"{path}/{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
             return jsonify({'status': 'Confirm Successful'}), 200
         except Exception as e:
             return jsonify({'status': 'Confirm Error', 'error': str(e)}), 500
@@ -331,10 +333,10 @@ def upload_picture():
         file = request.files['file']
         try:
             user_id = current_user.user.id
-            path = f"uploads/{user_id}/"
-            # if not os.path.exists(path):
-            #     os.makedirs(path)
-            # file.save(f"{path}/profile_picture_{file.filename}")  # Save the file to a folder (create the 'uploads' folder)
+            path = f"{config.UPLOADS_DIRECTORY}/profile_picture/{user_id}"
+            if not os.path.exists(path):
+                os.makedirs(path)
+            file.save(f"{path}/profile_picture")  # Save the file to a folder (create the 'uploads' folder)
             return jsonify({'status': 'Upload Successful'}), 200
         except Exception as e:
             return jsonify({'status': 'Upload Error', 'error': str(e)}), 500

@@ -3,10 +3,10 @@ from flask_login import LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime, timezone
-
-# import os
-# import logging
-# from logging.handlers import RotatingFileHandler
+import config
+import os
+import logging
+from logging.handlers import RotatingFileHandler
 
 db = SQLAlchemy()
 
@@ -18,8 +18,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:Entienda24@localhost:5432/entienda24'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres@localhost:5432/entienda24'
+    app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -51,22 +50,22 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    # # error logging!
-    # if not os.path.exists('logs'):
-    #     os.mkdir('logs')
-    # file_handler = RotatingFileHandler(
-    #     'logs/entiendayaprenda.log',
-    #     maxBytes=10240,
-    #     backupCount=10
-    # )
-    # file_handler.setFormatter(
-    #     logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-    # )
-    # file_handler.setLevel(logging.INFO)
-    # app.logger.addHandler(file_handler)
-    #
-    # app.logger.setLevel(logging.INFO)
-    # app.logger.info('Entienda y Aprenda startup')
+    # error logging!
+    if not os.path.exists(config.LOGGING_DIRECTORY):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler(
+        f"{config.LOGGING_DIRECTORY}/entiendayaprenda.log",
+        maxBytes=10240,
+        backupCount=10
+    )
+    file_handler.setFormatter(
+        logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+    )
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Entienda y Aprenda startup')
 
     return app
 
