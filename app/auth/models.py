@@ -31,6 +31,7 @@ class Usuario(db.Model, UserMixin):
     birth_date = db.Column(db.Date, nullable=True)
     profile_description = db.Column(db.String(400), nullable=True)
     fantasy_name = db.Column(db.String(50), nullable=True)
+    profile_picture_path = db.Column(db.String(128), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -53,8 +54,11 @@ class Usuario(db.Model, UserMixin):
         return self._is_tutor
 
     def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+        avatar_source = self.profile_picture_path
+        if not avatar_source:
+            digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+            avatar_source = f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+        return avatar_source
 
     def save(self):
         if not self.id:

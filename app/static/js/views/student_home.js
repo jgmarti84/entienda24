@@ -42,7 +42,7 @@ $(document).ready(function () {
                 contentType: false,
                 success: function(response) {
                     if (response.status === "Upload Successful") {
-                        alert("response successful")
+                        // alert("response successful")
                         var baseURL = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
                         window.location.href = baseURL + "/student/home?tab=perfil";
                     }
