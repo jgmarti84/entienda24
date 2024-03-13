@@ -337,6 +337,9 @@ def upload_picture():
             if not os.path.exists(path):
                 os.makedirs(path)
             file.save(f"{path}/profile_picture")  # Save the file to a folder (create the 'uploads' folder)
+            current_user.user.update(
+                profile_picture_path=url_for('static', filename=f"uploads/profile_picture/{user_id}/profile_picture")
+            )
             return jsonify({'status': 'Upload Successful'}), 200
         except Exception as e:
             return jsonify({'status': 'Upload Error', 'error': str(e)}), 500
