@@ -16,7 +16,7 @@
             <form action="" method="post" novalidate>
               <div class="control mb-5">
                 <p class="control has-icons-left has-icons-right">
-                  {{ form.username(id="signup-user", class="input is-info", placeholder="Usuario", size=64, value=current_user.user.username) }}
+                  {{ form.username(id="signup-user", class="input is-info", placeholder="Usuario", size=64, value=current_user.user.username, disabled=True) }}
                   <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                   </span>
@@ -24,7 +24,7 @@
               </div>
               <div class="control mb-5">
                 <p class="control has-icons-left has-icons-right">
-                  {{ form.name(id="signup-name", class="input is-info", placeholder="Nombre", size=64, value=current_user.user.name) }}
+                  {{ form.name(id="signup-name", class="input is-info", placeholder="Nombre", size=64, value=current_user.user.name, disabled=True) }}
                   <span class="icon is-small is-left">
                     <i class="fas fa-user-edit"></i>
                   </span>
@@ -32,7 +32,7 @@
               </div>
               <div class="control mb-5">
                 <p class="control has-icons-left has-icons-right">
-                  {{ form.last_name(id="signup-last-name", class="input is-info", placeholder="Apellido", size=64, value=current_user.user.last_name) }}
+                  {{ form.last_name(id="signup-last-name", class="input is-info", placeholder="Apellido", size=64, value=current_user.user.last_name, disabled=True) }}
                   <span class="icon is-small is-left">
                     <i class="fas fa-user-shield"></i>
                   </span>
@@ -40,7 +40,7 @@
               </div>
               <div class="control mb-5">
                 <p class="control has-icons-left has-icons-right">
-                  {{ form.email(id="signup-mail", class="input is-info", placeholder="Email", value=current_user.user.email) }}
+                  {{ form.email(id="signup-mail", class="input is-info", placeholder="Email", value=current_user.user.email, disabled=True) }}
                   <span class="icon is-small is-left">
                     <i class="fa fa-envelope"></i>
                   </span>
@@ -52,17 +52,17 @@
                     <span>
                       <i class="fa fa-phone pt-3 pr-1"></i>
                     </span>
-                    {{ form.phone_country_code(class="input is-info", style="width: 90px;", select=phones[0]) }}
+                    {{ form.phone_country_code(class="input is-info", style="width: 90px;", select=phones[0], disabled=True) }}
                     -
-                    {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area", value=phones[1]) }}
+                    {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area", value=phones[1], disabled=True) }}
                     -
-                    {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;", value=phones[2]) }}
+                    {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;", value=phones[2], disabled=True) }}
                   </span>
                 </p>
               </div>
             </form>
             <div class="p-3 m-0">
-              <a id="validate-info-button" class="form-button button is-primary">
+              <a id="validate-info-button" class="form-button button is-primary" disabled>
                 <span class="icon is-small is-right">
                   <i class="fa fa-check"></i>
                 </span>
