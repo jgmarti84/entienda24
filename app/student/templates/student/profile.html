@@ -4,10 +4,10 @@
     {% if student.user.updated_at %}<p style="color: white; font-size: 9px;">Última actividad: <br>{{ student.user.updated_at.strftime("%d/%m/%y a las %H:%M hrs.") }}</p>{% endif %}
   </div>
   <div class="profile-card-content">
-    <a href="{{ url_for('student.home') }}">
+    <a href="{{ url_for('student.home') }}" style="color: inherit;">
       <ul style="list-style: none;">
         <li class="user-avatar is-small" style="display: inline-block;">{{ student.user.username[0].upper() }}</li>
-        <li class="user-username is-small" style="display: inline-block;">{{ student.user.username }}</li>
+        <li class="user-username is-small" style="display: inline-block;"><strong>{{ student.user.username }}</strong></li>
       </ul>
     </a>
     <div class="profile-card-details">
