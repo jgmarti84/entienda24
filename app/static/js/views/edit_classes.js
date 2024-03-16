@@ -53,6 +53,7 @@ $(document).ready(function () {
 
     $("#save-button").click(function() {
         const dataToSend = {tutor_subjects_array: getSubjectsTableData(tableId)};
+        console.log(dataToSend)
         $.post({
             type: "POST",
             url: `/save_tutor_sutbjects/`,

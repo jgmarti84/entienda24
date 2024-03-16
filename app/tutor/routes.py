@@ -111,7 +111,7 @@ def save_tutor_subjects():
                 try:
                     MateriaProfesor.remove_by_tutor(tutor.id)
                     for subject_data in data["tutor_subjects_array"]:
-                        tutor_subject = MateriaProfesor(tutor_id=tutor.id, subject_id=int(subject_data[0]), price_ref=float(subject_data[4]), comment=subject_data[5])
+                        tutor_subject = MateriaProfesor(tutor_id=tutor.id, subject_id=int(subject_data[1]), price_ref=float(subject_data[4]), comment=subject_data[5])
                         tutor_subject.save()
                     next_page = request.args.get('next', None)
                     if not next_page or urlparse(next_page).netloc != '':

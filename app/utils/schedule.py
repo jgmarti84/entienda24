@@ -14,6 +14,7 @@ hour_to_time_index = {
 
 ba_tz = timezone('America/Argentina/Buenos_Aires')
 
+
 def time_slot_from_time_index(time_index):
     hour = int(time_index / 2)
     minute = time_index % 2
