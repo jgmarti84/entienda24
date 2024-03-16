@@ -4,38 +4,6 @@
       <div class="section p-0">
         {% include "tutor/profile.html" %}
       </div>
-<!--      <p class="menu-label is-hidden-touch mt-5">Navegación</p>-->
-<!--      <ul class="menu-list mt-2">-->
-<!--        <li>-->
-<!--          <a href="{{ url_for('public.home') }}" class="">-->
-<!--            <span class="icon"><i class="fa fa-home"></i></span> Inicio-->
-<!--          </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <a href="">-->
-<!--            <span class="icon"><i class="fa fa fa-cog"></i></span><span>Panel de Control</span>-->
-<!--          </a>-->
-<!--          <ul>-->
-<!--            <li>-->
-<!--              <a href="{{ url_for('public.tutor_view', tutor_id=tutor.id)}}">-->
-<!--                <span class="icon is-small"><i class="fa fa-calendar" aria-hidden="true"></i></span>-->
-<!--                <span>Modificar Horarios</span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="{{ url_for('tutor.edit_classes', tutor_id=current_user.id) }}">-->
-<!--                <span class="icon is-small"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>-->
-<!--                <span>Modificar Precios y Materias</span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <a href="#" class="">-->
-<!--            <span class="icon"><i class="fa fa-info"></i></span> Acerca de Entienda y Aprenda-->
-<!--          </a>-->
-<!--        </li>-->
-<!--      </ul>-->
     </aside>
 
     <div class="container column is-auto px-2">
@@ -56,60 +24,79 @@
               <h3 class="title is-5">Modificá tu Disponibilidad Horaria</h3>
               <div class="header-fade-out-hr"></div>
             </div>
-
             <section class="section p-3">
               <div class="container">
-                <div style="width: 400px; margin: auto;">
-                  <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
-                  <hr class="fade-out-hr" style="margin: 10px;">
-                </div>
-                <div class="has-text-centered mb-3"><i><a id="feedback" class="feedback"></a></i></div>
-                <table id="schedule-table" class="content-table schedule-data edit" style="width: 400px; margin: auto;">
-                  <thead>
-                    <tr>
-                      <th class="is-hidden">Tutor id</th>
-                      <th class="is-hidden">Semana</th>
-                      <th class="is-hidden">Indice Semana</th>
-                      <th>Horario</th>
-                      <th class="is-hidden">Indice Tiempo</th>
-                      <th>Lu</th>
-                      <th>Ma</th>
-                      <th>Mi</th>
-                      <th>Ju</th>
-                      <th>Vi</th>
-                      <th>Sá</th>
-                      <th>Do</th>
-                      <th class="is-hidden">Indice Año</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for slot in tutor.get_weeks_schedule(default_params["number_weeks"]).to_dict(orient="records") %}
-                      <tr>
-                        <td class="is-hidden">{{tutor.id}}</td>
-                        <td class="is-hidden">{{slot["monday_week_date"]}}</td>
-                        <td class="is-hidden">{{slot["week_index"]}}</td>
-                        <td>{{slot["time_slot"]}}</td>
-                        <td class="is-hidden">{{slot["time_index"]}}</td>
-                        {% for i in range(7) %}
-                          <td class="enrolled-{{slot['enrolled_days'][i]}} {{slot['availability_days'][i]}}">{{slot['availability_days'][i]}}</td>
+                <div class="columns is-variable">
+                  <div class="column is-two-thirds">
+                    <div style="width: 400px; margin: auto;">
+                      <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
+                      <hr class="fade-out-hr" style="margin: 10px;">
+                    </div>
+                    <div class="has-text-centered mb-3"><i><a id="feedback" class="feedback"></a></i></div>
+                    <table id="schedule-table" class="content-table schedule-data edit" style="width: 400px; margin: auto;">
+                      <thead>
+                        <tr>
+                          <th class="is-hidden">Tutor id</th>
+                          <th class="is-hidden">Semana</th>
+                          <th class="is-hidden">Indice Semana</th>
+                          <th>Horario</th>
+                          <th class="is-hidden">Indice Tiempo</th>
+                          <th>Lu</th>
+                          <th>Ma</th>
+                          <th>Mi</th>
+                          <th>Ju</th>
+                          <th>Vi</th>
+                          <th>Sá</th>
+                          <th>Do</th>
+                          <th class="is-hidden">Indice Año</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for slot in tutor.get_weeks_schedule(default_params["number_weeks"]).to_dict(orient="records") %}
+                          <tr>
+                            <td class="is-hidden">{{tutor.id}}</td>
+                            <td class="is-hidden">{{slot["monday_week_date"]}}</td>
+                            <td class="is-hidden">{{slot["week_index"]}}</td>
+                            <td>{{slot["time_slot"]}}</td>
+                            <td class="is-hidden">{{slot["time_index"]}}</td>
+                            {% for i in range(7) %}
+                              <td class="enrolled-{{slot['enrolled_days'][i]}} {{slot['availability_days'][i]}}">{{slot['availability_days'][i]}}</td>
+                            {% endfor %}
+                            <td class="is-hidden">{{slot["year_index"]}}</td>
+                          </tr>
                         {% endfor %}
-                        <td class="is-hidden">{{slot["year_index"]}}</td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-                <ul class="pagination-list" style="justify-content: center; margin-top: 3px;">
-                  <li id="schedule-table-previous">
-                    <a aria-controls="schedule-table" role="link" class="pagination-link previous" style="font-size: 10px; padding: 8px;">
-                      &lt;
-                    </a>
-                  </li>
-                  <li id="schedule-table-next">
-                    <a aria-controls="schedule-table" role="link" class="pagination-link next" style="font-size: 10px; padding: 8px;">
-                      &gt;
-                    </a>
-                  </li>
-                </ul>
+                      </tbody>
+                    </table>
+                    <ul class="pagination-list" style="justify-content: center; margin-top: 3px;">
+                      <li id="schedule-table-previous">
+                        <a aria-controls="schedule-table" role="link" class="pagination-link previous" style="font-size: 10px; padding: 8px;">
+                          &lt;
+                        </a>
+                      </li>
+                      <li id="schedule-table-next">
+                        <a aria-controls="schedule-table" role="link" class="pagination-link next" style="font-size: 10px; padding: 8px;">
+                          &gt;
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="column is-auto">
+                    <div class="container transparent-box m-2">
+                      <h1 class="subtitle has-text-centered m-3" style="font-weight: bold;">Agregar Horarios</h1>
+                      <hr class="fade-out-hr" style="margin: 10px;">
+                      <p class="has-text-centered">Para agregar un horario seleccionalo en la tabla semanal y luego presioná: </p>
+                      <ul>
+                        <li> <strong>V:</strong> para agregar la disponibilidad de clase virtual</li>
+                        <li> <strong>P:</strong> para agregar la disponibilidad de clase presencial</li>
+                        <li> <strong>V:</strong> para agregar la disponibilidad de clase tanto virtual como presencial</li>
+                      </ul>
+                      <br>
+                      <h1 class="subtitle has-text-centered m-3" style="font-weight: bold;">Sacar Horarios</h1>
+                      <hr class="fade-out-hr" style="margin: 10px;">
+                      <p class="has-text-centered">Para Sacar un horario seleccioná un horario agregado de la tabla semanal y luego presioná: <strong>barra espaciadora</strong>, <strong>delete</strong> o <strong>borrar</strong></p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>

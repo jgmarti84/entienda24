@@ -46,6 +46,11 @@ $(document).ready(function () {
                         var baseURL = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
                         window.location.href = baseURL + "/student/home?tab=perfil";
                     }
+                },
+                error: function(response) {
+                    console.log("error")
+                    console.log(response.error)
+                    console.error(response.error)
                 }
             })
         }

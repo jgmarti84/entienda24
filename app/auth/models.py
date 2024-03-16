@@ -32,8 +32,12 @@ class Usuario(db.Model, UserMixin):
     profile_description = db.Column(db.String(400), nullable=True)
     fantasy_name = db.Column(db.String(50), nullable=True)
     profile_picture_path = db.Column(db.String(128), nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.now().astimezone(schedule.ba_tz))
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.now().astimezone(schedule.ba_tz),
+        onupdate=datetime.now().astimezone(schedule.ba_tz)
+    )
 
     _is_tutor = None
 
