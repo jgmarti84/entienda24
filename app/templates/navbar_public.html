@@ -3,7 +3,7 @@
     <div class="navbar-brand">
       <a href="{{ url_for('public.home') }}" class="navbar-item">
         <img src="{{ url_for('static', filename='media/eya-logo.png') }}" alt="eya">
-        <h1 id="logo-title" class="subtitle"><strong>Entienda y Aprenda</strong></h1>
+        <h1 id="logo-title" class="subtitle" style="margin-bottom: 2px; margin-left: 4px;"><strong>Entienda y Aprenda</strong></h1>
       </a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
@@ -11,7 +11,7 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div id="navbar-menu-id" class="navbar-menu">
+    <div id="navbar-menu-id" class="navbar-menu" style="margin-left: 10px;">
       <div class="navbar-start">
         <div class="navbar-item">
           <a href="{{ url_for('public.subjects') }}">
