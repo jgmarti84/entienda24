@@ -34,16 +34,12 @@
                 <strong class="profile-card-name">{{ subject.tutor.user.username }}</strong>
                 <small class="stars">{{ subject.tutor.mean_score() }}</small><span style="font-size: 12px">({{ subject.tutor.count_scores() }} opiniones)</span>
                 <div class="pt-3 mb-3">
-                  {% set pv = subject.get_price_table_v()[0]["hour_x1"] * subject.tutor.price_factor() %}
-                  {% set pp = subject.get_price_table_p()[0]["hour_x1"] * subject.tutor.price_factor() %}
+                  {% set pr = subject.get_price_table_p()[0]["hour_test"] %}
                   <p>
-                    Precio Virtual: <strong>{{ '${:,.2f}'.format(pv).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
+                    Precio de Referencia: <strong>{{ '${:,.0f}'.format(pr).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
                   </p>
                   <p>
-                    Precio Presencial: <strong>{{ '${:,.2f}'.format(pp).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
-                  </p>
-                  <p>
-                    Clases Dadas: <strong>{{ subject.tutor.count_enrollments() }}</strong>
+                    Horas de clases dadas: <strong>{{ subject.tutor.count_hours(status=0) }}</strong>
                   </p>
                   <p>
                     Disponibilidad: <strong>{{ subject.tutor.availability() }}</strong>

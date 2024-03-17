@@ -77,17 +77,6 @@ class Usuario(db.Model, UserMixin):
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-    # def mean_score(self):
-    #     return 3
-    #
-    # def count_scores(self):
-    #     return 10
-    #
-    # def availability(self):
-    #     return "media"
-    #
-    # def count_enrollments(self):
-    #     return 7
 
     @staticmethod
     def get_by_id(tutor_id):
