@@ -127,7 +127,7 @@ def subject_info(subject_id):
     }
     asc = request.args.get('asc', 'false')
     default_params = {
-        "sortby": request.args.get('sortby', 'score'),
+        "sortby": request.args.get('sortby', 'hours'),
         "asc": True if asc == "true" else False
     }
     tutor_subjects = MateriaProfesor.get_by_subject_id(subject_id)

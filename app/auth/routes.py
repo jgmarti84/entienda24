@@ -86,6 +86,8 @@ def signup():
 @auth_bp.route('/login/', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
+        if current_user.user.user_type.lower() == "a":
+            return redirect(url_for('admin.admin_database'))
         return redirect(url_for('public.home'))
 
     if request.method == "POST":

@@ -29,6 +29,9 @@ def create_app():
     migrate = Migrate(app, db)
 
     # Registro de los Blueprints
+    from .admin import admin_bp
+    app.register_blueprint(admin_bp)
+
     from .auth import auth_bp
     app.register_blueprint(auth_bp)
 
