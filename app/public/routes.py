@@ -1,6 +1,8 @@
 from flask import render_template, url_for, redirect, request
 from flask_login import current_user
 
+import pandas as pd
+
 from app.auth.forms import LoginForm, SignupForm
 from app.auth.models import Profesor
 from app.models import Materia, Facultad
@@ -107,9 +109,25 @@ def tutors():
 # -------- Specific Subject Public Page ----------------------------------------------------------- #
 @public_bp.route('/subject_view/<int:subject_id>')
 def subject_info(subject_id):
+    def get_tutor_hours(x):
+        return float(x.tutor.count_hours())
+
+    def get_tutor_score(x):
+        score = float(x.tutor.mean_score())
+        if pd.isna(score):
+            score = 0
+        return score if score else 0
+
+    def get_tutor_price(x):
+        return float(x.price_ref)
+    sort_keys = {
+        "score": get_tutor_score,
+        "price": get_tutor_price,
+        "hours": get_tutor_hours,
+    }
     asc = request.args.get('asc', 'false')
     default_params = {
-        "sortby": request.args.get('sortby', 'mean_score'),
+        "sortby": request.args.get('sortby', 'score'),
         "asc": True if asc == "true" else False
     }
     tutor_subjects = MateriaProfesor.get_by_subject_id(subject_id)
@@ -119,7 +137,7 @@ def subject_info(subject_id):
         return render_template("public/empty_tutor_subject.html", subject=subject, login_form=login_form)
     return render_template(
         "public/subject_view.html",
-        tutor_subjects=tutor_subjects,
+        tutor_subjects=sorted(tutor_subjects, key=sort_keys[default_params["sortby"]], reverse=not default_params["asc"]),
         login_form=login_form,
         default_params=default_params
     )

@@ -7,11 +7,23 @@
       <label for="order-tutors-select" style="margin-right: 0.5rem;"><strong>Ordená por:</strong></label>
       <div class="select">
         <select id="order-tutors-select" style="margin-right: 0.5rem;">
-          <option value="mean_score">Calificación</option>
-          <option value="count_scores">Calificaciones Recibidas</option>
-          <option value="availability_hours">Disponibilidad</option>
-          <option value="count_enrollments">Clases Dadas</option>
-          <option value="count_hours">Horas Dadas</option>
+          {% if default_params['sortby'] == 'score' %}
+          <option value="score" selected>Calificación</option>
+          {% else %}
+          <option value="score">Calificación</option>
+          {% endif %}
+<!--          <option value="count_scores">Calificaciones Recibidas</option>-->
+<!--          <option value="availability_hours">Disponibilidad</option>-->
+          {% if default_params['sortby'] == 'price' %}
+          <option value="price" selected>Precio</option>
+          {% else %}
+          <option value="price">Precio</option>
+          {% endif %}
+          {% if default_params['sortby'] == 'hours' %}
+          <option value="hours" selected>Horas de Clases Dadas</option>
+          {% else %}
+          <option value="hours">Horas de Clases Dadas</option>
+          {% endif %}
         </select>
       </div>
       <span class="arrow-icons">
