@@ -24,6 +24,7 @@ def home():
     }
     if current_user.is_authenticated:
         if current_user.is_tutor:
+            MateriaProfesor.update_tutor_subjects(tutor_id=current_user.user.id)
             # Update classes so those that are older than today will have a status of finished
             ClaseReservada.update_classes_status(tutor_id=current_user.user.id)
             # get all the classes from the tutor

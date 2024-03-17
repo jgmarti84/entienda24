@@ -20,6 +20,8 @@ def home():
             for cls in classes:
                 cls.remove()
 
+            ClaseReservada.update_classes_status(student_id=current_user.user.id)
+
             # buscamos todas las clases
             student_logged_classes = ClaseReservada.get_by_student_id(current_user.user.id)
             student_logged_classes.extend(ClaseReservada.query.filter(ClaseReservada.other_students.contains([current_user.user.id])).all())

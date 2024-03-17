@@ -110,6 +110,8 @@ class ClaseReservada(db.Model):
     @staticmethod
     def update_classes_status(**filters):
         classes = ClaseReservada.query.filter_by(**filters).all()
+        if 'student_id' in filters:
+            classes.extend(ClaseReservada.query.filter(ClaseReservada.other_students.contains([filters['student_id']])).all())
         for cls in classes:
             if cls.enrolled_schedule[-1].datetime() < datetime.now() + timedelta(minutes=30):
                 if cls.status == 1:

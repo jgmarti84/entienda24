@@ -54,6 +54,16 @@ class MateriaProfesor(db.Model):
     def get_by_subject_id(subject_id):
         return MateriaProfesor.query.filter(MateriaProfesor.subject_id.in_([subject_id])).all()
 
+    @staticmethod
+    def update_tutor_subjects(tutor_id):
+        tutor_subjects = MateriaProfesor.query.filter(MateriaProfesor.tutor_id.in_([tutor_id])).all()
+        subjects = []
+        for subject in tutor_subjects:
+            if any([subject.subject_id == s.subject_id for s in subjects]):
+                subject.remove()
+            else:
+                subjects.append(subject)
+
     def save(self):
         db.session.add(self)
         db.session.commit()
