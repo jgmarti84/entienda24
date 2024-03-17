@@ -4,10 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
 import config
-from pytz import timezone
+import pytz
 
 
-ba_tz = timezone('America/Argentina/Buenos_Aires')
+# ba_tz = timezone('America/Argentina/Buenos_Aires')
 import os
 import logging
 from logging.handlers import RotatingFileHandler
@@ -51,7 +51,7 @@ def create_app():
     @app.before_request
     def before_request():
         if current_user.is_authenticated:
-            current_user.user.updated_at = datetime.now().astimezone(ba_tz)
+            current_user.user.updated_at = datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
             db.session.commit()
 
     with app.app_context():

@@ -12,10 +12,10 @@ from app.student.models import ClaseReservada
 import app.utils.schedule as schedule
 from app.data.static_data import time_index_parser
 from hashlib import md5
-from pytz import timezone
+import pytz
 
 
-ba_tz = timezone('America/Argentina/Buenos_Aires')
+# ba_tz = timezone('America/Argentina/Buenos_Aires')
 
 
 class Usuario(db.Model, UserMixin):
@@ -36,11 +36,11 @@ class Usuario(db.Model, UserMixin):
     profile_description = db.Column(db.String(400), nullable=True)
     fantasy_name = db.Column(db.String(50), nullable=True)
     profile_picture_path = db.Column(db.String(128), nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.now().astimezone(ba_tz))
+    created_at = db.Column(db.DateTime, default=datetime.now(pytz.timezone('America/Argentina/Buenos_Aires')))
     updated_at = db.Column(
         db.DateTime,
-        default=datetime.now().astimezone(ba_tz),
-        onupdate=datetime.now().astimezone(ba_tz)
+        default=datetime.now(pytz.timezone('America/Argentina/Buenos_Aires')),
+        onupdate=datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
     )
 
     _is_tutor = None
