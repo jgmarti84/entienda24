@@ -19,16 +19,6 @@
               <span>Perfil</span>
             </a>
           </li>
-          {% if default_params["active_tab"] == "clases" %}
-            <li class="is-active" data-target="clases">
-          {% else %}
-            <li data-target="clases">
-          {% endif %}
-            <a>
-              <span class="icon is-small"><i class="fas fa-book"></i></span>
-              <span>Clases</span>
-            </a>
-          </li>
           {% if default_params["active_tab"] == "horarios" %}
             <li class="is-active" data-target="horarios">
           {% else %}
@@ -47,6 +37,16 @@
             <a>
               <span class="icon is-small"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
               <span>Precios y Materias</span>
+            </a>
+          </li>
+          {% if default_params["active_tab"] == "clases" %}
+            <li class="is-active" data-target="clases">
+          {% else %}
+            <li data-target="clases">
+          {% endif %}
+            <a>
+              <span class="icon is-small"><i class="fas fa-book"></i></span>
+              <span>Clases</span>
             </a>
           </li>
         </ul>

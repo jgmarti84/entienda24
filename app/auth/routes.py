@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from datetime import datetime, timezone
 import json
 from .utils import validate_email_syntax
-import phonenumbers
+import re
 import config
 from app.tutor.models import HorarioProfesorDisponible, HorarioProfesorReservado, MateriaProfesor
 from app.student.models import ClaseReservada
@@ -31,6 +31,11 @@ def signup():
             password = form.password.data
             username = form.username.data
             email = form.email.data
+
+            # Comprobamos que el nombre de usuario no contenga espacios
+            if re.search(r"\s", username):
+                error = "El nombre de usuario no puede contener espacios!"
+                return json.dumps({"status": "Signup Error", "error": error})
 
             # Comprobamos que no hay ya un usuario con ese nombre de usuario
             user = Usuario.get_by_username(username)
