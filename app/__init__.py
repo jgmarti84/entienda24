@@ -3,6 +3,7 @@ from flask_login import LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+# import flask_monitoringdashboard as dashboard
 import config
 import pytz
 
@@ -31,6 +32,7 @@ def create_app():
 
     db.init_app(app)
     migrate = Migrate(app, db)
+    # dashboard.bind(app)
 
     # Registro de los Blueprints
     from .admin import admin_bp

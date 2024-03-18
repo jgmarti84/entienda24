@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request, jsonify
 from flask_login import login_required, current_user, login_user, logout_user
 from urllib.parse import urlparse
-from datetime import datetime, timezone
+from datetime import datetime
 import json
 from .utils import validate_email_syntax
 import re
@@ -10,7 +10,7 @@ from app.tutor.models import HorarioProfesorDisponible, HorarioProfesorReservado
 from app.student.models import ClaseReservada
 import app.utils.schedule as schedule
 import app.utils.classes as classes
-
+import pytz
 import os
 from app import login_manager
 
@@ -64,7 +64,7 @@ def signup():
             user_data["phone"] = phone_nr
             user = Usuario(**user_data)
             user.set_password(password)
-            user.created_at = datetime.now(timezone.utc)
+            user.created_at = datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
             user.save()
             if user.is_tutor:
                 tutor = Profesor(user.id)
