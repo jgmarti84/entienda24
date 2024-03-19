@@ -62,19 +62,19 @@ def create_app():
     # error logging!
     if not os.path.exists(config.LOGGING_DIRECTORY):
         os.makedirs(config.LOGGING_DIRECTORY)
-    file_handler = RotatingFileHandler(
-        f"{config.LOGGING_DIRECTORY}/entiendayaprenda.log",
-        maxBytes=10240,
-        backupCount=10
-    )
-    file_handler.setFormatter(
-        logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-    )
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-
-    app.logger.setLevel(logging.INFO)
-    app.logger.info('Entienda y Aprenda startup')
+    # file_handler = RotatingFileHandler(
+    #     f"{config.LOGGING_DIRECTORY}/entiendayaprenda.log",
+    #     maxBytes=10240,
+    #     backupCount=10
+    # )
+    # file_handler.setFormatter(
+    #     logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+    # )
+    # file_handler.setLevel(logging.INFO)
+    # app.logger.addHandler(file_handler)
+    #
+    # app.logger.setLevel(logging.INFO)
+    # app.logger.info('Entienda y Aprenda startup')
 
     return app
 
