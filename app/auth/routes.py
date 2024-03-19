@@ -13,7 +13,7 @@ import app.utils.classes as classes
 import pytz
 import os
 from app import login_manager
-
+from flask import current_app
 from . import auth_bp
 from .forms import SignupForm, LoginForm, ModifyPasswordForm, EditUserProfileForm, EditTutorBankDataForm
 from .models import Usuario, Profesor, Estudiante
@@ -64,6 +64,7 @@ def signup():
             user_data["phone"] = phone_nr
             user = Usuario(**user_data)
             user.set_password(password)
+            current_app.logger.info(f"{datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))}")
             user.created_at = datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
             user.save()
             if user.is_tutor:
@@ -140,7 +141,12 @@ def is_valid_tutor_log_schedule(tutor_id):
         for slot in slots:
             matching_slot = HorarioProfesorDisponible.get_tutor_slots_by_isodate(tutor_id, *slot[:4])
             if not len(matching_slot) == 1:
-                return json.dumps({"status": "Validate Error", "error": f"Error en el horario del {slot[4]} a las {schedule.time_slot_from_time_index(slot[3])}"})
+                error = f"Error en el horario year_index: {slot[0]}, week_index: {slot[1]}, day_index: {slot[2]}, time_index: {slot[3]}"
+                error += f"\nNr. matching slots: {len(matching_slot)}"
+                for ms in matching_slot:
+                    error += f"year_index: {ms.year_index}, week_index: {ms.week_index}, day_index: {ms.day_index}, time_index: {ms.time_index}"
+                # return json.dumps({"status": "Validate Error", "error": f"Error en el horario del {slot[4]} a las {schedule.time_slot_from_time_index(slot[3])}"})
+                return json.dumps({"status": "Validate Error", "error": error})
             if matching_slot[0].availability_type not in classes.map_class_type(class_type):
                 return json.dumps({"status": "Validate Error", "error": f"El horario del {slot[4]} a las {schedule.time_slot_from_time_index(slot[3])} no corresponde con el tipo seleccionado."})
         try:
