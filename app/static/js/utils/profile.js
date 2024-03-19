@@ -21,3 +21,12 @@ function ratingToStars() {
         this.innerHTML = getStars(n)
     })
 }
+
+function renderLastUpdate() {
+    var dateString = $(".last-update").data("last-update");
+    const date = new Date(dateString);
+    // Format the date components
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} a las ${date.getHours()}:${date.getMinutes()} hrs`;
+    // Update the text content of the HTML element with the formatted date
+    $(".last-update strong").text(formattedDate);
+}

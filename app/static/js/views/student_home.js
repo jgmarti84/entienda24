@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    renderLastUpdate()
     toggleProfileTabs()
     $("#validate-info-button").click(function() {
         var dataToSend = {

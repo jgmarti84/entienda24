@@ -4,6 +4,7 @@ $(document).ready(function () {
     const tableId = "schedule-table";
 
     ratingToStars()
+    renderLastUpdate()
     toggleProfileTabs()
     $(".tutor-prices-link").click(function() {
         const subject_id = $(this).parent("tr").data("subject");
