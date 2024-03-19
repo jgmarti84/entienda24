@@ -284,7 +284,7 @@ function getCellInfo(cell) {
         var returnInfo = [0, 0, 0, 0, 0]
     } else {
         var tdList = $(cell).parent().find("td")
-        var returnInfo =  [parseInt($(tdList[12]).text()), parseInt($(tdList[2]).text()), $(cell).index() - 6, parseInt($(tdList[4]).text()), $(tdList[1]).text()]
+        var returnInfo =  [parseInt($(tdList[12]).text()), parseInt($(tdList[2]).text()), $(cell).index() - 4, parseInt($(tdList[4]).text()), $(tdList[1]).text()]
     }
     return returnInfo
 }

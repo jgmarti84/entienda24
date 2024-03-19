@@ -233,6 +233,7 @@ $(document).ready(function () {
             var timeSlots = [];
             $(getElementsArrayByClass("time-added")).each(function(index, element) {timeSlots.push(getCellInfo(element))});
             var dataToSend = {slots: timeSlots, hours: hours, class_type: classType};
+            console.log(timeSlots)
             makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
                 if (error) {
                     console.error('Error in the fifth request: ', error);
