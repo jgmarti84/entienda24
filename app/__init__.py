@@ -61,7 +61,7 @@ def create_app():
 
     # error logging!
     if not os.path.exists(config.LOGGING_DIRECTORY):
-        os.mkdir('logs')
+        os.makedirs(config.LOGGING_DIRECTORY)
     file_handler = RotatingFileHandler(
         f"{config.LOGGING_DIRECTORY}/entiendayaprenda.log",
         maxBytes=10240,
