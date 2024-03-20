@@ -53,7 +53,8 @@ def create_app():
     @app.before_request
     def before_request():
         if current_user.is_authenticated:
-            current_user.user.updated_at = datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
+            # current_user.user.updated_at = datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
+            current_user.user.updated_at = datetime.now()
             db.session.commit()
 
     with app.app_context():

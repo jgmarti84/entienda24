@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     // show profile rating as stars
     ratingToStars()
+    renderLastUpdate()
     // functionality to navigate through different tabs
     toggleProfileTabs()
     // add event to show the prices modal
