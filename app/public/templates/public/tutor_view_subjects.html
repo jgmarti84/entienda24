@@ -12,21 +12,29 @@
               <tr>
                 <th class="is-hidden">Codigo Facultad</th>
                 <th class="is-hidden">Código</th>
-                <th>Materia</th>
                 <th>Unidad Académica</th>
+                <th>Materia</th>
+                <th>Precios</th>
                 <th>Comentario</th>
-                <th>Programa</th>
               </tr>
             </thead>
             <tbody>
               {% for s in tutor.tutor_subject %}
-                <tr data-priceRef="{{s.price_ref}}" data-subjectId={{s.subject_id}} data-tutorId={{s.tutor_id}}>
+                <tr data-priceRef="{{s.price_ref}}" data-subjectId={{s.subject_id}} data-tutorId={{s.tutor_id}} style="position: relative;">
                   <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
                   <td class="is-hidden">{{s.subject.subject_id}}</td>
-                  <td>{{s.subject.subject_name}}</td>
                   <td>{{s.subject.faculty.faculty_name}}</td>
-                  <td>{{s.comment if s.comment else ""}}</td>
-                  <td>{{s.subject.subject_program if s.subject.subject_program != "" else "No hay programa"}}</td>
+                  <td>
+                    {{s.subject.subject_name}}
+                      <p class="is-hidden tutor-subject-tooltip">{{s.subject.subject_name}}</p>
+                  </td>
+                  <td class="tutor-prices-link"><a class="button is-success is-small">Ver Precios</a></td>
+                  <td>
+                    {% if s.comment %}
+                      {{s.comment}}
+                      <p class="is-hidden tutor-subject-tooltip">{{s.comment}}</p>
+                    {% endif %}
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -35,23 +43,26 @@
       </div>
       <div class="column is-two-fifths py-5">
         <div class="content">
-          <ul>
-            <li>
-              Se paga por hora, y pueden distribuir las horas como quieran.
-              La hora de prueba tiene un precio más bajo. Si su 1ra clase es de
-              hora y media o 2 hs, solo la 1ra hora tiene ese precio.
-            </li>
-            <li>
-              Después de abonar la 1ra hora, pueden pagar hs de clases por
-              separado o packs de 5 o 10 hs por adelantado a precios más bajos.
-            </li>
-            <li>
-              Las hs de los packs deben tomarse antes de las 5 semanas (35 días) o se pierden.
-            </li>
-            <li>
-              Los precios de las clases grupales son por persona.
-            </li>
-          </ul>
+          <ol>
+            <li>Se paga por hora y se pueden distribuir las horas como quieran. La de prueba tiene un precio más bajo (si la primera clase dura más de una hora, solo la primera hora se abona a ese valor).</li>
+            <li>Pueden abonar horas de clases por separado o paquetes de 5 o 10 horas por adelantado a precios más económicos.</li>
+            <li>Las clases grupales deben tomarlas con amigos o conocidos. Todos los estudiantes deben estar registrados como tal, aunque solo uno deberá hacer la reserva.</li>
+<!--            <li>-->
+<!--              Se paga por hora, y pueden distribuir las horas como quieran.-->
+<!--              La hora de prueba tiene un precio más bajo. Si su 1ra clase es de-->
+<!--              hora y media o 2 hs, solo la 1ra hora tiene ese precio.-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              Después de abonar la 1ra hora, pueden pagar hs de clases por-->
+<!--              separado o packs de 5 o 10 hs por adelantado a precios más bajos.-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              Las hs de los packs deben tomarse antes de las 5 semanas (35 días) o se pierden.-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              Los precios de las clases grupales son por persona.-->
+<!--            </li>-->
+          </ol>
         </div>
       </div>
     </div>

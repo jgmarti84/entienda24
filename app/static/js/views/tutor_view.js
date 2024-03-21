@@ -8,12 +8,22 @@ $(document).ready(function () {
     renderLastUpdate()
     // functionality to navigate through different tabs
     toggleProfileTabs()
-    // add event to show the prices modal
-    $('#tutor-subjects-table tbody tr').each(function (index, element) {
-        $(element).click(function () {
-            openSubjectPricesModal($(this).data('subjectid'), 'tutor-prices-modal')
+    $(".tutor-prices-link").each(function(index, element) {
+        $(element).click(function() {
+            const subjectId = $(element).parent("tr").data("subjectid")
+            openSubjectPricesModal(subjectId, 'tutor-prices-modal')
         })
-    })
+    });
+    $('.content-table.subjects-data td:nth-of-type(6)').hover(function() {
+        $(this).find("p").removeClass("is-hidden")
+    }, function () {
+        $(this).find("p").addClass("is-hidden")
+    });
+    $('.content-table.subjects-data td:nth-of-type(4)').hover(function() {
+        $(this).find("p").removeClass("is-hidden")
+    }, function () {
+        $(this).find("p").addClass("is-hidden")
+    });
     closeModalEvents("tutor-prices-modal")
 
     const indexes = getTablePaginationIndexList(tableId, rowsPerPage);

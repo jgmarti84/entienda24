@@ -24,14 +24,8 @@ function ratingToStars() {
 
 function renderLastUpdate() {
     var dateString = $(".last-update").data("last-update");
-    console.log(dateString)
     const date = new Date(dateString);
-    // Format the date components
-    // Convert the date to a different timezone
     const options = { timeZone: 'America/Argentina/Buenos_Aires' };
     const formattedDate = date.toLocaleString('es-AR', options);
-    console.log(formattedDate)
-    // const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} a las ${date.getHours()}:${date.getMinutes()} hrs`;
-    // Update the text content of the HTML element with the formatted date
     $(".last-update strong").text(formattedDate);
 }
