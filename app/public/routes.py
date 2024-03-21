@@ -54,7 +54,8 @@ def login():
 # -------- About Us ----------------------------------------------------------- #
 @public_bp.route("/quienes_somos")
 def quienes_somos():
-    return "Somos entienda y aprenda"
+    login_form = LoginForm()
+    return render_template("public/whoweare.html", login_form=login_form)
 
 
 # -------- Tutor Public Page ----------------------------------------------------------- #
