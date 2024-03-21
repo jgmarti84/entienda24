@@ -54,10 +54,6 @@
 .content-table.subjects-search tbody tr td {
     text-align: center;
     vertical-align: middle;
-    /*max-width: 100px;*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
 }
 .content-table.subjects-search tbody tr td:nth-of-type(4),
 .content-table.subjects-search tbody tr td:nth-of-type(6) {

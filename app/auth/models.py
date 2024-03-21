@@ -213,8 +213,9 @@ class Profesor(db.Model, UserMixin):
         return sum(scores) / len(scores)
 
     def count_scores(self):
-        scores = [ce.score for ce in self.class_enrolled if ce.score]
-        return len(scores)
+        return len(np.unique([ce.student_id for ce in self.class_enrolled if ce.score]))
+        # scores = [ce.score for ce in self.class_enrolled if ce.score]
+        # return len(scores)
 
     def availability_hours(self, n_weeks=8):
         schedule_df = self.get_availability_df()
