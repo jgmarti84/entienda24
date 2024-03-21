@@ -163,7 +163,7 @@ class Profesor(db.Model, UserMixin):
         enrollment_df = enrollment_df.groupby(["year_index", "week_index"]).apply(
             lambda x: schedule.slot_schedule_week_to_view(x, schedule_type="enrollment")
         ).drop(["year_index", "week_index"], axis=1)
-        enrollment_df = enrollment_df.fillna("0").apply(lambda x: x.tolist(), axis=1)
+        enrollment_df = enrollment_df.fillna("0").astype(int).apply(lambda x: x.tolist(), axis=1)
 
         df = pd.concat([availability_df, enrollment_df], axis=1).rename(
             columns={0: "availability_days", 1: "enrolled_days"}).reset_index()
