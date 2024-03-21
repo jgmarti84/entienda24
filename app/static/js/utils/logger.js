@@ -375,7 +375,6 @@ function studentMoreInfoHandle(classId, subjectId, classStatus, tutorId, student
                 $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Fecha:</strong> ${response.class_info.enrolled_schedule[0].date}</p>`)
                 $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Horario:</strong> ${response.class_info.enrolled_schedule[0].start_time} - ${response.class_info.enrolled_schedule[response.class_info.enrolled_schedule.length-1].end_time}</p>`)
                 openModal($("#class-qualify-modal"));
-
                 var stars = document.getElementsByClassName("fa-star");
                 Array.prototype.forEach.call(stars, (star) => star.addEventListener("click", setPriority));
 
@@ -426,6 +425,7 @@ function studentMoreInfoHandle(classId, subjectId, classStatus, tutorId, student
                 const modalTagId = "schedule-log-modal";
 
                 openModal($(`#${modalTagId}`))
+                let cellsElements = updateHoursConfirmButton(hours)
                 $(`#${tableId} tbody`).empty()
                 $(response.tutor_schedule).each(function(index, slot) {
                     $(`#${tableId} tbody`).append(tutorScheduleRow(tutorId, slot))
@@ -509,7 +509,8 @@ function studentMoreInfoHandle(classId, subjectId, classStatus, tutorId, student
                         }
                         $(cell).removeClass("selected");
                     })
-                    var classesArray = classRowsCreation(getElementsArrayByClass("time-added"));
+                    let cellsElements = updateHoursConfirmButton(hours)
+                    var classesArray = classRowsCreation(cellsElements);
 
                     $("#logged-availability-table tbody").empty();
                     $(classesArray).each(function(index, rowClass) {
@@ -534,7 +535,8 @@ function studentMoreInfoHandle(classId, subjectId, classStatus, tutorId, student
                         $(cell).removeClass("selected");
                     })
 
-                    var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
+                    let cellsElements = updateHoursConfirmButton(hours)
+                    var classesArray = classRowsCreation(cellsElements);
                     $("#logged-availability-table tbody").empty();
                     $(classesArray).each(function(index, rowClass) {
                         var firstCellInfo = getCellInfo(rowClass[0]);
@@ -572,4 +574,17 @@ function tutorScheduleRow(tutorId, slotData) {
     row += `<td class="is-hidden">${slotData.year_index}</td>`;
     row += "</tr>"
     return row
+}
+
+function updateHoursConfirmButton(hours) {
+    let cellsElements = getElementsArrayByClass("time-added")
+    if (cellsElements.length === 2 * hours) {
+        $("#confirm-hours-button").removeClass("is-hidden")
+        $("#hours-left").addClass("is-hidden")
+    } else {
+        $("#hours-left").removeClass("is-hidden")
+        $("#hours-left").text("Las horas seleccionadas en la tabla no coincide con las horas reservadas!")
+        $("#confirm-hours-button").addClass("is-hidden")
+    }
+    return cellsElements
 }

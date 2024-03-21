@@ -12,20 +12,6 @@ function updateStudentInfoBox(nStudents) {
     }
 }
 
-function updateHoursConfirmButton() {
-    let cellsElements = getElementsArrayByClass("time-added")
-    const hours = $('#step4 input').val();
-    if (cellsElements.length === 2 * hours) {
-        $("#confirm-hours-button").removeClass("is-hidden")
-        $("#hours-left").addClass("is-hidden")
-    } else {
-        $("#hours-left").removeClass("is-hidden")
-        $("#hours-left").text("Las horas seleccionadas en la tabla no coincide con las horas reservadas!")
-        $("#confirm-hours-button").addClass("is-hidden")
-    }
-    return cellsElements
-}
-
 $(document).ready(function () {
     ratingToStars();
 
@@ -98,7 +84,7 @@ $(document).ready(function () {
 
         openModal($("#schedule-log-modal"))
         modalOpen = true
-        let cellsElements = updateHoursConfirmButton()
+        let cellsElements = updateHoursConfirmButton($('#step4 input').val())
 
         const modalTagId = "schedule-log-modal";
         $(`#${modalTagId} .modal-background`).click(function () {
@@ -199,7 +185,7 @@ $(document).ready(function () {
                 }
                 $(cell).removeClass("selected");
             })
-            let cellsElements = updateHoursConfirmButton()
+            let cellsElements = updateHoursConfirmButton($('#step4 input').val())
             var classesArray = classRowsCreation(cellsElements);
             $("#logged-availability-table tbody").empty();
             $(classesArray).each(function(index, rowClass) {
@@ -223,7 +209,7 @@ $(document).ready(function () {
                 $(cell).removeClass("time-added");
                 $(cell).removeClass("selected");
             })
-            let cellsElements = updateHoursConfirmButton()
+            let cellsElements = updateHoursConfirmButton($('#step4 input').val())
             var classesArray = classRowsCreation(cellsElements)
             $("#logged-availability-table tbody").empty();
             $(classesArray).each(function(index, rowClass) {
