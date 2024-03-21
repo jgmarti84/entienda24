@@ -202,6 +202,14 @@ class Profesor(db.Model, UserMixin):
         clases = self.get_classes(status=status)
         return sum(ce.class_length() / 2 for ce in clases)
 
+    def count_hours_string(self, status=None):
+        h = self.count_hours(status=status)
+        h, m = divmod(h * 60, 60)
+        h = int(h)
+        m = " hr" if m == 0 else "y 1/2 hr"
+        return f"{h}{m}"
+
+
     def count_enrollments(self, status=None):
         clases = self.get_classes(status=status)
         return len(clases)
@@ -214,8 +222,6 @@ class Profesor(db.Model, UserMixin):
 
     def count_scores(self):
         return len(np.unique([ce.student_id for ce in self.class_enrolled if ce.score]))
-        # scores = [ce.score for ce in self.class_enrolled if ce.score]
-        # return len(scores)
 
     def availability_hours(self, n_weeks=8):
         schedule_df = self.get_availability_df()
@@ -290,6 +296,13 @@ class Estudiante(db.Model, UserMixin):
     def count_hours(self, status=None):
         clases = self.get_classes(status=status)
         return sum(ce.class_length() / 2 for ce in clases)
+
+    def count_hours_string(self, status=None):
+        h = self.count_hours(status=status)
+        h, m = divmod(h * 60, 60)
+        h = int(h)
+        m = " hr" if m == 0 else "y 1/2 hr"
+        return f"{h}{m}"
 
     def has_class_tutor(self, tutor_id):
         clases = self.get_classes(status=[0, 1])

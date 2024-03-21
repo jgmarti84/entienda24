@@ -40,7 +40,7 @@
                 <span style="font-size:14px; ">{{ '{:.1f}'.format(tutor.mean_score()) }}</span><span style="font-size: 12px"> ({{ tutor.count_scores() }} {{"opinion" if tutor.count_scores() == 1 else "opiniones"}})
               </span>
                 <p class="pt-3">
-                  Horas de clases dadas: <strong>{{ tutor.count_hours(status=0) }}</strong>
+                  Horas de clases dadas: <strong>{{ tutor.count_hours_string(status=0) }}</strong>
                 </p>
                 <p>
                   Disponibilidad: <strong>{{ tutor.availability() }}</strong>
