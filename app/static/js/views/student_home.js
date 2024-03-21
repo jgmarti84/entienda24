@@ -140,7 +140,7 @@ $(document).ready(function () {
         const studentId = $(row).data("studentid")
         const classType = $(row).data("classtype")
         const hours = $(row).data("slots") / 2
-        moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, classType, hours, userType="student")
+        studentMoreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, classType, hours)
     })
 
     const modalTagId = "schedule-log-modal";

@@ -189,6 +189,6 @@ $(document).ready(function () {
         const row = $(this).parent('tr')
         const classId = $(row).data("classid")
         const classStatus = $(row).find("td.status-cell").data("status")
-        moreInfoHandle(classId, classStatus, userType="tutor")
+        tutorMoreInfoHandle(classId, classStatus, userType="tutor")
     })
 })

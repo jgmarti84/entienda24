@@ -67,7 +67,7 @@ class ClaseReservada(db.Model):
         start_time = self.enrolled_schedule[0].start_time()
         end_time = self.enrolled_schedule[-1].end_time()
         return f"{start_time} - {end_time}"
-
+    # def time_
     def student_info(self):
         if self.status == 1:
             return_status = "Reprogramar Clase"
@@ -113,6 +113,6 @@ class ClaseReservada(db.Model):
         if 'student_id' in filters:
             classes.extend(ClaseReservada.query.filter(ClaseReservada.other_students.contains([filters['student_id']])).all())
         for cls in classes:
-            if cls.enrolled_schedule[-1].datetime() < datetime.now() + timedelta(minutes=30):
+            if cls.enrolled_schedule[-1].datetime() + timedelta(minutes=30) < datetime.now():
                 if cls.status == 1:
                     cls.update(**dict(status=0))

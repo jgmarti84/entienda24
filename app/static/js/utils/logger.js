@@ -336,217 +336,225 @@ function renderPricesTable(tableId, subjectId, showV=true, showP=true) {
     }
 }
 
-function moreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, classType, hours, userType="tutor") {
-    if (userType === "tutor") {
-        if (classStatus === 1) {
-            confirm("Está seguro que desea cancelar esta clase?\n" +
-                "Una vez cancelada, quedara en ese estado hasta que\n" +
-                "el alumno elija nuevamente horarios.")
+function tutorMoreInfoHandle(classId, classStatus) {
+    if (classStatus === 1) {
+        let result = confirm(
+            "Está seguro que desea cancelar esta clase?\n" +
+            "Una vez cancelada, quedara en ese estado hasta que\n" +
+            "el alumno elija nuevamente horarios."
+        )
+        if (result === true) {
+            console.log("cancelando la clase")
             const request_url = `/cancel_logged_class/${classId}`
             makeStringifyPostRequest(request_url, {}, function (error, response) {
+                console.log("clase cancelada")
+                console.log(response)
                 if (error) {
                     console.error("Error en el request:", error);
                     return;
                 }
                 if (response.status === "Cancel Successful") {
-                    location.reload()
+                    console.log(response)
+                    // location.reload()
                 } else {
                     message(response.error, true, "tutor-class-panel", "panel-feedback")
                 }
             })
         }
-    } else {
-        if (classStatus === 0) {
-            const get_url = `/get_class_data/${classId}`
-            makeGetRequest(get_url, function(error, response) {
-                if (error) {
-                    console.error("Error en el request:", error);
-                    return;
-                }
-                if (response.status === "Get Successful") {
-                    $("#class-info-container").empty()
-                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Profesor:</strong> ${response.class_info.tutor.username} </p>`)
-                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Materia:</strong> ${response.class_info.subject.subject_name}</p>`)
-                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Fecha:</strong> ${response.class_info.enrolled_schedule[0].date}</p>`)
-                    $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Horario:</strong> ${response.class_info.enrolled_schedule[0].start_time} - ${response.class_info.enrolled_schedule[response.class_info.enrolled_schedule.length-1].end_time}</p>`)
-                    openModal($("#class-qualify-modal"));
+    }
+}
+// classId, classStatus, userType="tutor"
+function studentMoreInfoHandle(classId, subjectId, classStatus, tutorId, studentId, classType, hours, userType="student") {
+    if (classStatus === 0) {
+        const get_url = `/get_class_data/${classId}`
+        makeGetRequest(get_url, function(error, response) {
+            if (error) {
+                console.error("Error en el request:", error);
+                return;
+            }
+            if (response.status === "Get Successful") {
+                $("#class-info-container").empty()
+                $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Profesor:</strong> ${response.class_info.tutor.username} </p>`)
+                $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Materia:</strong> ${response.class_info.subject.subject_name}</p>`)
+                $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Fecha:</strong> ${response.class_info.enrolled_schedule[0].date}</p>`)
+                $("#class-info-container").append(`<p class="has-text-centered">&#x2022 <strong>Horario:</strong> ${response.class_info.enrolled_schedule[0].start_time} - ${response.class_info.enrolled_schedule[response.class_info.enrolled_schedule.length-1].end_time}</p>`)
+                openModal($("#class-qualify-modal"));
 
-                    var stars = document.getElementsByClassName("fa-star");
-                    Array.prototype.forEach.call(stars, (star) => star.addEventListener("click", setPriority));
+                var stars = document.getElementsByClassName("fa-star");
+                Array.prototype.forEach.call(stars, (star) => star.addEventListener("click", setPriority));
 
-                    $("#class-qualify-modal .modal-background").click(function() {
-                        closeModal($(this).closest(".modal"));
-                    })
+                $("#class-qualify-modal .modal-background").click(function() {
+                    closeModal($(this).closest(".modal"));
+                })
 
-                    $(document).on("keydown", function(event) {
-                        let key = (event.keyCode ? event.keyCode : event.which);
-                        if (key === 27) {
-                            closeModal($("#class-qualify-modal"));
+                $(document).on("keydown", function(event) {
+                    let key = (event.keyCode ? event.keyCode : event.which);
+                    if (key === 27) {
+                        closeModal($("#class-qualify-modal"));
+                    }
+                })
+                $("button.modal-close").click(function() {
+                    closeModal($(this).closest(".modal"))
+                })
+                $("#class-qualify-modal .button").click(function() {
+                    console.log($("#ratingBox").data("index"))
+                    const score = $("#ratingBox").data("index")
+                    const request_url = `/save_class_score/${classId}`;
+                    var dataToSend = {score: score}
+                    makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
+                        if (error) {
+                            console.error('Error in the fifth request: ', error);
+                            return;
                         }
-                    })
-                    $("button.modal-close").click(function() {
-                        closeModal($(this).closest(".modal"))
-                    })
-                    $("#class-qualify-modal .button").click(function() {
-                        console.log($("#ratingBox").data("index"))
-                        const score = $("#ratingBox").data("index")
-                        const request_url = `/save_class_score/${classId}`;
-                        var dataToSend = {score: score}
-                        makeStringifyPostRequest(request_url, dataToSend, function(error, response) {
-                            if (error) {
-                                console.error('Error in the fifth request: ', error);
-                                return;
-                            }
-                            if (response.status === "Save Successful") {
-                                location.reload()
-                            } else {
-                                message(response.error, true, "class-qualify-modal", messageId="score-feedback")
-                            }
+                        if (response.status === "Save Successful") {
+                            location.reload()
+                        } else {
+                            message(response.error, true, "class-qualify-modal", messageId="score-feedback")
+                        }
 
-                        })
                     })
-                } else {
-                    message(response.error, true, "student-class-panel", "panel-feedback")
-                }
-            })
-        }
-        if (classStatus === 1 || classStatus === 3) {
-            const post_url = `/get_tutor_schedule/${tutorId}/4`
-            makeGetRequest(post_url, function(error, response) {
-                var isMouseDown = false;
-                if (error) {
-                    console.error("There was an error in the request.")
-                } else {
-                    const tableId = "schedule-table"
-                    const modalTagId = "schedule-log-modal";
+                })
+            } else {
+                message(response.error, true, "student-class-panel", "panel-feedback")
+            }
+        })
+    }
+    if (classStatus === 1 || classStatus === 3) {
+        const post_url = `/get_tutor_schedule/${tutorId}/4`
+        makeGetRequest(post_url, function(error, response) {
+            var isMouseDown = false;
+            if (error) {
+                console.error("There was an error in the request.")
+            } else {
+                const tableId = "schedule-table"
+                const modalTagId = "schedule-log-modal";
 
-                    openModal($(`#${modalTagId}`))
-                    $(`#${tableId} tbody`).empty()
-                    $(response.tutor_schedule).each(function(index, slot) {
-                        $(`#${tableId} tbody`).append(tutorScheduleRow(tutorId, slot))
-                    })
-                    modalOpen = true
-                    var tablePageIndex = 1;
-                    var rowsPerPage = 28;
+                openModal($(`#${modalTagId}`))
+                $(`#${tableId} tbody`).empty()
+                $(response.tutor_schedule).each(function(index, slot) {
+                    $(`#${tableId} tbody`).append(tutorScheduleRow(tutorId, slot))
+                })
+                modalOpen = true
+                var tablePageIndex = 1;
+                var rowsPerPage = 28;
 
-                    const indexes = getTablePaginationIndexList(tableId, rowsPerPage);
-                    const weeks_list = [...new Set(extractTableDataArray(tableId).map(x => x.monday_week_date))];
+                const indexes = getTablePaginationIndexList(tableId, rowsPerPage);
+                const weeks_list = [...new Set(extractTableDataArray(tableId).map(x => x.monday_week_date))];
 
+                renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
+                renderTablePagButtons(tableId, tablePageIndex, indexes);
+                renderTableTitle(tableId, tablePageIndex, weeks_list);
+                $(`#${tableId}-next`).click(function() {
+                    if (tablePageIndex < indexes[indexes.length - 1]) {
+                        tablePageIndex++;
+                    }
                     renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
                     renderTablePagButtons(tableId, tablePageIndex, indexes);
                     renderTableTitle(tableId, tablePageIndex, weeks_list);
-                    $(`#${tableId}-next`).click(function() {
-                        if (tablePageIndex < indexes[indexes.length - 1]) {
-                            tablePageIndex++;
-                        }
-                        renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
-                        renderTablePagButtons(tableId, tablePageIndex, indexes);
-                        renderTableTitle(tableId, tablePageIndex, weeks_list);
-                    })
+                })
 
-                    $(`#${tableId}-previous`).click(function() {
-                        if (tablePageIndex > indexes[0]) {
-                            tablePageIndex--;
-                        }
-                        renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
-                        renderTablePagButtons(tableId, tablePageIndex, indexes);
-                        renderTableTitle(tableId, tablePageIndex, weeks_list);
-                    })
+                $(`#${tableId}-previous`).click(function() {
+                    if (tablePageIndex > indexes[0]) {
+                        tablePageIndex--;
+                    }
+                    renderTablePage(tableId, (tablePageIndex-1) * rowsPerPage, tablePageIndex * rowsPerPage);
+                    renderTablePagButtons(tableId, tablePageIndex, indexes);
+                    renderTableTitle(tableId, tablePageIndex, weeks_list);
+                })
 
-                    $(`#${tableId} td`).mousedown(function() {
-                        isMouseDown = true;
-                        startCell = $(this);
-                        return false;
-                    }).mouseover(function() {
-                        if (isMouseDown) {
-                            endCell = $(this);
-                            selectCellsInTable(startCell, endCell, tableId);
-                        }
-                    })
-                    // Individual cells deselection
-                    $(`#${tableId} td`).click(function() {
-                        if (!$(this).hasClass("B")) {
-                            if ($(this).hasClass("selected")) {
-                                $(this).removeClass("selected");
-                            } else {
-                                if ($(this).hasClass("enrolled-0")) {
-                                    $(this).addClass("selected");
-                                }
+                $(`#${tableId} td`).mousedown(function() {
+                    isMouseDown = true;
+                    startCell = $(this);
+                    return false;
+                }).mouseover(function() {
+                    if (isMouseDown) {
+                        endCell = $(this);
+                        selectCellsInTable(startCell, endCell, tableId);
+                    }
+                })
+                // Individual cells deselection
+                $(`#${tableId} td`).click(function() {
+                    if (!$(this).hasClass("B")) {
+                        if ($(this).hasClass("selected")) {
+                            $(this).removeClass("selected");
+                        } else {
+                            if ($(this).hasClass("enrolled-0")) {
+                                $(this).addClass("selected");
                             }
                         }
+                    }
+                })
+                $(document).mouseup(function() {
+                    isMouseDown = false;
+                    var array = getElementsArrayByClass("current-selected");
+                    $(array).each(function() {
+                        $(this).removeClass("current-selected");
+                        $(this).addClass("selected");
                     })
-                    $(document).mouseup(function() {
-                        isMouseDown = false;
-                        var array = getElementsArrayByClass("current-selected");
-                        $(array).each(function() {
-                            $(this).removeClass("current-selected");
-                            $(this).addClass("selected");
-                        })
-                    });
+                });
 
-                    // Handle deselection when user clicks outside the table
-                    $(document).on('click', function (e) {
-                        if (!$(e.target).closest(`#${tableId}`).length) {
-                            $('.selected').removeClass('selected');
+                // Handle deselection when user clicks outside the table
+                $(document).on('click', function (e) {
+                    if (!$(e.target).closest(`#${tableId}`).length) {
+                        $('.selected').removeClass('selected');
+                    }
+                });
+
+                $("#add-availability-button").click(function() {
+                    var selectedCells = getElementsArrayByClass("selected");
+                    var cellsNotAdded = [];
+                    $(selectedCells).each(function (index, cell) {
+                        var classTypeCond = $(cell).hasClass(classType) || $(cell).hasClass("VyP");
+                        var availabilityCond = $(cell).hasClass("enrolled-0");
+                        if (availabilityCond && classTypeCond) {
+                            $(cell).addClass("time-added");
+                        } else {
+                            cellsNotAdded.push(cell);
                         }
-                    });
+                        $(cell).removeClass("selected");
+                    })
+                    var classesArray = classRowsCreation(getElementsArrayByClass("time-added"));
 
-                    $("#add-availability-button").click(function() {
-                        var selectedCells = getElementsArrayByClass("selected");
-                        var cellsNotAdded = [];
-                        $(selectedCells).each(function (index, cell) {
-                            var classTypeCond = $(cell).hasClass(classType) || $(cell).hasClass("VyP");
-                            var availabilityCond = $(cell).hasClass("enrolled-0");
-                            if (availabilityCond && classTypeCond) {
-                                $(cell).addClass("time-added");
-                            } else {
-                                cellsNotAdded.push(cell);
-                            }
-                            $(cell).removeClass("selected");
-                        })
-                        var classesArray = classRowsCreation(getElementsArrayByClass("time-added"));
+                    $("#logged-availability-table tbody").empty();
+                    $(classesArray).each(function(index, rowClass) {
+                        var firstCellInfo = getCellInfo(rowClass[0]);
+                        var lastCellInfo = getCellInfo(rowClass[rowClass.length - 1]);
+                        var classDate =  new Date(firstCellInfo[4]);
+                        classDate.setDate(classDate.getUTCDate() + firstCellInfo[2]);
 
-                        $("#logged-availability-table tbody").empty();
-                        $(classesArray).each(function(index, rowClass) {
-                            var firstCellInfo = getCellInfo(rowClass[0]);
-                            var lastCellInfo = getCellInfo(rowClass[rowClass.length - 1]);
-                            var classDate =  new Date(firstCellInfo[4]);
-                            classDate.setDate(classDate.getUTCDate() + firstCellInfo[2]);
+                        var row = "<tr>";
+                        row += `<td>${transformDate(classDate)}</td>`;
+                        row += `<td>${timeIndexParser[firstCellInfo[3]]} - ${timeIndexParser[lastCellInfo[3]+1]}</td>`;
+                        row += "</tr>";
+                        $("#logged-availability-table tbody").append(row);
+                    })
+                })
 
-                            var row = "<tr>";
-                            row += `<td>${transformDate(classDate)}</td>`;
-                            row += `<td>${timeIndexParser[firstCellInfo[3]]} - ${timeIndexParser[lastCellInfo[3]+1]}</td>`;
-                            row += "</tr>";
-                            $("#logged-availability-table tbody").append(row);
-                        })
+                $("#remove-availability-button").click(function() {
+                    var selectedCells = getElementsArrayByClass("selected");
+
+                    $(selectedCells).each(function(index, cell) {
+                        $(cell).removeClass("time-added");
+                        $(cell).removeClass("selected");
                     })
 
-                    $("#remove-availability-button").click(function() {
-                        var selectedCells = getElementsArrayByClass("selected");
+                    var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
+                    $("#logged-availability-table tbody").empty();
+                    $(classesArray).each(function(index, rowClass) {
+                        var firstCellInfo = getCellInfo(rowClass[0]);
+                        var lastCellInfo = getCellInfo(rowClass[rowClass.length - 1]);
+                        var classDate =  new Date(firstCellInfo[4]);
+                        classDate.setDate(classDate.getUTCDate() + firstCellInfo[2]);
 
-                        $(selectedCells).each(function(index, cell) {
-                            $(cell).removeClass("time-added");
-                            $(cell).removeClass("selected");
-                        })
-
-                        var classesArray = classRowsCreation(getElementsArrayByClass("time-added"))
-                        $("#logged-availability-table tbody").empty();
-                        $(classesArray).each(function(index, rowClass) {
-                            var firstCellInfo = getCellInfo(rowClass[0]);
-                            var lastCellInfo = getCellInfo(rowClass[rowClass.length - 1]);
-                            var classDate =  new Date(firstCellInfo[4]);
-                            classDate.setDate(classDate.getUTCDate() + firstCellInfo[2]);
-
-                            var row = "<tr>";
-                            row += `<td>${transformDate(classDate)}</td>`;
-                            row += `<td>${timeIndexParser[firstCellInfo[3]]} - ${timeIndexParser[lastCellInfo[3]+1]}</td>`;
-                            row += "</tr>";
-                            $("#logged-availability-table tbody").append(row);
-                        })
+                        var row = "<tr>";
+                        row += `<td>${transformDate(classDate)}</td>`;
+                        row += `<td>${timeIndexParser[firstCellInfo[3]]} - ${timeIndexParser[lastCellInfo[3]+1]}</td>`;
+                        row += "</tr>";
+                        $("#logged-availability-table tbody").append(row);
                     })
-                }
-            })
-        }
+                })
+            }
+        })
     }
 }
 

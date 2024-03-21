@@ -179,6 +179,9 @@ def cancel_logged_class(class_id):
             if request.method == "POST":
                 try:
                     cls = ClaseReservada.get_by_id(class_id)
+                    delta = (cls.enrolled_schedule[0].datetime() - datetime.now()).total_seconds()
+                    if delta < 0:
+                        return jsonify({"status": "Candel Error", "error": "No se puede cancelar esta clase. La clase ya se encuentra en proceso!"}), 200
                     cls.update(**dict(status=3))
                     return jsonify({"status": "Cancel Successful", "message": "La Clase se ha cancelado correctamente"}), 200
                 except Exception as e:
