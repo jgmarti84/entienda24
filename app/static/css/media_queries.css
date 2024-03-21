@@ -1,0 +1,25 @@
+#horizontal-cards {
+    display: inline-block;
+}
+#vertical-cards {
+    display: none;
+}
+
+@media (max-width: 650px) {
+    #horizontal-cards{
+        display: none;
+    }
+
+    #vertical-cards {
+        display: inline-block;
+    }
+}
+
+@media (max-width: 650px) {
+    .vertical-line {
+        display: none;
+    }
+    #left-footer-col, #right-footer-col {
+        text-align: center !important;
+    }
+}

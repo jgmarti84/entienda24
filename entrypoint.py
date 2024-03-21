@@ -7,5 +7,5 @@ if __name__ == "__main__":
         debug=False,
         host="localhost",
         port=8001,
-        ssl_context='adhoc'
+        # ssl_context='adhoc'
     )

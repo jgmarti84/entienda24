@@ -1,7 +1,7 @@
 <section class="hero is-primary is-bold section">
   <h1 class="title has-text-centered">Listado de Profesores</h1>
   <hr class="fade-out-hr">
-  <div class="container is-horizontal">
+  <div class="container">
 <!--    <div class="sort-controls" style="width: 35%; margin: auto;">-->
 <!--      <label for="order-tutors-select" style="margin-right: 0.5rem;"><strong>Ordená por:</strong></label>-->
 <!--      <div class="select">-->
@@ -23,7 +23,7 @@
     <div class="columns is-multiline">
 
       {% for tutor in tutors %}
-        <div class="column is-full-mobile">
+        <div id="horizontal-cards" class="column is-full-mobile">
 
           <article class="media" data-tutorid="{{tutor.id}}" style="margin: auto;">
             <figure class="profile-hcard-primary-image media-left">
@@ -57,7 +57,9 @@
               </div>
             </div>
           </article>
-
+        </div>
+        <div id="vertical-cards" class="column is-full-mobile">
+          {% include "tutor/profile.html" %}
         </div>
       {% endfor %}
     </div>
