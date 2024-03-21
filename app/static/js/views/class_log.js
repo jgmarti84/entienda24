@@ -344,7 +344,6 @@ $(document).ready(function () {
     $(`#upload-file`).on('click', function () {
         const formData = new FormData();
         const file = $(fileInput)[0].files[0];
-        console.log(file)
         formData.append('file', file);
         formData.append('loggedIds', JSON.stringify(loggedIds));
         const post_url = '/class_log_confirm'

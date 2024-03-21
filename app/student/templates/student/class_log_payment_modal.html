@@ -65,26 +65,30 @@
       <div id="confirmation-message" class="is-hidden">
         <h1 class="subtitle has-text-centered">Usted reservo la clase correctamente</h1>
         <p class="has-text-centered">Escribanos al <strong>+54 9 11 5528 6230</strong>  o continue al chat the whatsapp para ponerlo en contacto con el profesor</p>
-
-<!--        <a class="icon has-text-primary" href="https://wa.me/+5491155286230">-->
-<!--          <i class="fab fa-whatsapp"></i>-->
-<!--        </a>-->
-
-<!--        <a class="button is-small is-info" href="{{url_for('student.home')}}">Aceptar</a>-->
-        <div class="field is-grouped mt-5" style="justify-content: center;">
-          <p class="control">
-            <a class="icon has-text-primary" href="https://wa.me/+5491155286230">
-              <i class="fab fa-whatsapp is-large"></i>
+        <div class="field has-addons has-addons-centered mt-2">
+          <p class="control mr-1">
+            <a class="button is-info is-small" href="https://wa.me/+5491155286230">
+              <span class="icon">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+              </span>
+              <span>Whatsapp</span>
             </a>
+<!--            <a class="button is-info is-small" href="https://wa.me/+5491155286230">-->
+<!--              <a class="icon">-->
+<!--                <i class="fab fa-whatsapp"></i>Whatsapp-->
+<!--              </a>-->
+<!--            </a>-->
           </p>
-          <p class="control">
+          <p class="control ml-1">
             <a class="button is-info is-small" href="{{url_for('student.home')}}">
-              Aceptar
+              <span class="icon">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </span>
+              <span>Aceptar</span>
             </a>
           </p>
         </div>
       </div>
-
     </div>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
