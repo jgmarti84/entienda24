@@ -14,3 +14,4 @@ phone-number-validator
 unidecode
 pandas
 valuta
+pyopenssl
