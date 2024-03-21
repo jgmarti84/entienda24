@@ -5,12 +5,16 @@ from app.auth.models import Profesor
 from app.student.models import ClaseReservada
 from app.auth.forms import EditUserProfileForm, ModifyPasswordForm
 import phonenumbers
+from datetime import datetime
 
 
 @student_bp.route('/student/home/')
 @login_required
 def home():
     if current_user.is_authenticated:
+        def get_time_to_class(x):
+            return abs((x.enrolled_schedule[0].datetime() - datetime.now()).total_seconds())
+
         default_params = {
             "active_tab": request.args.get('tab', "perfil")
         }
@@ -25,6 +29,8 @@ def home():
             # buscamos todas las clases
             student_logged_classes = ClaseReservada.get_by_student_id(current_user.user.id)
             student_logged_classes.extend(ClaseReservada.query.filter(ClaseReservada.other_students.contains([current_user.user.id])).all())
+            student_logged_classes = sorted(student_logged_classes, key=get_time_to_class, reverse=False)
+
             form = EditUserProfileForm()
             user_phone = phonenumbers.parse(current_user.user.phone)
             pcode = user_phone.country_code

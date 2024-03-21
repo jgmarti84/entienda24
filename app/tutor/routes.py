@@ -12,6 +12,7 @@ import numpy as np
 from psycopg2.extensions import register_adapter, AsIs
 from app.auth.forms import ModifyPasswordForm, EditUserProfileForm, EditTutorBankDataForm
 import phonenumbers
+from datetime import datetime
 register_adapter(np.int64, AsIs)
 
 
@@ -23,6 +24,9 @@ def home():
         "active_tab": request.args.get('tab', "perfil")
     }
     if current_user.is_authenticated:
+        def get_time_to_class(x):
+            return abs(x.enrolled_schedule[0].datetime() - datetime.now()).total_seconds()
+
         if current_user.is_tutor:
             MateriaProfesor.update_tutor_subjects(tutor_id=current_user.user.id)
             # Update classes so those that are older than today will have a status of finished
@@ -35,6 +39,8 @@ def home():
                     student = other_student_dict.get(student_id)
                     if not student:
                         other_student_dict[student_id] = Estudiante.get_by_id(student_id)
+
+            tutor_logged_classes = sorted(tutor_logged_classes, key=get_time_to_class, reverse=False)
 
             form = EditUserProfileForm()
             user_phone = phonenumbers.parse(current_user.user.phone)
