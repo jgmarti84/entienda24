@@ -68,8 +68,8 @@ def class_log(tutor_id):
                 default_params=default_params,
 
             )
-        return redirect("public.create_account")
-    return redirect("public.create_account")
+        return redirect(url_for("public.create_account"))
+    return redirect(url_for("public.create_account"))
 
 
 @student_bp.route('/get_class_data/<int:class_id>', methods=["GET"])
