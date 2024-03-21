@@ -34,7 +34,11 @@
               <div class="content media-hcard-content">
                 <strong class="profile-card-name">{{ tutor.user.username }}</strong>
 <!--                estrellas pintadas y no pintadas -->
-                <small class="stars">{{ tutor.mean_score() }}</small><span style="font-size:14px; ">{{ '{:.1f}'.format(tutor.mean_score()) }}</span><span style="font-size: 12px"> ({{ tutor.count_scores() }} opiniones)</span>
+                <small class="stars">
+                  {{ tutor.mean_score() }}
+                </small>
+                <span style="font-size:14px; ">{{ '{:.1f}'.format(tutor.mean_score()) }}</span><span style="font-size: 12px"> ({{ tutor.count_scores() }} {{"opinion" if tutor.count_scores() == 1 else "opiniones"}})
+              </span>
                 <p class="pt-3">
                   Horas de clases dadas: <strong>{{ tutor.count_hours(status=0) }}</strong>
                 </p>
