@@ -344,18 +344,14 @@ function tutorMoreInfoHandle(classId, classStatus) {
             "el alumno elija nuevamente horarios."
         )
         if (result === true) {
-            console.log("cancelando la clase")
             const request_url = `/cancel_logged_class/${classId}`
             makeStringifyPostRequest(request_url, {}, function (error, response) {
-                console.log("clase cancelada")
-                console.log(response)
                 if (error) {
                     console.error("Error en el request:", error);
                     return;
                 }
                 if (response.status === "Cancel Successful") {
-                    console.log(response)
-                    // location.reload()
+                    location.reload()
                 } else {
                     message(response.error, true, "tutor-class-panel", "panel-feedback")
                 }
