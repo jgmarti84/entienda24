@@ -42,3 +42,11 @@
   margin-left: -3px;
   top: 0;
 }
+
+select[name=phone_country_code]::-webkit-input-placeholder {
+    font-size: 8px;
+}
+#user_type li {
+    display: inline;
+    margin-right: 10px;
+}

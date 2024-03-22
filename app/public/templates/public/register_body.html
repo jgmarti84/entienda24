@@ -1,7 +1,7 @@
 <section class="hero is-primary is-bold is-small">
   <div class="hero-body">
 
-    <div id="signup-box" class="signup-box transparent-box" style="width: 600px;">
+    <div id="signup-box" class="signup-box transparent-box">
 
       <div class="signup-area has-text-centered" style="width: 85%; margin: auto;">
         <h1 class="title">Registrate</h1>
@@ -68,7 +68,7 @@
               </span>
             </p>
           </div>
-          <div class="control mb-5">
+          <div id="phone-register-span" class="control mb-5">
             <p class="control">
               <span>
                 <span>
@@ -79,6 +79,27 @@
                 {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area") }}
                 -
                 {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;") }}
+                <span class="icon is-small is-right">
+                  <i class="fa fa-check mx-2"></i>
+                  <i class="fas fa-asterisk mr-2 fa-xs"></i>
+                </span>
+              </span>
+            </p>
+          </div>
+          <div id="phone-register-block" class="control">
+            <p class="control mb-5">
+              <span>
+                {{ form.phone_country_code(class="input is-info", style="width: 90px;") }}
+                -
+                {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area") }}
+              </span>
+            </p>
+            <p class="control">
+              <span>
+                <span>
+                  <i class="fa fa-phone pt-3 pr-1"></i>
+                </span>
+                {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 180px;") }}
                 <span class="icon is-small is-right">
                   <i class="fa fa-check mx-2"></i>
                   <i class="fas fa-asterisk mr-2 fa-xs"></i>

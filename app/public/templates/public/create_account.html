@@ -3,20 +3,8 @@
 {% block title %}Creá una Cuenta - Entienda y Aprenda {% endblock %}
 
 {% block links %}
-<style>
-    select[name=phone_country_code]::-webkit-input-placeholder {
-        font-size: 8px;
-    }
-    #user_type li {
-        display: inline;
-        margin-right: 10px;
-    }
-</style>
-<!--<style>-->
-<!--    input[name=phone]::-webkit-input-placeholder {-->
-<!--        font-size: 12px !important;-->
-<!--    }-->
-<!--</style>-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/media_queries.css') }}">
 {% endblock %}
 
 {% block body %}

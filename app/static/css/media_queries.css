@@ -15,11 +15,40 @@
     }
 }
 
+#phone-register-span {
+    display: inline-block;
+}
+#phone-register-block {
+    display: none;
+}
 @media (max-width: 650px) {
+    #phone-register-span {
+        display: none;
+    }
+    #phone-register-block {
+        display: inline-block;
+        width: 100%;
+    }
+    /*.input {margin-left: auto;}*/
+    /*#signup-mail, #signup-pass, #signup-last-name, #signup-name, #signup-user {*/
+    /*    width: 100%*/
+    /*}*/
+}
+
+@media (max-width: 745px) {
     .vertical-line {
         display: none;
     }
     #left-footer-col, #right-footer-col {
         text-align: center !important;
+    }
+}
+
+#signup-box {
+    width: 600px;
+}
+@media (max-width: 745px) {
+    #signup-box {
+        width: 95%;
     }
 }
