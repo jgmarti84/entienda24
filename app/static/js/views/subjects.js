@@ -1,6 +1,9 @@
 function tableRowUrlNavigate(tableTagId) {
-    $(`#${tableTagId} tbody tr`).on("click", function() {
-        location.href = $(this).data("url")
+    // $(`#${tableTagId} tbody tr`).on("click", function() {
+    //     location.href = $(this).data("url")
+    // })
+    $("td.clickeable-cell").on("click", function() {
+        location.href = $(this).parent("tr").data("url")
     })
 }
 
@@ -11,7 +14,7 @@ $(document).ready(function() {
         info: false,          // Enable/Disable the info
         lengthMenu: [10, 15, 20, 25, 50, 100],
         pageLength: 15,       // Set the number of rows per page
-        responsive: true,     // Enable responsive behavior
+        // responsive: true,     // Enable responsive behavior
         language: {
             lengthMenu: "Mostrar _MENU_ Materias por Página",
             zeroRecords: "No se encontraron materias",
@@ -27,8 +30,9 @@ $(document).ready(function() {
             { title: "Codigo Materia", visible: false , orderable: false },
             { title: "Materia", visible: true, orderable: true },
             { title: "Unidad Academica", visible: true, orderable: true },
-            { title: "Programa de la Materia", visible: true, orderable: false },
+            { title: "Programa", visible: true, orderable: false },
             { title: "Materia Unidecode", visible: false, orderable: false },
+            { title: "Menu", visible: true, orderable: false}
         ],
     });
 
@@ -43,6 +47,12 @@ $(document).ready(function() {
             tableRowUrlNavigate("subjects-search-table")
         }
     })
+    // $(".dropdown").on("click", function () {
+    //     $(this).toggleClass("is-active");
+    // })
+    // $(document).on("click", function(){
+    //     $(".dropdown.is-active").toggleClass("is-active");
+    // })
 
     $('#subject-name-filter').on('input', function() {
         const converted_filter = removeAccentsAndLowerCase(this.value)

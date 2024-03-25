@@ -1,9 +1,11 @@
 /* Table with content */
 .content-table {
+    width: 95%;
+    margin: auto;
     border-collapse: collapse;
-    margin: 25px 0;
+    /*margin: 25px 0;*/
     font-size: 0.9em;
-    border-radius: 5px 5px 0 0;
+    border-radius: 10px 10px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
@@ -42,22 +44,6 @@
 }
 .content-table tbody tr:last-of-type {
     border-bottom: 2.5px solid #969496;
-}
-
-/* Specific table with subject-search Table with content */
-.content-table.subjects-search tbody tr {
-    overflow-x: hidden;
-    cursor: pointer;
-}
-
-.content-table.subjects-search thead tr th,
-.content-table.subjects-search tbody tr td {
-    text-align: center;
-    vertical-align: middle;
-}
-.content-table.subjects-search tbody tr td:nth-of-type(4),
-.content-table.subjects-search tbody tr td:nth-of-type(6) {
-    text-align: left;
 }
 
 /* Specific table with subject-data Table with content */

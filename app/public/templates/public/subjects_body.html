@@ -55,8 +55,8 @@
     <div class="column is-three-quarters">
       <div>
         <div class="table-container p-5">
-<!--          TODO: Enable scroll in x-direction for small displays-->
-          <table id="subjects-search-table" class="content-table subjects-search" style="margin: auto;">
+<!--      TODO: Enable scroll in x-direction for small displays-->
+          <table id="subjects-search-table" class="content-table subjects-search" style="width:95%">
             <thead>
               <tr>
                 <th class="is-hidden">Codigo Facultad</th>
@@ -65,6 +65,7 @@
                 <th>Unidad Académica</th>
                 <th>Programa</th>
                 <th>Materia Unidecode</th>
+                <th>Menu</th>
               </tr>
             </thead>
             <tbody>
@@ -72,10 +73,42 @@
                   <tr data-url="{{ url_for('public.subject_info', subject_id=s.subject_id) }}">
                     <td class="is-hidden">{{ s.faculty.faculty_id }}</td>
                     <td class="is-hidden">{{ s.subject_id }}</td>
-                    <td>{{ s.subject_name }}</td>
-                    <td>{{ s.faculty.faculty_name }}</td>
-                    <td>{{ s.subject_program }}</td>
-                    <td>{{ s.unidecode_subject_name() }}</td>
+                    <td class="clickeable-cell">{{ s.subject_name }}</td>
+                    <td class="clickeable-cell">{{ s.faculty.faculty_name }}</td>
+                    <td class="clickeable-cell">
+                      {% if s.subject_program %}
+                      <a href="{{ s.subject_program }}">
+                        <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
+                      </a>
+                      {% else %}
+                      <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
+                      {% endif %}
+                    </td>
+                    <td class="clickeable-cell">{{ s.unidecode_subject_name() }}</td>
+                    <td>
+                      <div class="dropdown is-right is-hoverable">
+                        <div class="dropdown-trigger">
+                          <span class="icon is-small">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                          <div class="dropdown-content">
+                            <p class="dropdown-item" style="text-align: left;"><strong>Unidad Academica:</strong> {{ s.faculty.faculty_name }} </p>
+                            <p class="dropdown-item" style="text-align: left;">
+                              <strong>Ver Programa:</strong>
+                              {% if s.subject_program %}
+                              <a href="{{ s.subject_program }}">
+                                <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
+                              </a>
+                              {% else %}
+                              <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
+                              {% endif %}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
               {% endfor %}
             </tbody>

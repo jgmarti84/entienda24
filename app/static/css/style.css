@@ -86,13 +86,13 @@
     background: linear-gradient(to right, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
 
-.table-container {
-    overflow-x: hidden; /* Enable horizontal scrolling if necessary */
-}
+/*.table-container {*/
+/*    overflow-x: hidden; !* Enable horizontal scrolling if necessary *!*/
+/*}*/
 
-.table-container table {
-    width: 100%; /* Make the table fill its container */
-}
+/*.table-container table {*/
+/*    width: 100%; !* Make the table fill its container *!*/
+/*}*/
 
 table#availability-table td{
     overflow: hidden;

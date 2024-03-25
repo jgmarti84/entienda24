@@ -29,10 +29,6 @@
         display: inline-block;
         width: 100%;
     }
-    /*.input {margin-left: auto;}*/
-    /*#signup-mail, #signup-pass, #signup-last-name, #signup-name, #signup-user {*/
-    /*    width: 100%*/
-    /*}*/
 }
 
 @media (max-width: 745px) {
@@ -52,3 +48,61 @@
         width: 95%;
     }
 }
+
+.table-container {
+    overflow-x: visible;
+}
+.content-table.subjects-search {
+    width: 95%;
+}
+.content-table.subjects-search tbody tr {
+    cursor: pointer;
+}
+.content-table.subjects-search tr td:nth-child(1) { width: 50vw }
+.content-table.subjects-search tr td:nth-child(2) { width: 5vw }
+.content-table.subjects-search tr td:nth-child(3) { width: 5vw }
+
+.content-table.subjects-search tr th:nth-of-type(4),
+.content-table.subjects-search tr td:nth-of-type(4) {
+    display: none;
+}
+.content-table.subjects-search tr th:nth-of-type(2),
+.content-table.subjects-search tr td:nth-of-type(2) {
+    text-align: center;
+}
+.content-table.subjects-search tr th:nth-of-type(3),
+.content-table.subjects-search tr td:nth-of-type(3) {
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .content-table.subjects-search tr td:nth-child(1) { width: 65vw }
+    .content-table.subjects-search tr th:nth-of-type(4),
+    .content-table.subjects-search tr td:nth-of-type(4) {
+        display: inline-block;
+        /*width: 40px;*/
+        width: 10vw;
+        text-align:center;
+    }
+    .content-table.subjects-search tr th:nth-of-type(2),
+    .content-table.subjects-search tr td:nth-of-type(2),
+    .content-table.subjects-search tr th:nth-of-type(3),
+    .content-table.subjects-search tr td:nth-of-type(3) {
+        display: none;
+    }
+}
+/*@media (max-width: 1280px) {*/
+/*    .content-table.subjects-search {*/
+/*        max-width: 95%;*/
+/*    }*/
+/*    .content-table.subjects-search tr th:nth-of-type(4),*/
+/*    .content-table.subjects-search tr td:nth-of-type(4) {*/
+/*        display: inline-block;*/
+/*        width: 40px;*/
+/*    }*/
+/*    .content-table.subjects-search tr th:nth-of-type(2),*/
+/*    .content-table.subjects-search tr td:nth-of-type(2),*/
+/*    .content-table.subjects-search tr th:nth-of-type(3),*/
+/*    .content-table.subjects-search tr td:nth-of-type(3) {*/
+/*        display: none;*/
+/*    }*/
+/*}*/
