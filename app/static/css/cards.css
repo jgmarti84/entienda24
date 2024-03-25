@@ -1,6 +1,6 @@
 /* Vertical profile card */
 .profile-card-container {
-  /*width: 400px;*/
+  max-width: 370px;
   background-color: rgb(255, 255, 255);
   overflow: hidden;
   border-radius: 1em;
