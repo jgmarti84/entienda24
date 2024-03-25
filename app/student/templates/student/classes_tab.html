@@ -54,33 +54,14 @@
       </td>
       <td class="status-cell" data-status="{{ class.status }}">
       {% if class.status == 0 %}
-<!--        <p>-->
-<!--          <span class="icon is-large">-->
-            <i class="far fa-calendar-check" aria-hidden="true"></i>
-<!--          </span>-->
-          Terminada
-<!--        </p>-->
+            <i class="far fa-calendar-check" aria-hidden="true"></i>Terminada
+
       {% elif class.status == 1 %}
-<!--        <p class="has-text-centered">-->
-<!--          <span class="icon is-large">-->
-            <i class="far fa-calendar" aria-hidden="true"></i>
-<!--          </span>-->
-          Confirmada
-<!--        </p>-->
+            <i class="far fa-calendar" aria-hidden="true"></i>Confirmada
       {% elif class.status == 2 %}
-<!--        <p class="has-text-centered">-->
-<!--          <span class="icon is-large">-->
-            <i class="far fa-calendar-plus" aria-hidden="true"></i>
-<!--          </span>-->
-          Reservada Temporalmente
-<!--        </p>-->
+            <i class="far fa-calendar-plus" aria-hidden="true"></i>Reservada Temporalmente
       {% else %}
-<!--        <p class="has-text-centered">-->
-<!--          <span class="icon is-large">-->
-            <i class="far fa-calendar-times" aria-hidden="true"></i>
-<!--          </span>-->
-          Cancelada
-<!--        </p>-->
+            <i class="far fa-calendar-times" aria-hidden="true"></i>Cancelada
       {% endif %}
       </td>
       {% if class.score %}

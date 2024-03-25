@@ -151,6 +151,10 @@
         display: none;
     }
 
+    .panel-tabs a {
+        font-size: 11px !important;
+    }
+
     #responsive-table tbody,
     #responsive-table th,
     #responsive-table td,
