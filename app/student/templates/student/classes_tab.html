@@ -54,20 +54,20 @@
       </td>
       <td class="status-cell" data-status="{{ class.status }}">
       {% if class.status == 0 %}
-            <i class="far fa-calendar-check" aria-hidden="true"></i>Terminada
+            <i class="far fa-calendar-check mr-2" aria-hidden="true"></i>Terminada
 
       {% elif class.status == 1 %}
-            <i class="far fa-calendar" aria-hidden="true"></i>Confirmada
+            <i class="far fa-calendar mr-2" aria-hidden="true"></i>Confirmada
       {% elif class.status == 2 %}
-            <i class="far fa-calendar-plus" aria-hidden="true"></i>Reservada Temporalmente
+            <i class="far fa-calendar-plus mr-2" aria-hidden="true"></i>Reservada Temporalmente
       {% else %}
-            <i class="far fa-calendar-times" aria-hidden="true"></i>Cancelada
+            <i class="far fa-calendar-times mr-2" aria-hidden="true"></i>Cancelada
       {% endif %}
       </td>
       {% if class.score %}
         <td class="more-info-cell score">{{ class.score }}</td>
       {% else %}
-        <td class="more-info-cell"><a class="button is-primary is-small" style="font-size: 10px;">{{ class.student_info() }}</a></td>
+        <td class="more-info-cell"><a class="button is-primary is-small">{{ class.student_info() }}</a></td>
       {% endif %}
     </tr>
     {% endfor %}

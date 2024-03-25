@@ -125,23 +125,6 @@
     margin: auto;
 }
 
-/*@media (max-width: 768px) {*/
-/*    */
-/*}*/
-
-
-/* Section One*/
-
-/*th { background: #c5c5c5;}*/
-/*table {*/
-/*        border-collapse: collapse;*/
-/*        border: 1px solid #cdcdcd;*/
-/*        font: normal 12px arial; */
-/*        width: 100%;*/
-/*}*/
-/*td, th { border: 1px solid #cdcdcd; padding: 2px;}*/
-
-/* Section two*/
 .panel-table {
     width: 100%;
 }
@@ -195,4 +178,13 @@
     #responsive-table td:nth-of-type(3):before { content: "Fecha y Horario:"; }
     #responsive-table td:nth-of-type(4):before { content: "Estado:"; }
     #responsive-table td:nth-of-type(5):before { content: "+ Info:"; }
+}
+
+td.more-info-cell a {
+    font-size: 10px;
+}
+@media (max-width: 400px) {
+    td.more-info-cell a {
+        font-size: 9px!important;
+    }
 }
