@@ -150,7 +150,11 @@
     .panel-block.student-class-panel-header {
         display: none;
     }
-    .panel-table table, thead, tbody, th, td, tr {
+
+    #responsive-table tbody,
+    #responsive-table th,
+    #responsive-table td,
+    #responsive-table tr {
         display: block;
     }
     #responsive-table tbody tr {
