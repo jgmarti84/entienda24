@@ -2,7 +2,7 @@
   <h1 class="title has-text-centered">{{ tutor_subjects[0].subject.subject_name }}</h1>
   <h3 class="subtitle has-text-centered">Profesores Disponibles</h3>
   <hr class="fade-out-hr">
-  <div class="container is-horizontal" style="margin-left: 470px; margin-right: 470px">
+  <div class="container">
     <div class="sort-controls">
       <label for="order-tutors-select" style="margin-right: 0.5rem;"><strong>Ordená por:</strong></label>
       <div class="select">
@@ -32,44 +32,49 @@
       </span>
     </div>
     <br>
-    <div>
-      {% for subject in tutor_subjects %}
-        <div class="column is-full-mobile">
+    <div class="container">
+      <div class="columns is-multiline">
+        {% for subject in tutor_subjects %}
+          <div id="horizontal-cards" class="column is-full-mobile">
+            <article class="media" data-tutorid="{{ subject.tutor_id }}" style="margin: auto;">
+              <figure class="profile-hcard-primary-image media-left">
+                  <img class="profile-hcard-img" src="{{subject.tutor.user.avatar(256)}}">
+              </figure>
 
-          <article class="media" data-tutorid="{{ subject.tutor_id }}">
-            <figure class="profile-hcard-primary-image media-left">
-                <img class="profile-hcard-img" src="{{subject.tutor.user.avatar(256)}}">
-            </figure>
-
-            <div class="media-content">
-              <div class="content media-hcard-content">
-                <strong class="profile-card-name">{{ subject.tutor.user.username }}</strong>
-                <small class="stars">{{ subject.tutor.mean_score() }}</small><span style="font-size: 12px">({{ subject.tutor.count_scores() }} opiniones)</span>
-                <div class="pt-3 mb-3">
-                  {% set pr = subject.get_price_table_p()[0]["hour_test"] %}
-                  <p>
-                    Precio de Referencia: <strong>{{ '${:,.0f}'.format(pr).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
-                  </p>
-                  <p>
-                    Horas de clases dadas: <strong>{{ subject.tutor.count_hours(status=0) }}</strong>
-                  </p>
-                  <p>
-                    Disponibilidad: <strong>{{ subject.tutor.availability() }}</strong>
-                  </p>
+              <div class="media-content">
+                <div class="content media-hcard-content">
+                  <strong class="profile-card-name">{{ subject.tutor.user.username }}</strong>
+                  <small class="stars">{{ subject.tutor.mean_score() }}</small><span style="font-size: 12px">({{ subject.tutor.count_scores() }} opiniones)</span>
+                  <div class="pt-3 mb-3">
+                    {% set pr = subject.get_price_table_p()[0]["hour_test"] %}
+                    <p>
+                      Precio de Referencia: <strong>{{ '${:,.0f}'.format(pr).replace(",", ";").replace(".", ",").replace(";", ".") }}</strong>
+                    </p>
+                    <p>
+                      Horas de clases dadas: <strong>{{ subject.tutor.count_hours(status=0) }}</strong>
+                    </p>
+                    <p>
+                      Disponibilidad: <strong>{{ subject.tutor.availability() }}</strong>
+                    </p>
+                  </div>
+                  <hr class="fade-out-hr-gray" style="margin: 0">
+                  {% if subject.comment != "" %}
+                    <ul style="padding-right: 10px">
+                      <li>
+                        <strong>{{ subject.comment }}</strong>
+                      </li>
+                    </ul>
+                  {% endif %}
                 </div>
-                <hr class="fade-out-hr-gray" style="margin: 0">
-                {% if subject.comment != "" %}
-                  <ul style="padding-right: 10px">
-                    <li>
-                      <strong>{{ subject.comment }}</strong>
-                    </li>
-                  </ul>
-                {% endif %}
               </div>
-            </div>
-          </article>
-        </div>
-      {% endfor %}
+            </article>
+          </div>
+          <div id="vertical-cards" class="column is-full-mobile">
+            {% set tutor = subject.tutor %}
+            {% include "tutor/profile.html" %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
