@@ -31,7 +31,7 @@
       <div class="container student-class-panel-cell"><p class="has-text-centered"><small><strong>Info +</strong></small></p></div>
     </div>
   </nav>
-  <table class="panel-table" style="width: 100%;">
+  <table id="responsive-table" class="panel-table">
     <thead>
       <tr>
         <th class="is-hidden">materia</th>
@@ -49,38 +49,38 @@
         <i class="fas fa-user-edit mr-2" aria-hidden="true"></i>{{ class.tutor.user.username }}
       </td>
       <td class="date-time-cell">
-        <p class="has-text-centered">{{ class.date() }}</p>
-        <p class="has-text-centered">{{ class.interval() }}</p>
+        <p>{{ class.date() }}</p>
+        <p>{{ class.interval() }}</p>
       </td>
       <td class="status-cell" data-status="{{ class.status }}">
       {% if class.status == 0 %}
-        <p class="has-text-centered">
-          <span class="icon is-large">
+<!--        <p>-->
+<!--          <span class="icon is-large">-->
             <i class="far fa-calendar-check" aria-hidden="true"></i>
-          </span>
+<!--          </span>-->
           Terminada
-        </p>
+<!--        </p>-->
       {% elif class.status == 1 %}
-        <p class="has-text-centered">
-          <span class="icon is-large">
+<!--        <p class="has-text-centered">-->
+<!--          <span class="icon is-large">-->
             <i class="far fa-calendar" aria-hidden="true"></i>
-          </span>
+<!--          </span>-->
           Confirmada
-        </p>
+<!--        </p>-->
       {% elif class.status == 2 %}
-        <p class="has-text-centered">
-          <span class="icon is-large">
+<!--        <p class="has-text-centered">-->
+<!--          <span class="icon is-large">-->
             <i class="far fa-calendar-plus" aria-hidden="true"></i>
-          </span>
+<!--          </span>-->
           Reservada Temporalmente
-        </p>
+<!--        </p>-->
       {% else %}
-        <p class="has-text-centered">
-          <span class="icon is-large">
+<!--        <p class="has-text-centered">-->
+<!--          <span class="icon is-large">-->
             <i class="far fa-calendar-times" aria-hidden="true"></i>
-          </span>
+<!--          </span>-->
           Cancelada
-        </p>
+<!--        </p>-->
       {% endif %}
       </td>
       {% if class.score %}
