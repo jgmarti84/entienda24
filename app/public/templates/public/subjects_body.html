@@ -73,9 +73,9 @@
                   <tr data-url="{{ url_for('public.subject_info', subject_id=s.subject_id) }}">
                     <td class="is-hidden">{{ s.faculty.faculty_id }}</td>
                     <td class="is-hidden">{{ s.subject_id }}</td>
-                    <td class="clickeable-cell">{{ s.subject_name }}</td>
-                    <td class="clickeable-cell">{{ s.faculty.faculty_name }}</td>
-                    <td class="clickeable-cell">
+                    <td class="clickeable-cell"><a href="{{url_for('public.subject_info', subject_id=s.subject_id)}}">{{ s.subject_name }}</a></td>
+                    <td>{{s.faculty.university_name}} - {{ s.faculty.faculty_name }}</td>
+                    <td>
                       {% if s.subject_program %}
                       <a href="{{ s.subject_program }}">
                         <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
@@ -84,31 +84,7 @@
                       <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
                       {% endif %}
                     </td>
-                    <td class="clickeable-cell">{{ s.unidecode_subject_name() }}</td>
-                    <td>
-                      <div class="dropdown is-right is-hoverable">
-                        <div class="dropdown-trigger">
-                          <span class="icon is-small">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                          </span>
-                        </div>
-                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-                          <div class="dropdown-content">
-                            <p class="dropdown-item" style="text-align: left;"><strong>Unidad Academica:</strong> {{ s.faculty.faculty_name }} </p>
-                            <p class="dropdown-item" style="text-align: left;">
-                              <strong>Ver Programa:</strong>
-                              {% if s.subject_program %}
-                              <a href="{{ s.subject_program }}">
-                                <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
-                              </a>
-                              {% else %}
-                              <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
-                              {% endif %}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
+                    <td>{{ s.unidecode_subject_name() }}</td>
                   </tr>
               {% endfor %}
             </tbody>

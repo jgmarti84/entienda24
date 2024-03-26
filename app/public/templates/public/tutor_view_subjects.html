@@ -7,13 +7,13 @@
     <div class="columns">
       <div class="column is-three-fifths">
         <div class="content mt-4">
-          <table  id="tutor-subjects-table" class="content-table subjects-data" style="width: 90%; margin: auto;">
+          <table  id="tutor-subjects-table" class="content-table subjects-data">
             <thead>
               <tr>
                 <th class="is-hidden">Codigo Facultad</th>
                 <th class="is-hidden">Código</th>
-                <th>Unidad Académica</th>
                 <th>Materia</th>
+                <th>Unidad Académica</th>
                 <th>Precios</th>
                 <th>Comentario</th>
               </tr>
@@ -23,16 +23,16 @@
                 <tr data-priceRef="{{s.price_ref}}" data-subjectId={{s.subject_id}} data-tutorId={{s.tutor_id}} style="position: relative;">
                   <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
                   <td class="is-hidden">{{s.subject.subject_id}}</td>
-                  <td>{{s.subject.faculty.faculty_name}}</td>
                   <td>
                     {{s.subject.subject_name}}
-                      <p class="is-hidden tutor-subject-tooltip">{{s.subject.subject_name}}</p>
+<!--                      <p class="is-hidden tutor-subject-tooltip">{{s.subject.subject_name}}</p>-->
                   </td>
+                  <td>{{s.subject.faculty.faculty_name}}</td>
                   <td class="tutor-prices-link"><a class="button is-success is-small">Ver Precios</a></td>
                   <td>
                     {% if s.comment %}
                       {{s.comment}}
-                      <p class="is-hidden tutor-subject-tooltip">{{s.comment}}</p>
+<!--                      <p class="is-hidden tutor-subject-tooltip">{{s.comment}}</p>-->
                     {% endif %}
                   </td>
                 </tr>

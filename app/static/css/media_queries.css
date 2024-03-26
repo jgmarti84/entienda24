@@ -55,7 +55,7 @@
 .content-table.subjects-search {
     width: 95%;
 }
-.content-table.subjects-search tbody tr {
+.content-table.subjects-search tbody tr td:nth-of-type(1) {
     cursor: pointer;
 }
 .content-table.subjects-search tr td:nth-child(1) { width: 50vw }
@@ -74,21 +74,21 @@
 .content-table.subjects-search tr td:nth-of-type(3) {
     text-align: center;
 }
-@media (max-width: 768px) {
-    .content-table.subjects-search tr td:nth-child(1) { width: 65vw }
-    .content-table.subjects-search tr th:nth-of-type(4),
-    .content-table.subjects-search tr td:nth-of-type(4) {
-        display: inline-block;
-        width: 10vw;
-        text-align:center;
-    }
-    .content-table.subjects-search tr th:nth-of-type(2),
-    .content-table.subjects-search tr td:nth-of-type(2),
-    .content-table.subjects-search tr th:nth-of-type(3),
-    .content-table.subjects-search tr td:nth-of-type(3) {
-        display: none;
-    }
-}
+/*@media (max-width: 768px) {*/
+/*    .content-table.subjects-search tr td:nth-child(1) { width: 65vw }*/
+/*    .content-table.subjects-search tr th:nth-of-type(4),*/
+/*    .content-table.subjects-search tr td:nth-of-type(4) {*/
+/*        display: inline-block;*/
+/*        width: 10vw;*/
+/*        text-align:center;*/
+/*    }*/
+/*    .content-table.subjects-search tr th:nth-of-type(2),*/
+/*    .content-table.subjects-search tr td:nth-of-type(2),*/
+/*    .content-table.subjects-search tr th:nth-of-type(3),*/
+/*    .content-table.subjects-search tr td:nth-of-type(3) {*/
+/*        display: none;*/
+/*    }*/
+/*}*/
 
 #user-info-box {
     width: 500px;
@@ -212,6 +212,45 @@ td.more-info-cell a {
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
+    #subjects-search-table thead {
+        display: none;
+    }
+    #subjects-search-table tbody,
+    #subjects-search-table th,
+    #subjects-search-table td,
+    #subjects-search-table tr {
+        display: block;
+    }
+    #subjects-search-table tbody tr {
+        border-bottom: 3.5px solid #969496;
+    }
+    #subjects-search-table td {
+        border-bottom: 0.3px solid #ccc;
+    }
+    #subjects-search-table td:nth-of-type(3) {
+        position: relative;
+        padding-left: 50%;
+        width: 100%;
+        text-align: left;
+    }
+    #subjects-search-table td:not(:nth-of-type(3)) {
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+    }
+    #subjects-search-table td:before {
+        position: absolute;
+        left: 25px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: middle;
+    }
+    #subjects-search-table td:nth-of-type(3):before { content: "Ver Programa:"; }
 }
 
 #subjects-data-table {
@@ -315,7 +354,27 @@ td.more-info-cell a {
     display: block;
 }
 
+#tutor-subjeccts-table {
+    width: 100%;
+    margin: auto;
+}
+#schedule-table {
+    width: 400px;
+    margin: auto;
+}
+#schedule-table-title-wrapper {
+    width: 400px;
+    margin: auto;
+}
 @media (max-width: 400px) {
+    #schedule-table {
+        width: 100%;
+        /*margin: auto;*/
+    }
+    #schedule-table-title-wrapper {
+        width: 100%;
+    }
+
     #classes-select-wrapper {
         display: block;
     }
@@ -330,6 +389,48 @@ td.more-info-cell a {
     #non-mobile-modify-button {
         display: none;
     }
+
+    #tutor-subjects-table thead {
+        display: none;
+    }
+    #tutor-subjects-table tbody,
+    #tutor-subjects-table th,
+    #tutor-subjects-table td,
+    #tutor-subjects-table tr {
+        display: block;
+    }
+    #tutor-subjects-table tbody tr {
+        border-bottom: 3.5px solid #969496;
+    }
+    #tutor-subjects-table td {
+        border-bottom: 0.3px solid #ccc;
+    }
+    #tutor-subjects-table td:nth-of-type(5) {
+        position: relative;
+        padding-left: 60%;
+        width: 100%;
+        text-align: left;
+    }
+    /*#tutor-subjects-table td:nth-of-type(3),*/
+    /*#tutor-subjects-table td:nth-of-type(4) {*/
+    /*    text-align: center!important;*/
+    /*    padding-left: revert!important;*/
+    /*}*/
+    #tutor-subjects-table td:before {
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: middle;
+    }
+    /*#tutor-subjects-table td:nth-of-type(3):before { content: none; }*/
+    /*#tutor-subjects-table td:nth-of-type(4):before { content: none; }*/
+    #tutor-subjects-table td:nth-of-type(5):before { content: "Tabla de Precios:"; }
+    /*#tutor-subjects-table td:nth-of-type(6):before { content: none; }*/
+
     #classes-table td:not(:nth-of-type(3)):not(:nth-of-type(4)):not(:nth-of-type(6)):not(:nth-of-type(7)) {
         position: relative;
         padding-left: 70%;

@@ -47,31 +47,31 @@
 }
 
 /* Specific table with subject-data Table with content */
-.content-table.subjects-data tbody tr {
-    overflow-x: hidden;
-}
+/*.content-table.subjects-data tbody tr {*/
+/*    overflow-x: hidden;*/
+/*}*/
 
-.content-table.subjects-data thead tr th,
-.content-table.subjects-data tbody tr td {
-    text-align: center;
-    vertical-align: middle;
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.tutor-subject-tooltip {
-    /*word-break: break-all;*/
-    white-space: normal;
-    max-width: 500px;
-    position: absolute;
-    top: 1em;
-    left: 2em;
-    border: 1px solid black;
-    background-color: #565656;
-    color: white;
-    font-size: 10px;
-}
+/*.content-table.subjects-data thead tr th,*/
+/*.content-table.subjects-data tbody tr td {*/
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
+/*    max-width: 100px;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    white-space: nowrap;*/
+/*}*/
+/*.tutor-subject-tooltip {*/
+/*    !*word-break: break-all;*!*/
+/*    white-space: normal;*/
+/*    max-width: 500px;*/
+/*    position: absolute;*/
+/*    top: 1em;*/
+/*    left: 2em;*/
+/*    border: 1px solid black;*/
+/*    background-color: #565656;*/
+/*    color: white;*/
+/*    font-size: 10px;*/
+/*}*/
 .content-table.subjects-data tbody tr td:nth-of-type(4),
 .content-table.subjects-data tbody tr td:nth-of-type(6) {
     text-align: left;

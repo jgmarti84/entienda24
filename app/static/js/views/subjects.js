@@ -2,12 +2,18 @@ function tableRowUrlNavigate(tableTagId) {
     // $(`#${tableTagId} tbody tr`).on("click", function() {
     //     location.href = $(this).data("url")
     // })
+    console.log('entrando')
     $("td.clickeable-cell").on("click", function() {
         location.href = $(this).parent("tr").data("url")
     })
 }
 
 $(document).ready(function() {
+    $("td").click(function() {
+        if ($(this).hasClass('clickeable-cell')) {
+            location.href = $(this).parent("tr").data("url")
+        }
+    })
     var dataTable = $('#subjects-search-table').DataTable({
         dom: 'rt<"pull-left"l><"pull-right"p>',
         paging: true,         // Enable pagination
@@ -32,7 +38,7 @@ $(document).ready(function() {
             { title: "Unidad Academica", visible: true, orderable: true },
             { title: "Programa", visible: true, orderable: false },
             { title: "Materia Unidecode", visible: false, orderable: false },
-            { title: "Menu", visible: true, orderable: false}
+            // { title: "Menu", visible: true, orderable: false}
         ],
     });
 
