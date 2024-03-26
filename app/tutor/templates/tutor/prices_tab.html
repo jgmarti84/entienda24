@@ -14,41 +14,33 @@
     <a href="{{ url_for('tutor.edit_classes') }}" class="button is-success is-small">Modificá</a>
   </div>
   <div class="container" style="position: relative;">
-<!--    <div class="columns">-->
-<!--      <div class="column is-1">-->
-<!--      </div>-->
-<!--      <div class="column is-10 p-5">-->
-        <div class="content mt-4">
-          <table  id="subjects-data-table" class="content-table tutor-subjects-data">
-            <thead>
-              <tr>
-                <th class="is-hidden">Codigo Facultad</th>
-                <th class="is-hidden">Código</th>
-                <th>Materia</th>
-                <th>Unidad Académica</th>
-                <th>Precio de Referencia</th>
-                <th>Precios</th>
-                <th>Comentario</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for s in tutor.tutor_subject %}
-                <tr  data-subject={{s.subject_id}} data-tutor={{tutor.id}}>
-                  <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
-                  <td class="is-hidden">{{s.subject.subject_id}}</td>
-                  <td>{{s.subject.subject_name}}</td>
-                  <td>{{s.subject.faculty.faculty_name}}</td>
-                  <td>{{'${:,.0f}'.format(s.price_ref).replace(",", ";").replace(".", ",").replace(";", ".")}}</td>
-                  <td class="tutor-prices-link"><a class="button is-success is-small">Ver Precios</a></td>
-                  <td>{{s.comment if s.comment else ""}}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-<!--      </div>-->
-<!--      <div class="column is-1">-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="content mt-4">
+      <table  id="subjects-data-table" class="content-table tutor-subjects-data">
+        <thead>
+          <tr>
+            <th class="is-hidden">Codigo Facultad</th>
+            <th class="is-hidden">Código</th>
+            <th>Materia</th>
+            <th>Unidad Académica</th>
+            <th>Precio de Referencia</th>
+            <th>Precios</th>
+            <th>Comentario</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in tutor.tutor_subject %}
+            <tr  data-subject={{s.subject_id}} data-tutor={{tutor.id}}>
+              <td class="is-hidden">{{s.subject.faculty.faculty_id}}</td>
+              <td class="is-hidden">{{s.subject.subject_id}}</td>
+              <td>{{s.subject.subject_name}}</td>
+              <td>{{s.subject.faculty.faculty_name}}</td>
+              <td>{{'${:,.0f}'.format(s.price_ref).replace(",", ";").replace(".", ",").replace(";", ".")}}</td>
+              <td class="tutor-prices-link"><a class="button is-success is-small">Ver Precios</a></td>
+              <td>{{s.comment if s.comment else ""}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

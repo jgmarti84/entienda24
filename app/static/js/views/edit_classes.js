@@ -51,7 +51,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#save-button").click(function() {
+    $("#save-button, #save-button-mobile").click(function() {
         const dataToSend = {tutor_subjects_array: getSubjectsTableData(tableId)};
         console.log(dataToSend)
         $.post({
