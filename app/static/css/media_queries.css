@@ -217,17 +217,12 @@ td.more-info-cell a {
 #subjects-data-table {
     width: 850px;
 }
-#mobile-modify-button {
-    display: none;
-}
-#non-mobile-modify-button {
-    display: block;
-}
-@media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
+@media (max-width: 1350px) {
     #subjects-data-table {
         width: 100%;
     }
+}
+@media (max-width: 1215px) {
     #subjects-data-table thead {
         display: none;
     }
@@ -240,18 +235,17 @@ td.more-info-cell a {
     #subjects-data-table tbody tr {
         border-bottom: 3.5px solid #969496;
     }
-    #subjects-data-table td:not(:last-of-type) {
+    #subjects-data-table td {
         border-bottom: 0.3px solid #ccc;
     }
-    #subjects-data-table td:not(:nth-of-type(6)):not(:nth-of-type(7)):not(:nth-of-type(8)):not(:nth-of-type(3)):not(:nth-of-type(4)) {
-        border: none;
+    #subjects-data-table td:not(:nth-of-type(7)) {
+        /*border: none;*/
         position: relative;
-        padding-left: 70%;
+        padding-left: 50%;
         width: 100%;
         text-align: left;
     }
-    #subjects-data-table td:nth-of-type(3),
-    #subjects-data-table td:nth-of-type(4) {
+    #subjects-data-table td:nth-of-type(7) {
         text-align: center;
     }
     #subjects-data-table td:before {
@@ -264,22 +258,79 @@ td.more-info-cell a {
         text-align: left;
         vertical-align: middle;
     }
+    #subjects-data-table td:nth-of-type(3):before { content: "Materia:"; }
+    #subjects-data-table td:nth-of-type(4):before { content: "Unidad Academica:"; }
     #subjects-data-table td:nth-of-type(5):before { content: "Precio de Referencia:"; }
+    #subjects-data-table td:nth-of-type(6):before { content: "Tabla de Precios:"; }
+}
 
-    #prices-table-v,
-    #prices-table-p {
+#mobile-modify-button {
+    width: 30%;
+    margin: auto;
+}
+#mobile-modify-button {
+    display: none;
+}
+#non-mobile-modify-button {
+    display: block;
+}
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+    #classes-table {
         width: 100%;
-        font-size: 10px;
+    }
+
+    #classes-table thead {
+        display: none;
+    }
+    #classes-table tbody,
+    #classes-table th,
+    #classes-table td,
+    #classes-table tr {
+        display: block;
     }
     #materias div.field {
         position: revert;
     }
     #mobile-modify-button {
         display: inline-block;
-        width: 30%;
-        margin: auto;
     }
     #non-mobile-modify-button {
         display: none;
+    }
+}
+@media (max-width: 400px) {
+    #subjects-data-table td:not(:nth-of-type(6)):not(:nth-of-type(7)):not(:nth-of-type(8)):not(:nth-of-type(3)):not(:nth-of-type(4)) {
+        /*border: none;*/
+        position: relative;
+        padding-left: 70%;
+        width: 100%;
+        text-align: left;
+    }
+    #subjects-data-table td:nth-of-type(3),
+    #subjects-data-table td:nth-of-type(4),
+    #subjects-data-table td:nth-of-type(6){
+        text-align: center;
+        padding-left: revert;
+    }
+    #subjects-data-table td:before {
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: middle;
+    }
+    #subjects-data-table td:nth-of-type(3):before { content: none; }
+    #subjects-data-table td:nth-of-type(4):before { content: none; }
+    #subjects-data-table td:nth-of-type(5):before { content: "Precio de Referencia:"; }
+    #subjects-data-table td:nth-of-type(6):before { content: none; }
+
+    #prices-table-v,
+    #prices-table-p {
+        width: 100%;
+        font-size: 10px;
     }
 }
