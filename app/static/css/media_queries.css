@@ -95,12 +95,16 @@
     margin: auto;
     padding: 30px;
 }
-#profile-picture-box {
+.profile-picture-box {
     width: 400px;
     margin: auto;
     position: relative;
 }
-#change-password-box {
+.change-password-box {
+    width: 400px;
+    margin: auto;
+}
+.bank-details-box {
     width: 400px;
     margin: auto;
 }
@@ -108,14 +112,17 @@
     #user-info-box {
         width: 100%;
     }
-    #profile-picture-box {
+    .profile-picture-box {
         width: 100%;
     }
     .image-wrapper {
         width: 100%;
         height: 70%;
     }
-    #change-password-box {
+    .change-password-box {
+        width: 100%;
+    }
+    .bank-details-box {
         width: 100%;
     }
 }
@@ -130,6 +137,7 @@
 }
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
+    .panel-block.tutor-class-panel-header,
     .panel-block.student-class-panel-header {
         display: none;
     }
@@ -186,5 +194,22 @@ td.more-info-cell a {
 @media (max-width: 400px) {
     td.more-info-cell a {
         font-size: 9px!important;
+    }
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+    div.tabs.is-boxed ul li {
+        width: 79px;
+        /*text-overflow: ellipsis;*/
+    }
+    div.tabs.is-boxed ul li a {
+        padding: 5px 5px;
+    }
+    div.tabs.is-boxed ul li a span {
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }

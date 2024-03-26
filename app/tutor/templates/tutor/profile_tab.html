@@ -7,13 +7,10 @@
     <h3 class="title is-5">Información General</h3>
     <div class="header-fade-out-hr"></div>
   </div>
-
-
   <div class="container">
     <div class="columns is-multiline">
-
       <div class="column is-auto">
-        <div id="user-info-box" class="transparent-box" style="width: 500px; margin: auto; padding: 30px">
+        <div id="user-info-box" class="transparent-box">
           <h1 class="subtitle is-6 has-text-centered">Modificá o validá tu información general</h1>
           <div class="signup-area has-text-centered">
             <form action="" method="post" novalidate>
@@ -49,17 +46,34 @@
                   </span>
                 </p>
               </div>
-              <div class="control mb-5">
-                <p class="control">
-                  <span>
+              <div id="phone-register-span" class="control mb-5">
+                <div class="control mb-5">
+                  <p class="control">
                     <span>
-                      <i class="fa fa-phone pt-3 pr-1"></i>
+                      <span>
+                        <i class="fa fa-phone pt-3 pr-1"></i>
+                      </span>
+                      {{ form.phone_country_code(class="input is-info", style="width: 90px;", select=phones[0], disabled=True) }}
+                      -
+                      {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area", value=phones[1], disabled=True) }}
+                      -
+                      {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;", value=phones[2], disabled=True) }}
                     </span>
-                    {{ form.phone_country_code(class="input is-info", style="width: 90px;", select=phones[0], disabled=True) }}
+                  </p>
+                </div>
+              </div>
+              <div id="phone-register-block" class="control">
+                <p class="control mb-5">
+                  <span>
+                    {{ form.phone_country_code(class="input is-info", style="width: 90px;", disabled=True) }}
                     -
-                    {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area", value=phones[1], disabled=True) }}
-                    -
-                    {{ form.phone(class="input is-info mr-3", placeholder="Telefono", style="width: 170px;", value=phones[2], disabled=True) }}
+                    {{ form.phone_city_code(class="input is-info", style="width: 60px;", placeholder="Código de Area", disabled=True) }}
+                  </span>
+                </p>
+                <p class="control has-icons-left">
+                  {{ form.phone(class="input is-info", placeholder="Telefono", style="width: 95%;", value=phones[2], disabled=True) }}
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-phone"></i>
                   </span>
                 </p>
               </div>
@@ -78,7 +92,7 @@
         </div>
       </div>
       <div class="column is-auto">
-        <div class="transparent-box" style="width: 400px; margin: auto; position: relative;">
+        <div class="transparent-box profile-picture-box">
           <div class="has-text-centered" style="padding: 30px">
             <h1 class="subtitle is-6 has-text-centered">Foto de perfil</h1>
               <div class="image-wrapper">
@@ -95,7 +109,7 @@
       </div>
 
       <div class="column is-auto">
-        <div class="transparent-box" style="width: 400px; margin: auto;">
+        <div class="transparent-box change-password-box">
           <div class="has-text-centered" style="padding: 30px">
             <h1 class="subtitle is-6 has-text-centered">Cambiá tu Usuario o Contraseña</h1>
             <div id="modify-password-button" class="button is-centered is-primary">
@@ -106,7 +120,8 @@
       </div>
 
       <div class="column is-auto">
-        <div class="transparent-box" style="width: 400px; margin: auto;">
+<!--        <div class="transparent-box" style="width: 400px; margin: auto;">-->
+        <div class="transparent-box bank-details-box">
           <div class="has-text-centered" style="padding: 30px">
             <h1 class="subtitle is-6 has-text-centered">Agregá los datos de tu Cuenta Bancaria o billetera virtual</h1>
             <form action="" method="post" novalidate>
