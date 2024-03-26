@@ -217,6 +217,12 @@ td.more-info-cell a {
 #subjects-data-table {
     width: 850px;
 }
+#mobile-modify-button {
+    display: none;
+}
+#non-mobile-modify-button {
+    display: block;
+}
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
     #subjects-data-table {
@@ -264,5 +270,16 @@ td.more-info-cell a {
     #prices-table-p {
         width: 100%;
         font-size: 10px;
+    }
+    #materias div.field {
+        position: revert;
+    }
+    #mobile-modify-button {
+        display: inline-block;
+        width: 30%;
+        margin: auto;
+    }
+    #non-mobile-modify-button {
+        display: none;
     }
 }
