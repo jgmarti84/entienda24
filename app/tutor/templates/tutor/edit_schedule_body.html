@@ -1,5 +1,5 @@
 <div class="hero is-bold section has-background-light p-0">
-  <section class="main-content section columns is-variable is-1-mobile is-1-tablet is-2-desktop is-2-widescreen is-2-fullhd p-5">
+  <section id="main-content" class="main-content section columns is-variable is-1-mobile is-1-tablet is-2-desktop is-2-widescreen is-2-fullhd p-5">
     <aside class="column is-5-tablet is-5-desktop is-4-widescreen is-3-fullhd px-2">
       <div class="section p-0">
         {% include "tutor/profile.html" %}
@@ -8,7 +8,7 @@
 
     <div class="container column is-auto px-2">
       <section class="hero is-link is-bold section pt-3 px-3">
-        <div class="section pt-5" style="position: relative;">
+        <div id="schedule-content" class="section pt-5" style="position: relative;">
           <div id="edit-horarios">
             <div class="hrtext">
               <h3 class="title is-5">Modificá tu Disponibilidad Horaria</h3>
@@ -27,17 +27,14 @@
                 </a>
               </div>
             </div>
-            <div id="mobile-modify-button">
-              <a style="display: inline-block;">
-                <button id="save-button-mobile" class="button is-success is-pulled-right is-small" style="display: inline-block;">Guardar</button>
+            <div id="mobile-modify-button" class="buttons is-centered">
+              <a>
+                <button id="save-button-mobile" class="button is-success is-small">Guardar</button>
               </a>
-
               <a href="{{ url_for('tutor.home')+'?tab=horarios' }}" style="display: inline-block;">
-                <button id="back-button-mobile" class="button is-success is-pulled-right is-small" style="display: inline-block;">Volver</button>
+                <button id="back-button-mobile" class="button is-success is-small">Volver</button>
               </a>
             </div>
-
-
             <section class="section p-3">
               <div class="container">
                 <div class="columns is-variable">
@@ -46,11 +43,11 @@
                       <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
                       <hr class="fade-out-hr" style="margin: 10px;">
                     </div>
-                    <div style="width: 90%; margin: auto;">
-                      <button class="add-type-button" data-classtype="v"> Virtual </button>
-                      <button class="add-type-button" data-classtype="p"> Presencial </button>
-                      <button class="add-type-button" data-classtype="a"> Ambas </button>
-                      <button class="add-type-button" data-classtype=" "> Borrar </button>
+                    <div id="input-class-type-buttons" class="buttons is-centered mt-4">
+                      <button class="add-type-button button is-info is-small is-responsive" data-classtype="v">Virtual</button>
+                      <button class="add-type-button button is-info is-small is-responsive" data-classtype="p">Presencial</button>
+                      <button class="add-type-button button is-info is-small is-responsive" data-classtype="a">Ambas</button>
+                      <button class="add-type-button button is-info is-small is-responsive" data-classtype=" ">Borrar</button>
                     </div>
                     <div class="has-text-centered mb-3"><i><a id="feedback" class="feedback"></a></i></div>
                     <table id="schedule-table" class="content-table schedule-data edit">
@@ -104,11 +101,23 @@
                     <div class="container transparent-box m-2">
                       <h1 class="subtitle has-text-centered m-3" style="font-weight: bold;">Agregar Horarios</h1>
                       <hr class="fade-out-hr" style="margin: 10px;">
-                      <p class="has-text-centered">Para agregar uno o varios horarios, seleccionalos y presioná la tecla <strong>V</strong> para virtual, <strong>P</strong> para presencial o <strong>A</strong> para ambas, segun corresponda.</p>
+                      <p>
+                        Para agregar uno o varios horarios, seleccionalos y luego presioná el botón correspondiente al tipo de clase.
+                      </p>
+<!--                      <br>-->
+<!--                      <p>-->
+<!--                        Tambien podés usar el teclado introduciendo la tecla <strong>V</strong> para virtual, <strong>P</strong> para presencial o <strong>A</strong> para ambas, segun corresponda.-->
+<!--                      </p>-->
                       <br>
                       <h1 class="subtitle has-text-centered m-3" style="font-weight: bold;">Sacar Horarios</h1>
                       <hr class="fade-out-hr" style="margin: 10px;">
-                      <p class="has-text-centered">Para Sacar un horario seleccioná un horario agregado de la tabla semanal y luego presioná: <strong>barra espaciadora</strong>, <strong>delete</strong> o <strong>borrar</strong>.</p>
+                      <p>
+                        Para Sacar un horario ya guardado, seleccionalo de la tabla semanal y luego presioná el botón borrar.
+                      </p>
+<!--                      <br>-->
+<!--                      <p>-->
+<!--                        También podés usar el teclado introduciendo la <strong>barra espaciadora</strong>, <strong>delete</strong> o <strong>borrar</strong>.-->
+<!--                      </p>-->
                     </div>
                   </div>
                 </div>

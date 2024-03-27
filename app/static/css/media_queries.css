@@ -141,6 +141,9 @@
     width: 400px;
     margin: auto;
 }
+#schedule-table thead tr td {
+    text-overflow: ellipsis;
+}
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
     #schedule-table {
@@ -229,10 +232,13 @@ td.more-info-cell a {
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
     #mobile-modify-button {
-        display: inline-block;
+        display: inline;
     }
     #non-mobile-modify-button {
         display: none;
+    }
+    #input-class-type-buttons.buttons button {
+        font-size: 10px;
     }
     div.tabs.is-boxed ul li {
         width: 79px;
@@ -380,6 +386,26 @@ td.more-info-cell a {
 }
 
 @media (max-width: 400px) {
+    #main-content {
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+    }
+    #schedule-content {
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+    }
+    /*.p-5 {*/
+    /*    padding-x: 1px!important;*/
+    /*}*/
+    /*section.hero {*/
+    /*    position: relative;*/
+    /*}*/
+    /*#schedule-table {*/
+    /*    position: absolute;*/
+    /*    left: 2px;*/
+    /*}*/
+
+
     #classes-select-wrapper {
         display: block;
     }
