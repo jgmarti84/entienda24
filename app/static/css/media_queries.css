@@ -52,28 +52,28 @@
 .table-container {
     overflow-x: visible;
 }
-.content-table.subjects-search {
-    width: 95%;
-}
-.content-table.subjects-search tbody tr td:nth-of-type(1) {
-    cursor: pointer;
-}
-.content-table.subjects-search tr td:nth-child(1) { width: 50vw }
-.content-table.subjects-search tr td:nth-child(2) { width: 5vw }
-.content-table.subjects-search tr td:nth-child(3) { width: 5vw }
+/*.content-table.subjects-search {*/
+/*    width: 95%;*/
+/*}*/
+/*.content-table.subjects-search tbody tr td:nth-of-type(1) {*/
+/*    cursor: pointer;*/
+/*}*/
+/*.content-table.subjects-search tr td:nth-child(1) { width: 50vw }*/
+/*.content-table.subjects-search tr td:nth-child(2) { width: 5vw }*/
+/*.content-table.subjects-search tr td:nth-child(3) { width: 5vw }*/
 
-.content-table.subjects-search tr th:nth-of-type(4),
-.content-table.subjects-search tr td:nth-of-type(4) {
-    display: none;
-}
-.content-table.subjects-search tr th:nth-of-type(2),
-.content-table.subjects-search tr td:nth-of-type(2) {
-    text-align: center;
-}
-.content-table.subjects-search tr th:nth-of-type(3),
-.content-table.subjects-search tr td:nth-of-type(3) {
-    text-align: center;
-}
+/*.content-table.subjects-search tr th:nth-of-type(4),*/
+/*.content-table.subjects-search tr td:nth-of-type(4) {*/
+/*    display: none;*/
+/*}*/
+/*.content-table.subjects-search tr th:nth-of-type(2),*/
+/*.content-table.subjects-search tr td:nth-of-type(2) {*/
+/*    text-align: center;*/
+/*}*/
+/*.content-table.subjects-search tr th:nth-of-type(3),*/
+/*.content-table.subjects-search tr td:nth-of-type(3) {*/
+/*    text-align: center;*/
+/*}*/
 /*@media (max-width: 768px) {*/
 /*    .content-table.subjects-search tr td:nth-child(1) { width: 65vw }*/
 /*    .content-table.subjects-search tr th:nth-of-type(4),*/
@@ -223,6 +223,7 @@ td.more-info-cell a {
 #non-mobile-modify-button {
     display: block;
 }
+#subjects-search-table {width: 100%;}
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
     #mobile-modify-button {
@@ -260,26 +261,28 @@ td.more-info-cell a {
     #subjects-search-table td {
         border-bottom: 0.3px solid #ccc;
     }
+    #subjects-search-table td:not(:nth-of-type(3)) {
+        text-align: center;
+    }
     #subjects-search-table td:nth-of-type(3) {
         position: relative;
         padding-left: 50%;
-        width: 100%;
         text-align: left;
     }
-    #subjects-search-table td:not(:nth-of-type(3)) {
-        text-align: center;
-        display: inline-block;
-        width: 100%;
-        position: relative;
-    }
+    /*#subjects-search-table td:not(:nth-of-type(3)) {*/
+    /*    text-align: center;*/
+    /*    display: inline-block;*/
+    /*    width: 100%;*/
+    /*    position: relative;*/
+    /*}*/
     #subjects-search-table td:before {
         position: absolute;
         left: 25px;
-        width: 45%;
+        width: 40%;
         padding-right: 10px;
         white-space: nowrap;
         font-weight: bold;
-        text-align: left;
+        text-align: right;
         vertical-align: middle;
     }
     #subjects-search-table td:nth-of-type(3):before { content: "Ver Programa:"; }

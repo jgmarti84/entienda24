@@ -54,7 +54,7 @@
     </div>
     <div class="column is-three-quarters">
       <div>
-        <div class="table-container p-5">
+<!--        <div class="table-container p-5">-->
 <!--      TODO: Enable scroll in x-direction for small displays-->
           <table id="subjects-search-table" class="content-table subjects-search" style="width:95%">
             <thead>
@@ -65,31 +65,31 @@
                 <th>Unidad Académica</th>
                 <th>Programa</th>
                 <th>Materia Unidecode</th>
-                <th>Menu</th>
+<!--                <th>Menu</th>-->
               </tr>
             </thead>
             <tbody>
               {% for s in subjects %}
-                  <tr data-url="{{ url_for('public.subject_info', subject_id=s.subject_id) }}">
-                    <td class="is-hidden">{{ s.faculty.faculty_id }}</td>
-                    <td class="is-hidden">{{ s.subject_id }}</td>
-                    <td class="clickeable-cell"><a href="{{url_for('public.subject_info', subject_id=s.subject_id)}}">{{ s.subject_name }}</a></td>
-                    <td>{{s.faculty.university_name}} - {{ s.faculty.faculty_name }}</td>
-                    <td>
-                      {% if s.subject_program %}
-                      <a href="{{ s.subject_program }}">
-                        <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
-                      </a>
-                      {% else %}
+                <tr data-url="{{ url_for('public.subject_info', subject_id=s.subject_id) }}">
+                  <td class="is-hidden">{{ s.faculty.faculty_id }}</td>
+                  <td class="is-hidden">{{ s.subject_id }}</td>
+                  <td class="clickeable-cell"><a href="{{url_for('public.subject_info', subject_id=s.subject_id)}}">{{ s.subject_name }}</a></td>
+                  <td>{{s.faculty.university_name}} - {{ s.faculty.faculty_name }}</td>
+                  <td>
+                    {% if s.subject_program %}
+                    <a href="{{ s.subject_program }}">
                       <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
-                      {% endif %}
-                    </td>
-                    <td>{{ s.unidecode_subject_name() }}</td>
-                  </tr>
+                    </a>
+                    {% else %}
+                    <i class="fas fa-arrow-right"></i><i class="fas fa-book-reader ml-1"></i>
+                    {% endif %}
+                  </td>
+                  <td>{{ s.unidecode_subject_name() }}</td>
+                </tr>
               {% endfor %}
             </tbody>
           </table>
-        </div>
+<!--        </div>-->
       </div>
     </div>
   </div>
