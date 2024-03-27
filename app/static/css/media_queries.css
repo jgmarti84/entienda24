@@ -55,9 +55,7 @@
 /*.content-table.subjects-search {*/
 /*    width: 95%;*/
 /*}*/
-/*.content-table.subjects-search tbody tr td:nth-of-type(1) {*/
-/*    cursor: pointer;*/
-/*}*/
+
 /*.content-table.subjects-search tr td:nth-child(1) { width: 50vw }*/
 /*.content-table.subjects-search tr td:nth-child(2) { width: 5vw }*/
 /*.content-table.subjects-search tr td:nth-child(3) { width: 5vw }*/
@@ -147,7 +145,6 @@
 (min-device-width: 768px) and (max-device-width: 1024px)  {
     #schedule-table {
         width: 100%;
-        /*margin: auto;*/
     }
     #schedule-table-title-wrapper {
         width: 100%;
@@ -223,7 +220,12 @@ td.more-info-cell a {
 #non-mobile-modify-button {
     display: block;
 }
-#subjects-search-table {width: 100%;}
+#subjects-search-table {
+    width: 100%;
+}
+#subjects-search-table tbody tr td:nth-of-type(1) {
+    cursor: pointer;
+}
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
     #mobile-modify-button {
@@ -269,12 +271,6 @@ td.more-info-cell a {
         padding-left: 50%;
         text-align: left;
     }
-    /*#subjects-search-table td:not(:nth-of-type(3)) {*/
-    /*    text-align: center;*/
-    /*    display: inline-block;*/
-    /*    width: 100%;*/
-    /*    position: relative;*/
-    /*}*/
     #subjects-search-table td:before {
         position: absolute;
         left: 25px;
