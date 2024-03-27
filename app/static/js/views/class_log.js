@@ -14,6 +14,16 @@ function updateStudentInfoBox(nStudents) {
 
 $(document).ready(function () {
     ratingToStars();
+    renderLastUpdate()
+    // $("p.last-update").each(function() {
+    //     $(this).addClass("is-hidden")
+    // })
+    // $("input.my_file").each(function() {
+    //     $(this).remove()
+    // })
+    // $("span.photo-icon").each(function() {
+    //     $(this).addClass("is-hidden")
+    // })
 
     var isValid = checkValidValues(formId);
     if (!isValid) {formId--}

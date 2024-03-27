@@ -232,6 +232,18 @@ td.more-info-cell a {
 }
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
+    #payment-file-timer {
+        width: 80%;
+        margin: auto;
+        padding: 0!important;
+    }
+    #schedule-class-info {
+        width: 80%;
+        margin: auto;
+    }
+    div#last-step h1 {
+        font-size: 22px;
+    }
     #mobile-modify-button {
         display: inline;
     }
@@ -392,6 +404,10 @@ td.more-info-cell a {
         padding-right: 5px!important;
     }
     #schedule-content {
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+    }
+    #logger-section {
         padding-left: 5px!important;
         padding-right: 5px!important;
     }
