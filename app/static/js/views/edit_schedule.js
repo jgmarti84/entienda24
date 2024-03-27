@@ -8,6 +8,7 @@ $(document).ready(function () {
     const tableId = "schedule-table";
 
     ratingToStars()
+    renderLastUpdate()
 
     const indexes = getTablePaginationIndexList(tableId, rowsPerPage);
     const weeks_list = [...new Set(extractTableDataArray(tableId).map(x => x.monday_week_date))]

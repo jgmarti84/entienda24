@@ -1,8 +1,13 @@
 <div class="profile-card-container">
-  <div class="profile-card-info-image">
+  <div class="profile-card-info-image" style="position: relative;">
     <img class="profile-card-img" src="{{student.user.avatar(256)}}" alt="this image contains user-image">
+    <input class="my_file" type="file">
+    <span class="photo-icon">
+      <i class="fa fa-camera" aria-hidden="true"></i>
+    </span>
 <!--    {% if student.user.updated_at %}<p style="color: white; font-size: 9px;">Última actividad: <br>{{ student.user.updated_at.strftime("%d/%m/%y a las %H:%M hrs.") }}</p>{% endif %}-->
-    {% if student.user.updated_at %}<p class="last-update" data-last-update="{{ student.user.updated_at }}">Última actividad: <br><strong></strong></p>{% endif %}
+<!--    {% if student.user.updated_at %}<p class="last-update" data-last-update="{{ student.user.updated_at }}">Última actividad: <br><strong></strong></p>{% endif %}-->
+    <p class="last-update" data-last-update="{{ student.user.updated_at }}">Última actividad: <br><strong></strong></p>
   </div>
   <div class="profile-card-content">
     <a href="{{ url_for('student.home') }}" style="color: inherit;">

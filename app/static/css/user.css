@@ -24,44 +24,27 @@
     font-size: 9px;
 }
 
-/*.wrapper {*/
-/*    !*height: 100%;*!*/
-/*    !*width: 100%;*!*/
-/*    padding-top: 40px;*/
-/*    padding-left: 40px;*/
-/*    padding-right: 40px;*/
-/*    position: relative;*/
-/*    !*border: 2px solid #fff;*!*/
-/*    border: 1px solid black;*/
-/*    !*border-radius: 45%;*!*/
-/*    margin: auto;*/
-/*    overflow: hidden;*/
-/*}*/
-
 .image-wrapper {
     height: 254px;
     width: 254px;
-    /*position: relative;*/
     border: 2px solid #fff;
     border-radius: 50%;
     margin: auto;
     overflow: hidden;
-    /*box-shadow: 0 1px 2px 0 rgba(34, 60, 80, .16);*/
     box-shadow: 0 0.6em 1.8em;
     transition: all ease-in-out .2s;
 }
 
 .my_file {
     position: absolute;
-    /*border: 1px solid black;*/
-    bottom: 6%;
+    top: 70%;
+    font-size: 38px;
     left: 44%;
     z-index: 2;
     outline: none;
     color: transparent;
     width: 50px;
-    height: 38px;
-    margin: auto;
+    height: 40px;
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -69,12 +52,11 @@
     visibility: hidden;
 }
 
-.photo {
+.photo-icon {
     position: absolute;
-    bottom: 8%;
-    left: 47%;
+    top: 68%;
+    font-size: 38px;
+    left: 45%;
     z-index: 1;
-    cursor: pointer;
-    font-size: 50px;
-    color: rgba(53,50,54,0.58);
+    color: rgba(166,164,165,0.69);
 }

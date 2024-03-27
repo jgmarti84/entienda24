@@ -1,5 +1,15 @@
 $(document).ready(function() {
     ratingToStars()
+    // renderLastUpdate()
+    $("p.last-update").each(function() {
+        $(this).addClass("is-hidden")
+    })
+    $("input.my_file").each(function() {
+        $(this).remove()
+    })
+    $("span.photo-icon").each(function() {
+        $(this).addClass("is-hidden")
+    })
 
     // Sorting the tutor cards
     $("#order-tutors-select").change(function() {

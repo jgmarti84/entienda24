@@ -14,6 +14,7 @@ function getSubjectsTableData(tableTagId) {
 
 $(document).ready(function () {
     ratingToStars()
+    renderLastUpdate()
 
     var tableId = 'classes-table'
     // Add click event to delete buttons

@@ -65,6 +65,7 @@ $(document).ready(function () {
     // save picture
     const fileInput = $("input[type=file].my_file");
     fileInput.change(function () {
+        console.log("changing picture")
         if ($(this)[0].files.length > 0) {
             $('#upload-file-box .file-name').text($(this)[0].files[0].name)
             const formData = new FormData();
