@@ -3,13 +3,19 @@
 {% else %}
   <div id="horarios" class="is-hidden" style="position: relative;">
 {% endif %}
-  <div class="field" style="position: absolute; top: 0; right: 0;">
+  <div id="non-mobile-modify-button" class="field" style="position: absolute; top: 0; right: 0;">
     <a href="{{ url_for('tutor.edit_schedule') }}" class="button is-success is-pulled-right is-small">Modificá</a>
   </div>
+
   <div class="hrtext">
     <h3 class="title is-5">Disponibilidad Horaria</h3>
     <div class="header-fade-out-hr"></div>
   </div>
+
+  <div id="mobile-modify-button" class="field">
+    <a href="{{ url_for('tutor.edit_schedule') }}" class="button is-success is-pulled-right is-small">Modificá</a>
+  </div>
+
   <div class="container" style="position: relative;">
     <div id="schedule-table-title-wrapper">
       <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>

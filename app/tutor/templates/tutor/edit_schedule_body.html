@@ -1,6 +1,6 @@
 <div class="hero is-bold section has-background-light p-0">
-  <section class="main-content section columns is-variable is-1-mobile is-2-tablet is-3-desktop is-4-widescreen is-5-fullhd p-5">
-    <aside class="column is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen is-one-fifth-fullhd px-2">
+  <section class="main-content section columns is-variable is-1-mobile is-1-tablet is-2-desktop is-2-widescreen is-2-fullhd p-5">
+    <aside class="column is-5-tablet is-5-desktop is-4-widescreen is-3-fullhd px-2">
       <div class="section p-0">
         {% include "tutor/profile.html" %}
       </div>
@@ -9,31 +9,51 @@
     <div class="container column is-auto px-2">
       <section class="hero is-link is-bold section pt-3 px-3">
         <div class="section pt-5" style="position: relative;">
-          <div class="field mt-2 mx-2 p-1" style="position: absolute; top: 0px;right: 0px;">
-            <a href="#">
-              <button id="save-button" class="button is-success is-pulled-right is-small">Guardar</button>
-            </a>
-          </div>
-          <div class="field mt-2 mx-2 p-1" style="position: absolute; top: 0px; right: 90px;">
-            <a href="{{ url_for('tutor.home')+'?tab=horarios' }}">
-              <button id="back-button" class="button is-success is-pulled-right is-small">Volver</button>
-            </a>
-          </div>
           <div id="edit-horarios">
             <div class="hrtext">
               <h3 class="title is-5">Modificá tu Disponibilidad Horaria</h3>
               <div class="header-fade-out-hr"></div>
             </div>
+
+            <div id="non-mobile-modify-button">
+              <div class="field mt-2 mx-2 p-1" style="position: absolute; top: 0px;right: 0px;">
+                <a href="#">
+                  <button id="save-button" class="button is-success is-pulled-right is-small">Guardar</button>
+                </a>
+              </div>
+              <div class="field mt-2 mx-2 p-1" style="position: absolute; top: 0px; right: 90px;">
+                <a href="{{ url_for('tutor.home')+'?tab=horarios' }}">
+                  <button id="back-button" class="button is-success is-pulled-right is-small">Volver</button>
+                </a>
+              </div>
+            </div>
+            <div id="mobile-modify-button">
+              <a style="display: inline-block;">
+                <button id="save-button-mobile" class="button is-success is-pulled-right is-small" style="display: inline-block;">Guardar</button>
+              </a>
+
+              <a href="{{ url_for('tutor.home')+'?tab=horarios' }}" style="display: inline-block;">
+                <button id="back-button-mobile" class="button is-success is-pulled-right is-small" style="display: inline-block;">Volver</button>
+              </a>
+            </div>
+
+
             <section class="section p-3">
               <div class="container">
                 <div class="columns is-variable">
                   <div class="column is-two-thirds">
-                    <div style="width: 400px; margin: auto;">
+                    <div id="schedule-table-title-wrapper">
                       <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
                       <hr class="fade-out-hr" style="margin: 10px;">
                     </div>
+                    <div style="width: 90%; margin: auto;">
+                      <button class="add-type-button" data-classtype="v"> Virtual </button>
+                      <button class="add-type-button" data-classtype="p"> Presencial </button>
+                      <button class="add-type-button" data-classtype="a"> Ambas </button>
+                      <button class="add-type-button" data-classtype=" "> Borrar </button>
+                    </div>
                     <div class="has-text-centered mb-3"><i><a id="feedback" class="feedback"></a></i></div>
-                    <table id="schedule-table" class="content-table schedule-data edit" style="width: 400px; margin: auto;">
+                    <table id="schedule-table" class="content-table schedule-data edit">
                       <thead>
                         <tr>
                           <th class="is-hidden">Tutor id</th>

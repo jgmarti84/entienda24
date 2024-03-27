@@ -73,7 +73,7 @@ $(document).ready(function () {
 
     $(document).on('keydown', function (e) {
         var selectedCellsArray = getElementsArrayByClass("selected")
-        var value = getInputClassTypeValue(e)
+        var value = getInputClassTypeValue(e.key)
         selectedCellsArray.forEach((td) => {
             var cond1 = $(td).hasClass("enrolled-1")
             var cond2 = $(td).hasClass("enrolled-2")
@@ -82,8 +82,22 @@ $(document).ready(function () {
             }
         })
     })
+    $(".add-type-button").click(function() {
+        const classType = $(this).data('classtype')
+        var selectedCellsArray = getElementsArrayByClass("selected")
+        console.log(classType)
+        var value = getInputClassTypeValue(classType)
+        console.log(value)
+        selectedCellsArray.forEach((td) => {
+            var cond1 = $(td).hasClass("enrolled-1")
+            var cond2 = $(td).hasClass("enrolled-2")
+            if (!(cond1 || cond2)) {
+                $(td).text(value)
+            }
+        })
 
-    $("#save-button").click(function () {
+    })
+    $("#save-button, #save-button-mobile").click(function () {
         const data = extractTableDataArray(tableId);
         const dataToSend = {data: data};
         $.post({

@@ -8,11 +8,16 @@
     <div class="columns">
       <div class="column is-three-fifths">
         <div class="container">
-          <div style="width: 400px; margin: auto;">
+          <div id="schedule-table-title-wrapper">
             <h1 id="schedule-table-title" class="subtitle has-text-centered m-3">This is a title</h1>
             <hr class="fade-out-hr" style="margin: 10px;">
           </div>
-          <table id="schedule-table" class="content-table schedule-data" style="width: 400px; margin:auto;">
+          <div id="mobile-modify-button" class="field my-2 ">
+            <a href="{{ url_for('student.class_log', tutor_id=tutor.id) }}">
+              <button class="button is-link is-pulled-right is-small">Reservá</button>
+            </a>
+          </div>
+          <table id="schedule-table" class="content-table schedule-data">
             <thead>
               <tr>
                 <th class="is-hidden">Tutor id</th>

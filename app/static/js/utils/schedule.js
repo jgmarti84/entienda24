@@ -107,13 +107,24 @@ function selectCellsInTable(startTd, endTd, tableTagId) {
  * @return {string} - the parsed value of the class type to fill the schedule with
  */
 function getInputClassTypeValue(key) {
-    if (key.key.toUpperCase() === 'V' || key.key.toUpperCase() === 'P' || key.key.toUpperCase() === 'A') {
-        var value = key.key.toUpperCase()
+    // if (key.key.toUpperCase() === 'V' || key.key.toUpperCase() === 'P' || key.key.toUpperCase() === 'A') {
+    //     var value = key.key.toUpperCase()
+    //     if (value === 'A') {
+    //         value = 'VyP'
+    //     }
+    // } else {
+    //     if (key.key === ' ' || key.key === 'Delete' || key.key === 'Backspace') {
+    //         var value = ""
+    //     }
+    // }
+    // return value
+    if (key.toUpperCase() === 'V' || key.toUpperCase() === 'P' || key.toUpperCase() === 'A') {
+        var value = key.toUpperCase()
         if (value === 'A') {
             value = 'VyP'
         }
     } else {
-        if (key.key === ' ' || key.key === 'Delete' || key.key === 'Backspace') {
+        if (key === ' ' || key === 'Delete' || key === 'Backspace') {
             var value = ""
         }
     }

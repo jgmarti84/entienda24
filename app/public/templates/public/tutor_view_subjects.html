@@ -3,6 +3,11 @@
     <h3 class="title is-5">Materias Disponibles con sus Precios</h3>
     <div class="header-fade-out-hr"></div>
   </div>
+  <div id="mobile-modify-button" class="field my-2 ">
+    <a href="{{ url_for('student.class_log', tutor_id=tutor.id) }}">
+      <button class="button is-link is-pulled-right is-small">Reservá</button>
+    </a>
+  </div>
   <div class="container">
     <div class="columns">
       <div class="column is-three-fifths">
