@@ -23,7 +23,11 @@ from .models import Usuario, Profesor, Estudiante
 @auth_bp.route('/signup/', methods=['POST'])
 def signup():
     if current_user.is_authenticated:
-        return redirect(url_for('public.index'))
+        # next_page = url_for('public.home')
+        logout_user()
+        next_page = url_for('public.create_account')
+        return json.dumps({'status': 'Signup Successful', 'next_page': next_page})
+        # return redirect(url_for('public.index'))
     if request.method == "POST":
         form = SignupForm(request.form)
         error = None
