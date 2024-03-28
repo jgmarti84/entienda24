@@ -346,6 +346,12 @@ td.more-info-cell a {
         vertical-align: middle;
     }
     #subjects-search-table td:nth-of-type(3):before { content: "Ver Programa:"; }
+
+    #prices-table-v,
+    #prices-table-p {
+        width: 100%;
+        font-size: 10px;
+    }
 }
 
 #subjects-data-table {
@@ -530,10 +536,4 @@ td.more-info-cell a {
     #subjects-data-table td:nth-of-type(4):before { content: none; }
     #subjects-data-table td:nth-of-type(5):before { content: "Precio de Referencia:"; }
     #subjects-data-table td:nth-of-type(6):before { content: none; }
-
-    #prices-table-v,
-    #prices-table-p {
-        width: 100%;
-        font-size: 10px;
-    }
 }
