@@ -23,6 +23,7 @@ var login = function() {
     url: '/login',
     data: data,
     success(response){
+      console.log(response)
       var status = JSON.parse(response)["status"];
       if (status === "Login Successful") {
         location.href = JSON.parse(response)["next_page"];

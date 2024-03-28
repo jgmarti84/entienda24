@@ -41,31 +41,71 @@
                   <strong>Ingresá con tu Cuenta de Estudiante</strong>
                 </div>
                 <hr class="fade-out-hr m-1">
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left">
-                    <input id="create-account-login-user" class="login-user login-input input is-success" type="text" placeholder="Usuario">
-                    <span class="icon is-small is-left">
-                      <i class="fa fa-user"></i>
-                    </span>
-                  </p>
-                </div>
+<!--                <form onsubmit="return false;" id="navbar-login-form" novalidate>-->
+<!--                  {{ login_form.hidden_tag() }}-->
+<!--                  <a class="navbar-item">-->
+<!--                    <div class="field">-->
+<!--                      <p class="control has-icons-left">-->
+<!--                        {{ login_form.username_email(id="create-account-login-user", class="login-user login-input input is-small is-success", placeholder="Usuario/Email") }}-->
+<!--                        <span class="icon is-small is-left">-->
+<!--                          <i class="fa fa-user"></i>-->
+<!--                        </span>-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </a>-->
+<!--                  <a class="navbar-item">-->
+<!--                    <div class="field">-->
+<!--                      <p class="control has-icons-left">-->
+<!--                        {{ login_form.password(id="create-account-login-pass", class="login-input input is-small is-success", placeholder="Contraseña") }}-->
+<!--                        <span class="icon is-small is-left">-->
+<!--                          <i class="fa fa-lock"></i>-->
+<!--                        </span>-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </a>-->
+<!--                  <div class="is-hidden username-errors navbar-item">-->
+<!--                    <ul></ul>-->
+<!--                  </div>-->
+<!--                  <span class="navbar-item">-->
+<!--                    <a id="navbar-login-button" class="login-button button is-info is-small">-->
+<!--                      <span class="icon"><i class="fa fa-check"></i></span>-->
+<!--                      <span>Iniciar Sesión</span>-->
+<!--                    </a>-->
+<!--                  </span>-->
+<!--                </form>-->
 
-                <div class="field p-3 m-0">
-                  <p class="control has-icons-left">
-                    <input id="create-account-login-pass" class="login-input input is-success" type="password" placeholder="Contraseña">
-                    <span class="icon is-small is-left">
-                      <i class="fa fa-lock"></i>
-                    </span>
-                  </p>
-                </div>
-                <div class="p-3 m-0">
-                  <a id="create-account-login-button" class="login-button button is-info">
-                    <span class="icon">
-                      <i class="fa fa-check"></i>
-                    </span>
-                    <span>Iniciar Sesión</span>
-                  </a>
-                </div>
+
+                <form onsubmit="return false;" novalidate>
+                  {{ login_form.hidden_tag() }}
+                  <div class="field p-3 m-0">
+                    <p class="control has-icons-left">
+<!--                      <input id="create-account-login-user" class="login-user login-input input is-success" type="text" placeholder="Usuario">-->
+                      {{ login_form.username_email(id="create-account-login-user", class="login-user login-input input is-success", placeholder="Usuario/Email") }}
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-user"></i>
+                      </span>
+                    </p>
+                  </div>
+
+                  <div class="field p-3 m-0">
+                    <p class="control has-icons-left">
+<!--                      <input id="create-account-login-pass" class="login-input input is-success" type="password" placeholder="Contraseña">-->
+                      {{ login_form.password(id="create-account-login-pass", class="login-input input is-success", placeholder="Contraseña") }}
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="p-3 m-0">
+                    <a id="create-account-login-button" class="login-button button is-info">
+                      <span class="icon">
+                        <i class="fa fa-check"></i>
+                      </span>
+                      <span>Iniciar Sesión</span>
+                    </a>
+                  </div>
+                </form>
+
               </div>
 
               <div id="registro" class="is-hidden">
