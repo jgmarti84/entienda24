@@ -230,6 +230,51 @@ td.more-info-cell a {
 #subjects-search-table tbody tr td:nth-of-type(1) {
     cursor: pointer;
 }
+#tutor-subjects-table {
+    width: 100%;
+}
+@media (max-width: 1380px) {
+    #tutor-subjects-table thead {
+        display: none;
+    }
+    #tutor-subjects-table tbody,
+    #tutor-subjects-table th,
+    #tutor-subjects-table td,
+    #tutor-subjects-table tr {
+        display: block;
+    }
+    #tutor-subjects-table tbody tr {
+        border-bottom: 3.5px solid #969496;
+    }
+    #tutor-subjects-table td {
+        border-bottom: 0.3px solid #ccc;
+    }
+    #tutor-subjects-table td:nth-of-type(5) {
+        position: relative;
+        padding-left: 60%;
+        width: 100%;
+        text-align: left;
+    }
+    /*#tutor-subjects-table td:nth-of-type(3),*/
+    /*#tutor-subjects-table td:nth-of-type(4) {*/
+    /*    text-align: center!important;*/
+    /*    padding-left: revert!important;*/
+    /*}*/
+    #tutor-subjects-table td:before {
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: middle;
+    }
+    /*#tutor-subjects-table td:nth-of-type(3):before { content: none; }*/
+    /*#tutor-subjects-table td:nth-of-type(4):before { content: none; }*/
+    #tutor-subjects-table td:nth-of-type(5):before { content: "Tabla de Precios:"; }
+    /*#tutor-subjects-table td:nth-of-type(6):before { content: none; }*/
+}
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
     #payment-file-timer {
@@ -431,46 +476,6 @@ td.more-info-cell a {
         margin-bottom: 10px;
 
     }
-    #tutor-subjects-table thead {
-        display: none;
-    }
-    #tutor-subjects-table tbody,
-    #tutor-subjects-table th,
-    #tutor-subjects-table td,
-    #tutor-subjects-table tr {
-        display: block;
-    }
-    #tutor-subjects-table tbody tr {
-        border-bottom: 3.5px solid #969496;
-    }
-    #tutor-subjects-table td {
-        border-bottom: 0.3px solid #ccc;
-    }
-    #tutor-subjects-table td:nth-of-type(5) {
-        position: relative;
-        padding-left: 60%;
-        width: 100%;
-        text-align: left;
-    }
-    /*#tutor-subjects-table td:nth-of-type(3),*/
-    /*#tutor-subjects-table td:nth-of-type(4) {*/
-    /*    text-align: center!important;*/
-    /*    padding-left: revert!important;*/
-    /*}*/
-    #tutor-subjects-table td:before {
-        position: absolute;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-        text-align: left;
-        vertical-align: middle;
-    }
-    /*#tutor-subjects-table td:nth-of-type(3):before { content: none; }*/
-    /*#tutor-subjects-table td:nth-of-type(4):before { content: none; }*/
-    #tutor-subjects-table td:nth-of-type(5):before { content: "Tabla de Precios:"; }
-    /*#tutor-subjects-table td:nth-of-type(6):before { content: none; }*/
 
     #classes-table td:not(:nth-of-type(3)):not(:nth-of-type(4)):not(:nth-of-type(6)):not(:nth-of-type(7)) {
         position: relative;
